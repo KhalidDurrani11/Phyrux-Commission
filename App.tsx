@@ -1,15 +1,26 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
-const LogoIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block mr-2 text-orange-400">
-    <path d="M19.9999 4L17.2899 4.31C16.5899 4.4 15.9599 4.95 15.8499 5.65L15.2099 9.51C15.0999 10.22 15.6099 10.88 16.3299 11.01L19.9999 11.69" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-    <path d="M19.9999 11.69L16.3299 11.01C15.6099 10.88 15.0999 10.22 15.2099 9.51L15.8499 5.65C15.9599 4.95 16.5899 4.4 17.2899 4.31L19.9999 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-    <path d="M19.9999 4L15.8499 5.65" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-    <path d="M19.9999 11.69L15.21 9.51" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-    <path d="M4 4V20H20V14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-  </svg>
-);
+const Logo = () => (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mr-3"
+      aria-hidden="true"
+    >
+      <path
+        d="M16 3L3 9.353V22.059L16 28.412L29 22.059V9.353L16 3Z"
+        stroke="#808080"
+        strokeWidth="2"
+      />
+      <path d="M3 9.353L16 15.706L29 9.353" stroke="#808080" strokeWidth="2" />
+      <path d="M16 28.412V15.706" stroke="#808080" strokeWidth="2" />
+      <path d="M16 3L3 9.353V22.059" stroke="#F97316" strokeWidth="2.5" />
+    </svg>
+  );
 
 const SparkleIcon = () => (
     <div className="relative inline-block ml-2 -top-1 md:-top-3">
@@ -38,8 +49,8 @@ const Header = () => {
         <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-6 pr-3 shadow-lg ring-1 ring-white/10">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <LogoIcon />
-              <span className="font-bold text-lg text-white">Phyrux Commissions</span>
+              <Logo />
+              <span className="font-bold text-xl text-white tracking-wider">PHYRUX</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-300">
               {navItems.map(item => (
@@ -303,12 +314,19 @@ const OurStory = () => (
     </section>
 );
 
+type SocialIconProps = {
+    href: string;
+    children: React.ReactNode;
+};
 
-const SocialIcon = ({ href, children }: { href: string; children: React.ReactNode }) => (
+// FIX: Changed SocialIcon from a const arrow function to a function declaration. This can help TypeScript's type inference in complex scenarios, resolving errors where the 'children' prop is incorrectly reported as missing.
+function SocialIcon({ href, children }: SocialIconProps) {
+    return (
     <a href={href} className="text-gray-400 hover:text-white transition-colors">
         {children}
     </a>
-);
+    );
+}
 
 const Footer = () => (
     <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
@@ -317,8 +335,8 @@ const Footer = () => (
                 {/* Logo and About */}
                 <div>
                     <div className="flex items-center justify-center md:justify-start mb-4">
-                        <LogoIcon />
-                        <span className="font-bold text-lg text-white">Phyrux Commissions</span>
+                        <Logo />
+                        <span className="font-bold text-xl text-white tracking-wider">PHYRUX</span>
                     </div>
                     <p className="text-gray-400 text-sm">Crafting digital experiences that captivate and inspire. Your vision, our mission.</p>
                 </div>
