@@ -31,7 +31,7 @@ const SparkleIcon = () => (
 
 
 const Header = () => {
-  const navItems = ["Services", "Work", "Testimonial", "Email"];
+  const navItems = ["Services", "Work", "Story", "Email"];
   return (
     <header className="fixed top-4 left-0 right-0 z-50 px-4">
       <div className="max-w-4xl mx-auto">
@@ -222,30 +222,139 @@ const TeamSection = () => (
     </section>
 );
 
-const AboutSection = () => (
-    <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+const storyEvents = [
+  { year: '2018', title: 'Genesis Spark', description: 'Phyrux Commissions was founded with a passion for digital art and gaming aesthetics, starting with small commissions.' },
+  { year: '2020', title: 'Service Expansion', description: 'Expanded our services to include video editing and graphic design, attracting a wider range of clients.' },
+  { year: '2022', title: 'Studio Establishment', description: 'Officially established a small, dedicated team and moved into our first creative studio space.' },
+  { year: '2024', title: 'Future Forged', description: 'Launched our new brand identity and futuristic website, marking a new era of high-end creative solutions.' },
+];
+
+const OurStory = () => (
+    <section className="py-24 px-4 relative overflow-hidden">
+        {/* Background Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:3rem_3rem]"></div>
+        {/* Decorative Diamonds */}
+        <div className="absolute top-1/4 left-1/4 w-8 h-8 bg-white/5 rotate-45 opacity-50 blur-sm animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-white/5 rotate-45 opacity-50 blur-md animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+        <div className="max-w-5xl mx-auto text-center relative z-10">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
+                Our Story
+            </h2>
+            <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-lg">
+                Born from a shared passion for gaming culture and cutting-edge design, Phyrux Commissions is more than a studio—it's an arsenal of creativity. We arm brands with the visual power to dominate their digital landscapes.
+            </p>
+
+            {/* Timeline Container */}
             <div className="relative">
-                <div className="absolute -inset-2 bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl blur opacity-20"></div>
-                <img 
-                    src="https://picsum.photos/seed/phyrux/800/600" 
-                    alt="Creative process"
-                    className="relative rounded-2xl w-full h-full object-cover"
-                />
-            </div>
-            <div className="text-left">
-                <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight tracking-tight mb-4">
-                    About Phyrux Commissions
-                </h2>
-                <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                    At Phyrux, we are the architects of digital dreams. Born from a passion for pixels and stories, our commission-based studio is dedicated to bringing your unique visions to life. We believe collaboration is key, and we work closely with you to craft bespoke content that captivates and inspires.
-                </p>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                    From the first sketch to the final render, our mission is to merge artistry with technology, creating digital experiences that are not just seen, but felt. Let's create something extraordinary together.
-                </p>
+                {/* Desktop Timeline */}
+                <div className="hidden md:block">
+                    <div className="absolute left-1/2 top-2 bottom-2 w-0.5 bg-white/10 -translate-x-1/2" aria-hidden="true"></div>
+                    {storyEvents.map((event, index) => (
+                        <div key={index} className="mb-12 flex justify-between items-center w-full">
+                            {/* Left Side Content/Spacer */}
+                            <div className="w-5/12">
+                                {index % 2 === 0 && (
+                                    <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
+                                        <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                        <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                    </div>
+                                )}
+                            </div>
+                            
+                            {/* Center Dot */}
+                            <div className="z-10">
+                                <div className="w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
+                            </div>
+
+                            {/* Right Side Content/Spacer */}
+                            <div className="w-5/12">
+                                {index % 2 !== 0 && (
+                                     <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
+                                        <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                        <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Mobile Timeline */}
+                <div className="md:hidden relative">
+                    <div className="absolute top-2 left-2 bottom-2 w-0.5 bg-white/10" aria-hidden="true"></div>
+                    <div className="space-y-8">
+                        {storyEvents.map((event) => (
+                            <div key={event.year} className="pl-10 relative">
+                                <div className="absolute top-1 left-0 w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
+                                <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left flex-grow">
+                                    <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                    <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                    <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+);
+
+
+const SocialIcon = ({ href, children }: { href: string; children: React.ReactNode }) => (
+    <a href={href} className="text-gray-400 hover:text-white transition-colors">
+        {children}
+    </a>
+);
+
+const Footer = () => (
+    <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                {/* Logo and About */}
+                <div>
+                    <div className="flex items-center justify-center md:justify-start mb-4">
+                        <LogoIcon />
+                        <span className="font-bold text-lg text-white">Phyrux Commissions</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">Crafting digital experiences that captivate and inspire. Your vision, our mission.</p>
+                </div>
+                
+                {/* Quick Links */}
+                <div>
+                    <h3 className="font-bold text-white mb-4">Quick Links</h3>
+                    <ul className="space-y-2">
+                        {["Services", "Work", "Story", "Testimonial"].map(item => (
+                            <li key={item}><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">{item}</a></li>
+                        ))}
+                    </ul>
+                </div>
+                
+                {/* Contact and Socials */}
+                <div>
+                    <h3 className="font-bold text-white mb-4">Get in Touch</h3>
+                    <a href="mailto:contact@phyrux.com" className="text-gray-400 hover:text-white text-sm transition-colors block mb-4">contact@phyrux.com</a>
+                    <div className="flex justify-center md:justify-start space-x-4">
+                        <SocialIcon href="#">
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
+                        </SocialIcon>
+                         <SocialIcon href="#">
+                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                        </SocialIcon>
+                        <SocialIcon href="#">
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                        </SocialIcon>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; {new Date().getFullYear()} Phyrux Commissions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 );
 
 export default function App() {
@@ -257,8 +366,9 @@ export default function App() {
         <VideoPlayer />
         <ServicesSection />
         <TeamSection />
-        <AboutSection />
+        <OurStory />
       </main>
+      <Footer />
     </div>
   );
 }
