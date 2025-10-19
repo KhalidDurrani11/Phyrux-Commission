@@ -782,7 +782,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 {project.images.map((src, index) => (
                      <img
                         key={index}
-                        src={src === 'https://media.giphy.com/media/8v326d2I02h2g/giphy.gif' || src === 'https://media.giphy.com/media/3oKIPtjElAmG42YyA0/giphy.gif' ? 'https://i.imgur.com/8rqwdLX.png' : src}
+                        src={src}
                         alt={`${project.title} preview ${index + 1}`}
                         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
                         onError={(e) => {
@@ -881,6 +881,70 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
+const InteractiveProjectCard = ({ project }: ProjectCardProps) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (project.images.length > 1) {
+            setCurrentIndex((prev) => (prev + 1) % project.images.length);
+        }
+    };
+
+    const prevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (project.images.length > 1) {
+            setCurrentIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+        }
+    };
+
+    return (
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 group">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
+                {project.images.map((src, index) => (
+                    <img
+                        key={index}
+                        src={src}
+                        alt={`${project.title} preview ${index + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null;
+                            target.src = 'https://i.imgur.com/8rqwdLX.png';
+                        }}
+                    />
+                ))}
+
+                {project.images.length > 1 && (
+                    <>
+                        <button
+                            onClick={prevImage}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 focus:outline-none"
+                            aria-label="Previous image"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button
+                            onClick={nextImage}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 focus:outline-none"
+                            aria-label="Next image"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </>
+                )}
+
+                <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded-full pointer-events-none">
+                    Preview {currentIndex + 1} / {project.images.length}
+                </div>
+            </div>
+            <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
+            {project.description && (
+                <p className="text-sm text-gray-400 mt-1">{project.description}</p>
+            )}
+        </div>
+    );
+};
 
 const PixelArtPage = ({ navigateTo }: NavigationProps) => {
     const firstRowProjects = pixelArtProjects.slice(0, 3);
@@ -908,14 +972,14 @@ const PixelArtPage = ({ navigateTo }: NavigationProps) => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <InteractiveProjectCard key={index} project={project} />
                     ))}
                 </div>
 
                 {secondRowProjects.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
-                            <ProjectCard key={index + firstRowProjects.length} project={project} />
+                            <InteractiveProjectCard key={index + firstRowProjects.length} project={project} />
                         ))}
                     </div>
                 )}
