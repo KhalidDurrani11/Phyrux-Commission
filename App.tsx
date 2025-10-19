@@ -42,77 +42,153 @@ const SparkleIcon = () => (
 type NavigationProps = {
     navigateTo: (page: string) => void;
 };
+
+const iconPaths: { [key: string]: string[] } = {
+    'video-editing': [
+      'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
+    ],
+    'graphics-designing': [
+      'M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z',
+    ],
+    'web-development': [
+      'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+    ],
+    'digital-art': [
+      'M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+      'M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
+    ],
+    'pixel-art': [
+      'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1-1m-6 0h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-3 .5-.5 1 1 .5.5 3.5-3z',
+    ],
+    'clipping-service': [
+      'M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a1 1 0 01-1.414 0L9 14m-4 0h2m11 0h2m-9-4v2m0 11v2m-4-13h.01M3 3h.01',
+    ],
+  };
+  
+  type ServiceIconProps = {
+    name: string;
+    className?: string;
+  };
+  
+  const ServiceIcon = ({ name, className }: ServiceIconProps) => {
+    const paths = iconPaths[name] || [];
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={className || 'h-12 w-12'}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        {paths.map((d, index) => (
+          <path key={index} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={d} />
+        ))}
+      </svg>
+    );
+  };
+
 const services = [
-    { id: 'video-editing', name: 'Video Editing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg> },
-    { id: 'graphics-designing', name: 'Graphics Designing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg> },
-    { id: 'web-development', name: 'Web Development', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> },
-    { id: 'digital-art', name: 'Digital Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg> },
-    { id: 'pixel-art', name: 'Pixel Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1-1m-6 0h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-3 .5-.5 1 1 .5.5 3.5-3z" /></svg> },
-    { id: 'clipping-service', name: 'Clipping Service', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a1 1 0 01-1.414 0L9 14m-4 0h2m11 0h2m-9-4v2m0 11v2m-4-13h.01M3 3h.01" /></svg> }
+    { id: 'video-editing', name: 'Video Editing', iconName: 'video-editing' },
+    { id: 'graphics-designing', name: 'Graphics Designing', iconName: 'graphics-designing' },
+    { id: 'web-development', name: 'Web Development', iconName: 'web-development' },
+    { id: 'digital-art', name: 'Digital Art', iconName: 'digital-art' },
+    { id: 'pixel-art', name: 'Pixel Art', iconName: 'pixel-art' },
+    { id: 'clipping-service', name: 'Clipping Service', iconName: 'clipping-service' }
 ];
 
 const Header = ({ navigateTo }: NavigationProps) => {
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  
-  return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-6 pr-3 shadow-lg ring-1 ring-white/10">
-          <div className="flex items-center justify-between">
-            <button onClick={() => navigateTo('home')} className="flex items-center focus:outline-none group">
-              <Logo />
-              <span className="font-bold text-xl text-white tracking-wider ml-3 transition-all duration-300" style={{minWidth: '215px'}}>
-                <span className="group-hover:opacity-0 group-hover:hidden">Phyrux Comms</span>
-                <span className="hidden group-hover:inline group-hover:opacity-100">Phyrux Commissions</span>
-              </span>
-            </button>
-            <nav className="hidden md:flex items-center space-x-1">
-              <button onClick={() => navigateTo('home')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">Home</button>
-              <div className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
-                <button className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white flex items-center">
-                  Services
-                  <svg className={`w-4 h-4 ml-1 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                {isServicesOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg py-2">
-                    {services.map(service => (
-                       <button key={service.id} onClick={() => { navigateTo(service.id); setIsServicesOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
-                           {service.name}
-                       </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <button onClick={() => navigateTo('about-us')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">About Us</button>
-              <button onClick={() => navigateTo('faqs')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">FAQs</button>
-            </nav>
-            <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300">
-              Contact us
-            </button>
+    const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
+    const menuTimeoutRef = useRef<number | null>(null);
+
+    const handleMenuEnter = () => {
+        if (menuTimeoutRef.current) {
+            clearTimeout(menuTimeoutRef.current);
+        }
+        setIsServicesMenuOpen(true);
+    };
+
+    const handleMenuLeave = () => {
+        menuTimeoutRef.current = window.setTimeout(() => {
+            setIsServicesMenuOpen(false);
+        }, 300);
+    };
+
+    return (
+      <header className="fixed top-4 left-0 right-0 z-50 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-6 pr-3 shadow-lg ring-1 ring-white/10">
+            <div className="flex items-center justify-between">
+              <button onClick={() => navigateTo('home')} className="flex items-center focus:outline-none group">
+                <Logo />
+                <span className="font-bold text-xl text-white tracking-wider ml-3 transition-all duration-300" style={{minWidth: '215px'}}>
+                  <span className="group-hover:opacity-0 group-hover:hidden">Phyrux Comms</span>
+                  <span className="hidden group-hover:inline group-hover:opacity-100">Phyrux Commissions</span>
+                </span>
+              </button>
+              <nav className="hidden md:flex items-center space-x-1">
+                <button onClick={() => navigateTo('home')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">Home</button>
+                <div 
+                    className="relative"
+                    onMouseEnter={handleMenuEnter}
+                    onMouseLeave={handleMenuLeave}
+                >
+                    <button 
+                        onClick={() => navigateTo('services-page')}
+                        className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white flex items-center gap-1"
+                    >
+                        Services
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                           <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    {isServicesMenuOpen && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-10">
+                            {services.map(service => (
+                                <button 
+                                    key={service.id} 
+                                    onClick={() => {
+                                        navigateTo(service.id);
+                                        setIsServicesMenuOpen(false);
+                                    }} 
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-md transition-colors duration-200"
+                                >
+                                    {service.name}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                <button onClick={() => navigateTo('about-us')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">About Us</button>
+                <button onClick={() => navigateTo('faqs')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 text-sm font-medium text-gray-300 hover:text-white">FAQs</button>
+              </nav>
+              <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300">
+                Contact us
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-  );
-};
+      </header>
+    );
+  };
 
-const Hero = () => (
+const Hero = ({ navigateTo }: NavigationProps) => (
     <section className="text-center pt-32 pb-16 px-4">
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white leading-none tracking-tight">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white leading-none tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
             <SparkleIcon />
             <br />
             Deserves a Great Editor.
         </h1>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="bg-gradient-to-r from-[#FFC8B3] to-[#EE9B7B] text-black font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)]">
-                Editing Work
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up animation-delay-400">
+            <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)] hover:opacity-90 transition-opacity">
+                Get a Quote
             </button>
-            <button className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
-                How it works
+            <button onClick={() => navigateTo('services-page')} className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
+                View Our Work
             </button>
         </div>
-        <div className="mt-8 flex items-center justify-center">
+        <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
                 <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1005/100/100" alt="customer 1" />
                 <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
@@ -209,7 +285,7 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
                 {services.map((service) => (
                     <button key={service.id} onClick={() => navigateTo(service.id)} className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
                         <div className="text-orange-400 mb-4 transition-all duration-300 group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
-                            {service.icon}
+                            <ServiceIcon name={service.iconName} className="h-12 w-12" />
                         </div>
                         <h3 className="font-bold text-xl text-white">{service.name}</h3>
                     </button>
@@ -220,11 +296,13 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
 );
 
 const teamMembers = [
-    { name: 'Tayyab', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/tayyab/200/200' },
-    { name: 'Gulsher Ahmed', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/gulsher/200/200' },
-    { name: 'Khalid Durrani', role: 'Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
-    { name: 'Ahmed Asif', role: 'Clipping', imageUrl: 'https://picsum.photos/seed/asid/200/200' },
-    { name: 'Taimoor Ahmed', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
+    { name: 'Tayyab', role: 'Founder (VFX/GFX)', imageUrl: 'https://picsum.photos/seed/tayyab/200/200' },
+    { name: 'Ali', role: 'Co-Founder (Video Editor)', imageUrl: 'https://picsum.photos/seed/ali/200/200' },
+    { name: 'Ahmed', role: 'Manager', imageUrl: 'https://picsum.photos/seed/ahmed_manager/200/200' },
+    { name: 'Gulsher', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/gulsher/200/200' },
+    { name: 'Khalid', role: 'Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
+    { name: 'Maaz', role: 'Pixel Artist', imageUrl: 'https://picsum.photos/seed/maaz/200/200' },
+    { name: 'Taimoor', role: 'Clipping Head', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
     { name: 'Akemi', role: 'Digital Artist', imageUrl: 'https://picsum.photos/seed/akemi/200/200' },
 ];
 
@@ -237,7 +315,7 @@ const TeamSection = () => (
             <p className="max-w-2xl mx-auto text-gray-400 mb-12">
                 We are a team of passionate creators, dedicated to bringing your vision to life with style and precision.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {teamMembers.map((member, index) => (
                     <div key={index} className="bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
                         <img 
@@ -416,9 +494,9 @@ function SocialIcon({ href, children }: SocialIconProps) {
 
 const Footer = ({ navigateTo }: NavigationProps) => (
     <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <div>
+        <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 text-center md:text-left">
+                <div className="lg:col-span-2">
                     <div className="flex items-center justify-center md:justify-start mb-4 group">
                         <Logo />
                         <span className="font-bold text-xl text-white tracking-wider ml-3 transition-all duration-300" style={{minWidth: '215px'}}>
@@ -426,11 +504,22 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                            <span className="hidden group-hover:inline group-hover:opacity-100">Phyrux Commissions</span>
                         </span>
                     </div>
-                    <p className="text-gray-400 text-sm">Phyrux Commissions is a creative powerhouse born from the dynamic worlds of digital art and gaming. We specialize in transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development. Our mission is to equip brands with the creative arsenal needed to captivate audiences and conquer the digital landscape.</p>
+                    <p className="text-gray-400 text-sm">Phyrux Commissions is a creative powerhouse born from the dynamic worlds of digital art and gaming. We specialize in transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.</p>
                 </div>
                 
                 <div>
-                    <h3 className="font-bold text-white mb-4">Quick Links</h3>
+                    <h3 className="font-bold text-white mb-4">Navigation</h3>
+                    <ul className="space-y-2">
+                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-white text-sm transition-colors">Home</button></li>
+                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-white text-sm transition-colors">Services</button></li>
+                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-white text-sm transition-colors">About Us</button></li>
+                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-white text-sm transition-colors">FAQs</button></li>
+                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-white text-sm transition-colors">Contact</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 className="font-bold text-white mb-4">Our Services</h3>
                     <ul className="space-y-2">
                         {services.map(item => (
                             <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-white text-sm transition-colors">{item.name}</button></li>
@@ -440,7 +529,7 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                 
                 <div>
                     <h3 className="font-bold text-white mb-4">Get in Touch</h3>
-                    <a href="mailto:contact@phyrux.com" className="text-gray-400 hover:text-white text-sm transition-colors block mb-4">contact@phyrux.com</a>
+                    <a href="mailto:tezurect82@gmail.com" className="text-gray-400 hover:text-white text-sm transition-colors block mb-4">tezurect82@gmail.com</a>
                     <div className="flex justify-center md:justify-start space-x-4">
                         <SocialIcon href="#">
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
@@ -464,7 +553,7 @@ const Footer = ({ navigateTo }: NavigationProps) => (
 
 const HomePage = ({ navigateTo }: NavigationProps) => (
     <>
-        <Hero />
+        <Hero navigateTo={navigateTo} />
         <VideoPlayer />
         <ServicesSection navigateTo={navigateTo} />
         <TeamSection />
@@ -483,11 +572,11 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
 
     return (
         <div className="pt-24 px-4">
-            <button onClick={() => navigateTo('home')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2">
+            <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
-                Back to Home
+                Back to Services
             </button>
 
             <section className="text-center pb-16">
@@ -526,11 +615,11 @@ const ServicePlaceholderPage = ({ serviceName, navigateTo }: { serviceName: stri
     <div className="pt-24 px-4 h-screen flex flex-col items-center justify-center text-center">
         <h1 className="text-5xl sm:text-6xl font-black text-white mb-4">{serviceName}</h1>
         <p className="text-gray-400 mb-8">Details about our {serviceName} services are coming soon!</p>
-        <button onClick={() => navigateTo('home')} className="text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2">
+        <button onClick={() => navigateTo('services-page')} className="text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            Back to Home
+            Back to Services
         </button>
     </div>
 );
@@ -649,6 +738,32 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
+const AllServicesPage = ({ navigateTo }: NavigationProps) => (
+    <div className="pt-24 pb-16">
+        <section className="py-16 px-4">
+            <div className="max-w-6xl mx-auto text-center">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight mb-4">
+                    Our Services
+                </h1>
+                <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+                    We offer a comprehensive suite of creative services to bring your vision to life. Each service is tailored to meet your unique needs with precision and flair. Click on a service to learn more.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {services.map((service) => (
+                        <button key={service.id} onClick={() => navigateTo(service.id)} className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <div className="text-orange-400 mb-4 transition-all duration-300 group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
+                                <ServiceIcon name={service.iconName} className="h-12 w-12" />
+                            </div>
+                            <h3 className="font-bold text-xl text-white mb-2">{service.name}</h3>
+                            <p className="text-sm text-gray-400">Click to see more</p>
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </div>
+);
+
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -662,6 +777,8 @@ export default function App() {
     switch(currentPage) {
         case 'home':
             return <HomePage navigateTo={navigateTo} />;
+        case 'services-page':
+            return <AllServicesPage navigateTo={navigateTo} />;
         case 'video-editing':
             return <VideoEditingPage navigateTo={navigateTo} />;
         case 'graphics-designing':
