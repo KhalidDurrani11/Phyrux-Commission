@@ -43,12 +43,12 @@ type NavigationProps = {
     navigateTo: (page: string) => void;
 };
 const services = [
-    { id: 'video-editing', name: 'Video Editing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg> },
-    { id: 'graphics-designing', name: 'Graphics Designing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg> },
-    { id: 'web-development', name: 'Web Development', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> },
-    { id: 'digital-art', name: 'Digital Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg> },
-    { id: 'pixel-art', name: 'Pixel Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1-1m-6 0h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-3 .5-.5 1 1 .5.5 3.5-3z" /></svg> },
-    { id: 'clipping-service', name: 'Clipping Service', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a1 1 0 01-1.414 0L9 14m-4 0h2m11 0h2m-9-4v2m0 11v2m-4-13h.01M3 3h.01" /></svg> }
+    { id: 'video-editing', name: 'Video Editing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg> },
+    { id: 'graphics-designing', name: 'Graphics Designing', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg> },
+    { id: 'web-development', name: 'Web Development', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> },
+    { id: 'digital-art', name: 'Digital Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg> },
+    { id: 'pixel-art', name: 'Pixel Art', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1-1m-6 0h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-3 .5-.5 1 1 .5.5 3.5-3z" /></svg> },
+    { id: 'clipping-service', name: 'Clipping Service', icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a1 1 0 01-1.414 0L9 14m-4 0h2m11 0h2m-9-4v2m0 11v2m-4-13h.01M3 3h.01" /></svg> }
 ];
 
 const Header = ({ navigateTo }: NavigationProps) => {
@@ -74,7 +74,7 @@ const Header = ({ navigateTo }: NavigationProps) => {
                   <svg className={`w-4 h-4 ml-1 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 {isServicesOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg py-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg py-2">
                     {services.map(service => (
                        <button key={service.id} onClick={() => { navigateTo(service.id); setIsServicesOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
                            {service.name}
@@ -208,7 +208,7 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((service) => (
                     <button key={service.id} onClick={() => navigateTo(service.id)} className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                        <div className="text-orange-400 mb-4 transition-colors duration-300 group-hover:text-orange-300">
+                        <div className="text-orange-400 mb-4 transition-all duration-300 group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                             {service.icon}
                         </div>
                         <h3 className="font-bold text-xl text-white">{service.name}</h3>
@@ -225,6 +225,7 @@ const teamMembers = [
     { name: 'Khalid Durrani', role: 'Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
     { name: 'Ahmed Asif', role: 'Clipping', imageUrl: 'https://picsum.photos/seed/asid/200/200' },
     { name: 'Taimoor Ahmed', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
+    { name: 'Akemi', role: 'Digital Artist', imageUrl: 'https://picsum.photos/seed/akemi/200/200' },
 ];
 
 const TeamSection = () => (
@@ -321,7 +322,8 @@ const AboutUsPage = ({ navigateTo }: NavigationProps) => (
 );
 
 type FAQItemProps = { question: string; answer: string; defaultOpen?: boolean; };
-function FAQItem({ question, answer, defaultOpen = false }: FAQItemProps) {
+
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     return (
         <div className="bg-[#1a1a1a] p-6 rounded-2xl">
@@ -350,7 +352,7 @@ function FAQItem({ question, answer, defaultOpen = false }: FAQItemProps) {
             </div>
         </div>
     );
-}
+};
 
 const FAQPage = ({ navigateTo }: NavigationProps) => {
     const faqs = [
@@ -441,13 +443,13 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                     <a href="mailto:contact@phyrux.com" className="text-gray-400 hover:text-white text-sm transition-colors block mb-4">contact@phyrux.com</a>
                     <div className="flex justify-center md:justify-start space-x-4">
                         <SocialIcon href="#">
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
-                        </SocialIcon>
-                        <SocialIcon href="#">
-                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-                        </SocialIcon>
-                        <SocialIcon href="#">
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                        </SocialIcon>
+                        <SocialIcon href="#">
+                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                        </SocialIcon>
+                        <SocialIcon href="#">
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
                         </SocialIcon>
                     </div>
                 </div>
@@ -631,13 +633,13 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
                             <SocialIcon href="#">
-                                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
-                               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
                                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
                             </SocialIcon>
                         </div>
                     </div>
