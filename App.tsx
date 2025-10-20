@@ -1,5 +1,18 @@
-
 import React, { useState, useRef, useEffect } from 'react';
+
+const Preloader = () => (
+    <div className="text-3xl sm:text-4xl font-black text-white tracking-widest uppercase">
+        {'Phyrux Comms'.split('').map((char, index) => (
+            <span
+                key={index}
+                className="inline-block opacity-0 animate-preloader-char"
+                style={{ animationDelay: `${index * 80}ms` }}
+            >
+                {char === ' ' ? '\u00A0' : char}
+            </span>
+        ))}
+    </div>
+);
 
 const Logo = () => (
     <svg
@@ -62,6 +75,7 @@ const BackButton = ({ navigateTo, page, text }: { navigateTo: (page: string) => 
 
 type NavigationProps = {
     navigateTo: (page: string) => void;
+    currentPage: string;
 };
 
 const iconPaths: { [key: string]: React.ReactNode } = {
@@ -177,83 +191,134 @@ const services: Service[] = [
     }
 ];
 
-const Header = ({ navigateTo }: NavigationProps) => {
+const HamburgerIcon = ({ open }: { open: boolean }) => (
+    <div className="w-6 h-5 flex flex-col justify-between items-center" aria-hidden="true">
+        <span className={`block h-0.5 w-full bg-white rounded-full transform transition duration-300 ease-in-out ${open ? 'rotate-45 translate-y-[9px]' : ''}`} />
+        <span className={`block h-0.5 w-full bg-white rounded-full transition duration-300 ease-in-out ${open ? 'opacity-0' : ''}`} />
+        <span className={`block h-0.5 w-full bg-white rounded-full transform transition duration-300 ease-in-out ${open ? '-rotate-45 -translate-y-[9px]' : ''}`} />
+    </div>
+);
+
+const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const menuTimeoutRef = useRef<number | null>(null);
 
     const handleMenuEnter = () => {
-        if (menuTimeoutRef.current) {
-            clearTimeout(menuTimeoutRef.current);
-        }
+        if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
         setIsServicesMenuOpen(true);
     };
 
     const handleMenuLeave = () => {
-        menuTimeoutRef.current = window.setTimeout(() => {
-            setIsServicesMenuOpen(false);
-        }, 300);
+        menuTimeoutRef.current = window.setTimeout(() => setIsServicesMenuOpen(false), 300);
     };
 
+    const handleMobileNav = (page: string) => {
+        navigateTo(page);
+        setIsMobileMenuOpen(false);
+    };
+
+    useEffect(() => {
+        document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
+        return () => { document.body.style.overflow = 'auto'; };
+    }, [isMobileMenuOpen]);
+    
+    const isServicePageActive = services.some(s => s.id === currentPage) || currentPage === 'services-page';
+
+    const navLinks = [
+        { page: 'home', label: 'Home', isActive: currentPage === 'home' },
+        { page: 'services-page', label: 'Services', isActive: isServicePageActive },
+        { page: 'about-us', label: 'About Us', isActive: currentPage === 'about-us' },
+        { page: 'faqs', label: 'FAQs', isActive: currentPage === 'faqs' },
+    ];
+
     return (
-      <header className="fixed top-4 left-0 right-0 z-50 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
-            <div className="flex items-center justify-between">
-              <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105">
-                <Logo />
-                <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                    <span className="group-hover:hidden">Phyrux Comms</span>
-                    <span className="hidden group-hover:inline">Phyrux Commissions</span>
-                </span>
-              </button>
-              <nav className="hidden md:flex items-center space-x-1">
-                <button onClick={() => navigateTo('home')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">Home</button>
-                <div 
-                    className="relative"
-                    onMouseEnter={handleMenuEnter}
-                    onMouseLeave={handleMenuLeave}
-                >
-                    <button 
-                        onClick={() => navigateTo('services-page')}
-                        className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 flex items-center gap-1"
-                    >
-                        Services
-                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ease-in-out ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-                           <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
+      <>
+        <header className="py-4 px-4 relative z-50">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
+              <div className="flex items-center justify-between">
+                <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105">
+                  <Logo />
+                  <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
+                      <span className="group-hover:hidden">Phyrux Comms</span>
+                      <span className="hidden group-hover:inline">Phyrux Commissions</span>
+                  </span>
+                </button>
+                <nav className="hidden md:flex items-center space-x-1">
+                  {navLinks.slice(0,1).map(link => (
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                  ))}
+                  <div 
+                      className="relative"
+                      onMouseEnter={handleMenuEnter}
+                      onMouseLeave={handleMenuLeave}
+                  >
+                      <button 
+                          onClick={() => navigateTo('services-page')}
+                          className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium flex items-center gap-1 ${isServicePageActive ? 'text-orange-400 bg-white/5' : 'text-gray-300 hover:text-orange-400'}`}
+                      >
+                          Services
+                          <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ease-in-out ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                      </button>
+                      <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-[60] transition-all duration-300 ease-out ${isServicesMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+                          {services.map(service => (
+                              <button 
+                                  key={service.id} 
+                                  onClick={() => {
+                                      navigateTo(service.id);
+                                      setIsServicesMenuOpen(false);
+                                  }} 
+                                  className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors duration-200 ${currentPage === service.id ? 'bg-orange-500/20 text-orange-300' : 'text-gray-300 hover:bg-white/10 hover:text-orange-400'}`}
+                              >
+                                  {service.name}
+                              </button>
+                          ))}
+                      </div>
+                  </div>
+                  {navLinks.slice(2).map(link => (
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                  ))}
+                </nav>
+                <div className="flex items-center gap-2">
+                    <button onClick={() => navigateTo('contact')} className="hidden md:block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
+                      Contact us
                     </button>
-                    {isServicesMenuOpen && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-10">
-                            {services.map(service => (
-                                <button 
-                                    key={service.id} 
-                                    onClick={() => {
-                                        navigateTo(service.id);
-                                        setIsServicesMenuOpen(false);
-                                    }} 
-                                    className="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-orange-400 rounded-md transition-colors duration-200"
-                                >
-                                    {service.name}
-                                </button>
-                            ))}
-                        </div>
-                    )}
+                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle menu">
+                       <HamburgerIcon open={isMobileMenuOpen} />
+                    </button>
                 </div>
-                <button onClick={() => navigateTo('about-us')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">About Us</button>
-                <button onClick={() => navigateTo('faqs')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">FAQs</button>
-              </nav>
-              <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
-                Contact us
-              </button>
+              </div>
             </div>
           </div>
+        </header>
+
+        {/* Mobile Menu */}
+        <div className={`fixed inset-0 z-40 md:hidden transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+             <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+             <nav className="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                <ul className="space-y-6">
+                    {navLinks.map((link, index) => (
+                        <li key={link.page} className="opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards ${0.1 * index}s` : 'none' }}>
+                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                        </li>
+                    ))}
+                </ul>
+                <div className="mt-12 opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards 0.5s` : 'none' }}>
+                    <button onClick={() => handleMobileNav('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-8 py-4 rounded-full text-lg hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
+                        Contact us
+                    </button>
+                </div>
+             </nav>
         </div>
-      </header>
+      </>
     );
   };
 
 const Hero = ({ navigateTo }: NavigationProps) => (
-    <section className="text-center pt-32 pb-16 px-4">
+    <section className="text-center pt-20 pb-16 px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
             <SparkleIcon />
@@ -267,7 +332,7 @@ const Hero = ({ navigateTo }: NavigationProps) => (
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
             </button>
-            <button onClick={() => navigateTo('services-page')} className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors ease-in-out duration-300 transform hover:scale-105">
+            <button onClick={() => navigateTo('services-page')} className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-all ease-in-out duration-300 transform hover:scale-105">
                 View Our Work
             </button>
         </div>
@@ -332,14 +397,14 @@ const VideoPlayer = () => {
                         Your browser does not support the video tag.
                     </video>
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                        <div className={`w-20 h-20 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out ${isPlaying ? 'opacity-0 scale-150' : 'opacity-100 scale-100'}`}>
+                        <div className={`w-20 h-20 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out ${isPlaying ? 'opacity-0 scale-150' : 'opacity-100 scale-100 group-hover:scale-110'}`}>
                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                         </div>
                     </div>
                     <div className="absolute bottom-6 left-6">
                         <button 
                             onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-                            className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                            className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 transition-all duration-300 ease-in-out"
                         >
                             {isPlaying ? (
                                 <>
@@ -370,17 +435,18 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
                 We turn ideas into digital reality. Explore our range of services designed to make your content stand out.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {services.map((service) => (
-                    <button 
-                        key={service.id} 
-                        onClick={() => navigateTo(service.id)} 
-                        className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    >
-                        <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
-                            <ServiceIcon name={service.iconName} className="h-12 w-12" />
-                        </div>
-                        <h3 className="font-bold text-xl text-white">{service.name}</h3>
-                    </button>
+                {services.map((service, index) => (
+                    <AnimatedWrapper key={service.id} index={index}>
+                        <button 
+                            onClick={() => navigateTo(service.id)} 
+                            className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        >
+                            <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
+                                <ServiceIcon name={service.iconName} className="h-12 w-12" />
+                            </div>
+                            <h3 className="font-bold text-xl text-white">{service.name}</h3>
+                        </button>
+                    </AnimatedWrapper>
                 ))}
             </div>
         </div>
@@ -409,15 +475,17 @@ const TeamSection = () => (
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {teamMembers.map((member, index) => (
-                    <div key={index} className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10">
-                        <img 
-                            src={member.imageUrl} 
-                            alt={member.name} 
-                            className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10 transition-colors duration-300 ease-in-out group-hover:border-orange-400"
-                        />
-                        <h3 className="font-bold text-lg text-white">{member.name}</h3>
-                        <p className="text-sm text-orange-400">{member.role}</p>
-                    </div>
+                    <AnimatedWrapper key={index} index={index}>
+                        <div className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10">
+                            <img 
+                                src={member.imageUrl} 
+                                alt={member.name} 
+                                className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10 transition-all duration-300 ease-in-out group-hover:border-orange-400 group-hover:scale-105"
+                            />
+                            <h3 className="font-bold text-lg text-white">{member.name}</h3>
+                            <p className="text-sm text-orange-400">{member.role}</p>
+                        </div>
+                    </AnimatedWrapper>
                 ))}
             </div>
         </div>
@@ -479,6 +547,31 @@ const TestimonialsSection = () => (
     </section>
 );
 
+const techLogos = [
+    'Adobe Premiere Pro', 'After Effects', 'Photoshop', 'Illustrator', 'Figma', 'React', 'Next.js', 'DaVinci Resolve', 'Tailwind CSS', 'JavaScript'
+];
+
+const TechMarquee = () => (
+    <section className="py-16 bg-black/20 overflow-hidden">
+        <div className="max-w-6xl mx-auto text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
+                Powered by Industry-Leading Tools
+            </h2>
+        </div>
+        <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div className="flex animate-marquee space-x-16 pr-16 flex-shrink-0">
+                {[...techLogos, ...techLogos].map((tech, index) => (
+                    <div key={index} className="flex items-center justify-center">
+                        <span className="text-2xl font-bold text-gray-500 whitespace-nowrap transition-all duration-300 group-hover:text-gray-400 hover:!text-orange-400 hover:!scale-110 cursor-default">
+                            {tech}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
+
 
 const storyEvents = [
   { year: '2018', title: 'Genesis Spark', description: 'Phyrux Commissions was founded with a passion for digital art and gaming aesthetics, starting with small commissions.' },
@@ -488,7 +581,7 @@ const storyEvents = [
 ];
 
 const AboutUsPage = ({ navigateTo }: NavigationProps) => (
-    <div className="pt-24">
+    <div className="pt-12">
         <section className="py-12 px-4 relative overflow-hidden">
             <div className="max-w-5xl mx-auto text-center relative z-10">
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
@@ -574,7 +667,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
                 aria-controls={contentId}
             >
                 <h3 className="font-semibold text-white text-base md:text-lg flex-1">{question}</h3>
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white transition-transform duration-300 ease-in-out" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}}>
                     {isOpen ? <CloseIcon /> : <PlusIcon />}
                 </div>
             </button>
@@ -602,10 +695,10 @@ const FAQPage = ({ navigateTo }: NavigationProps) => {
     ];
 
     return (
-        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 min-h-screen">
+        <div className="pt-20 pb-24 px-4 sm:px-6 lg:px-8 min-h-screen">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
                 {/* Left Column */}
-                <div className="lg:col-span-2 lg:sticky lg:top-28">
+                <div className="lg:col-span-2 lg:sticky lg:top-8">
                     <div className="flex items-center gap-3">
                         <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
                         <p className="font-semibold text-gray-300 uppercase tracking-widest text-sm">FAQ</p>
@@ -618,7 +711,7 @@ const FAQPage = ({ navigateTo }: NavigationProps) => {
                             <h2 className="font-bold text-2xl text-white">Have a question?</h2>
                             <p className="text-orange-100 mt-1">Let's discuss it now!</p>
                          </div>
-                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full hover:bg-gray-800 transition-colors ease-in-out duration-300 transform hover:scale-105 self-start sm:self-center flex-shrink-0">
+                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full hover:bg-gray-800 transition-all ease-in-out duration-300 transform hover:scale-105 self-start sm:self-center flex-shrink-0">
                             Book an appointment
                          </button>
                     </div>
@@ -648,7 +741,7 @@ type SocialIconProps = {
 
 function SocialIcon({ href, children }: SocialIconProps) {
     return (
-        <a href={href} className="group text-gray-400 transition-colors duration-300 ease-in-out">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="group text-gray-400 transition-colors duration-300 ease-in-out">
             <div className="w-10 h-10 rounded-full bg-white/5 group-hover:bg-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 ease-in-out transform group-hover:scale-110">
                  {children}
             </div>
@@ -674,11 +767,11 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                 <div>
                     <h3 className="font-bold text-white mb-4">Navigation</h3>
                     <ul className="space-y-2">
-                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">Home</button></li>
-                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">Services</button></li>
-                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">About Us</button></li>
-                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">FAQs</button></li>
-                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">Contact</button></li>
+                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Home</button></li>
+                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Services</button></li>
+                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">About Us</button></li>
+                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">FAQs</button></li>
+                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Contact</button></li>
                     </ul>
                 </div>
 
@@ -686,7 +779,7 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                     <h3 className="font-bold text-white mb-4">Our Services</h3>
                     <ul className="space-y-2">
                         {services.map(item => (
-                            <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out">{item.name}</button></li>
+                            <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">{item.name}</button></li>
                         ))}
                     </ul>
                 </div>
@@ -715,13 +808,15 @@ const Footer = ({ navigateTo }: NavigationProps) => (
 );
 
 
-const HomePage = ({ navigateTo }: NavigationProps) => (
+// FIX: The HomePage component was not accepting the 'currentPage' prop, causing a type error when calling child components that required it. This has been fixed by adding 'currentPage' to the component's props and passing it down to 'Hero' and 'ServicesSection'.
+const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
-        <Hero navigateTo={navigateTo} />
+        <Hero navigateTo={navigateTo} currentPage={currentPage} />
         <VideoPlayer />
-        <ServicesSection navigateTo={navigateTo} />
+        <ServicesSection navigateTo={navigateTo} currentPage={currentPage} />
         <TeamSection />
         <TestimonialsSection />
+        <TechMarquee />
     </>
 );
 
@@ -828,7 +923,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <CardComponent
             {...props}
-            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10"
+            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1"
         >
             <div 
                 className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer"
@@ -881,7 +976,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4">
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
             <div className="relative group aspect-video overflow-hidden rounded-lg">
                 {project.images.map((src, index) => (
                     <img
@@ -968,7 +1063,7 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
     return (
         <div
             ref={ref}
-            className={`transition-all duration-500 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`transition-all duration-800 ease-in-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: `${index * 100}ms` }}
         >
             {children}
@@ -990,7 +1085,7 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10">
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
             <div className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-black" onClick={handlePlay}>
                 {!isInteracted ? (
                     <>
@@ -1016,7 +1111,7 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
     const secondRowProjects = videoEditingProjects.slice(3);
 
     return (
-        <div className="pt-24 px-4">
+        <div className="pt-12 px-4">
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Video Editing
@@ -1058,7 +1153,7 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
     const secondRowProjects = webDevProjects.slice(3);
 
     return (
-        <div className="pt-24 px-4">
+        <div className="pt-12 px-4">
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Web Development
@@ -1098,7 +1193,7 @@ const PixelArtPage = ({ navigateTo }: NavigationProps) => {
     const secondRowProjects = pixelArtProjects.slice(3);
     
     return (
-        <div className="pt-24 px-4">
+        <div className="pt-12 px-4">
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Pixel Art
@@ -1149,7 +1244,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
     const secondRowProjects = placeholderProjects.slice(3);
 
     return (
-        <div className="pt-24 px-4">
+        <div className="pt-12 px-4">
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     {service.name}
@@ -1185,7 +1280,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
 };
 
 const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
-    <div className="pt-24 px-4 pb-16">
+    <div className="pt-12 px-4 pb-16">
         <section className="text-center pb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                 Clipping Service
@@ -1229,7 +1324,7 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
 
 
     return (
-        <div className="pt-24 px-4 min-h-screen">
+        <div className="pt-12 px-4 min-h-screen">
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Get in Touch
@@ -1317,7 +1412,7 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
 
 const AllServicesPage = ({ navigateTo }: NavigationProps) => {
     return (
-        <div className="pt-24 pb-16">
+        <div className="pt-12 pb-16">
             <section className="py-16 px-4">
                 <div className="max-w-6xl mx-auto text-center">
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight mb-4">
@@ -1327,18 +1422,19 @@ const AllServicesPage = ({ navigateTo }: NavigationProps) => {
                         We offer a comprehensive suite of creative services to bring your vision to life. Each service is tailored to meet your unique needs with precision and flair.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {services.map((service) => (
-                            <button 
-                                key={service.id} 
-                                onClick={() => navigateTo(service.id)} 
-                                className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            >
-                                <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
-                                    <ServiceIcon name={service.iconName} className="h-12 w-12" />
-                                </div>
-                                <h3 className="font-bold text-xl text-white mb-2">{service.name}</h3>
-                                <p className="text-sm text-gray-400">View Details</p>
-                            </button>
+                        {services.map((service, index) => (
+                            <AnimatedWrapper key={service.id} index={index}>
+                                <button 
+                                    onClick={() => navigateTo(service.id)} 
+                                    className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                >
+                                    <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
+                                        <ServiceIcon name={service.iconName} className="h-12 w-12" />
+                                    </div>
+                                    <h3 className="font-bold text-xl text-white mb-2">{service.name}</h3>
+                                    <p className="text-sm text-gray-400 group-hover:text-orange-400 transition-colors duration-300">View Details</p>
+                                </button>
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 </div>
@@ -1361,54 +1457,112 @@ const WhatsAppButton = () => (
     </a>
   );
 
+const ScrollProgressBar = () => {
+    const [scroll, setScroll] = useState(0);
+
+    const onScroll = () => {
+        const Scrolled = document.documentElement.scrollTop;
+        const MaxHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        const ScrollPercent = (Scrolled / MaxHeight) * 100;
+        setScroll(ScrollPercent);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    return (
+        <div className="fixed top-0 left-0 w-full h-1 z-[999] pointer-events-none">
+            <div
+                className="h-full bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-150 ease-out"
+                style={{ width: `${scroll}%` }}
+            ></div>
+        </div>
+    );
+};
+
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState('home');
+  const [animationClass, setAnimationClass] = useState('page-transition-enter');
+  
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const timer = setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.overflow = '';
+    }, 1500); 
+
+    return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = '';
+    };
+  }, []);
 
   const navigateTo = (page: string) => {
-    window.scrollTo(0, 0);
-    setCurrentPage(page);
+    if (page === currentPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    };
+
+    setAnimationClass('page-transition-exit');
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      setCurrentPage(page);
+      setAnimationClass('page-transition-enter');
+    }, 400); // exit animation duration
   };
+
 
   const renderPage = () => {
     const servicePage = services.find(s => s.id === currentPage);
 
     switch(currentPage) {
         case 'home':
-            return <HomePage navigateTo={navigateTo} />;
+            return <HomePage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'services-page':
-            return <AllServicesPage navigateTo={navigateTo} />;
+            return <AllServicesPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'video-editing':
-            return <VideoEditingPage navigateTo={navigateTo} />;
+            return <VideoEditingPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'web-development':
-            return <WebDevelopmentPage navigateTo={navigateTo} />;
+            return <WebDevelopmentPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'pixel-art':
-            return <PixelArtPage navigateTo={navigateTo} />;
+            return <PixelArtPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'clipping-service':
-            return <ClippingServicePage navigateTo={navigateTo} />;
+            return <ClippingServicePage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'about-us':
-            return <AboutUsPage navigateTo={navigateTo} />;
+            return <AboutUsPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'faqs':
-            return <FAQPage navigateTo={navigateTo} />;
+            return <FAQPage navigateTo={navigateTo} currentPage={currentPage} />;
         case 'contact':
-            return <ContactPage navigateTo={navigateTo} />;
+            return <ContactPage navigateTo={navigateTo} currentPage={currentPage} />;
         default:
             if (servicePage) {
-                if (servicePage.id === 'graphics-designing' || servicePage.id === 'digital-art') {
-                    return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
-                }
+                return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
             }
-            return <HomePage navigateTo={navigateTo} />;
+            return <HomePage navigateTo={navigateTo} currentPage={currentPage} />;
     }
   };
 
   return (
     <div className="bg-[#0D0D0D] min-h-screen text-white">
-      <Header navigateTo={navigateTo} />
-      <main>
+      <div
+          className={`fixed inset-0 bg-[#0D0D0D] z-[100] flex items-center justify-center transition-opacity duration-800 ease-in-out ${isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          aria-hidden={!isLoading}
+      >
+          <Preloader />
+      </div>
+
+      <ScrollProgressBar />
+      <Header navigateTo={navigateTo} currentPage={currentPage} />
+      <main className={animationClass}>
         {renderPage()}
       </main>
-      <Footer navigateTo={navigateTo} />
+      <Footer navigateTo={navigateTo} currentPage={currentPage} />
       <WhatsAppButton />
     </div>
   );
