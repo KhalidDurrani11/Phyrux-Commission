@@ -55,7 +55,7 @@ const SparkleIcon = () => (
 const BackButton = ({ navigateTo, page, text }: { navigateTo: (page: string) => void; page: string; text: string; }) => (
     <button
         onClick={() => navigateTo(page)}
-        className="group inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-black/20 px-4 py-2 text-sm font-semibold text-orange-400 transition-all duration-300 ease-in-out hover:bg-orange-500/10 hover:border-orange-500/50 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-[#0D0D0D]"
+        className="group inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-black/20 px-4 py-2 text-sm font-semibold text-orange-400 transition-all duration-300 ease-in-out hover:bg-orange-500/10 hover:border-orange-500/50 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-[#0D0D0D]"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -238,7 +238,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
           <div className="max-w-5xl mx-auto">
             <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
               <div className="flex items-center justify-between">
-                <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105">
+                <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
                   <Logo />
                   <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
                       <span className="group-hover:hidden">Phyrux Comms</span>
@@ -247,7 +247,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                 </button>
                 <nav className="hidden md:flex items-center space-x-1">
                   {navLinks.slice(0,1).map(link => (
-                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                   ))}
                   <div 
                       className="relative"
@@ -256,7 +256,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                   >
                       <button 
                           onClick={() => navigateTo('services-page')}
-                          className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium flex items-center gap-1 ${isServicePageActive ? 'text-orange-400 bg-white/5' : 'text-gray-300 hover:text-orange-400'}`}
+                          className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium flex items-center gap-1 active:scale-95 ${isServicePageActive ? 'text-orange-400 bg-white/5' : 'text-gray-300 hover:text-orange-400'}`}
                       >
                           Services
                           <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ease-in-out ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
@@ -274,7 +274,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                                       navigateTo(service.id);
                                       setIsServicesMenuOpen(false);
                                   }} 
-                                  className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors duration-200 ${currentPage === service.id ? 'bg-orange-500/20 text-orange-300' : 'text-gray-300 hover:bg-white/10 hover:text-orange-400'}`}
+                                  className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-200 active:scale-95 ${currentPage === service.id ? 'bg-orange-500/20 text-orange-300' : 'text-gray-300 hover:bg-white/10 hover:text-orange-400'}`}
                               >
                                   {service.name}
                               </button>
@@ -282,11 +282,11 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                       </div>
                   </div>
                   {navLinks.slice(2).map(link => (
-                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                   ))}
                 </nav>
                 <div className="flex items-center gap-2">
-                    <button onClick={() => navigateTo('contact')} className="hidden md:block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
+                    <button onClick={() => navigateTo('contact')} className="hidden md:block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95">
                       Contact us
                     </button>
                     <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle menu">
@@ -300,17 +300,17 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
 
         {/* Mobile Menu */}
         <div className={`fixed inset-0 z-40 md:hidden transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-             <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+             <div className="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
              <nav className="relative z-10 h-full flex flex-col items-center justify-center text-center">
                 <ul className="space-y-6">
                     {navLinks.map((link, index) => (
                         <li key={link.page} className="opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards ${0.1 * index}s` : 'none' }}>
-                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                         </li>
                     ))}
                 </ul>
                 <div className="mt-12 opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards 0.5s` : 'none' }}>
-                    <button onClick={() => handleMobileNav('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-8 py-4 rounded-full text-lg hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
+                    <button onClick={() => handleMobileNav('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95">
                         Contact us
                     </button>
                 </div>
@@ -329,20 +329,20 @@ const Hero = ({ navigateTo }: NavigationProps) => (
             Deserves a Great Editor.
         </h1>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up animation-delay-400">
-            <button onClick={() => navigateTo('contact')} className="group flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)] transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transform hover:scale-105">
+            <button onClick={() => navigateTo('contact')} className="group flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)] transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transform hover:scale-105 active:scale-95">
                 Get a Quote
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
             </button>
-            <button onClick={() => navigateTo('services-page')} className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-all ease-in-out duration-300 transform hover:scale-105">
+            <button onClick={() => navigateTo('services-page')} className="bg-transparent border border-white/20 text-white font-semibold px-6 py-3 rounded-full transition-all ease-in-out duration-300 transform hover:scale-105 hover:bg-white/10 active:scale-95">
                 View Our Work
             </button>
         </div>
         <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
-                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1005/100/100" alt="customer 1" />
-                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
+                <img loading="lazy" className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1005/100/100" alt="customer 1" />
+                <img loading="lazy" className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
                 <div className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] bg-purple-600 flex items-center justify-center text-xs font-bold text-white">VIX</div>
             </div>
             <p className="ml-4 text-gray-400 text-sm">100+ Happy customers</p>
@@ -407,7 +407,7 @@ const VideoPlayer = () => {
                     <div className="absolute bottom-6 left-6">
                         <button 
                             onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-                            className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 transition-all duration-300 ease-in-out"
+                            className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out"
                         >
                             {isPlaying ? (
                                 <>
@@ -442,7 +442,7 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
                     <AnimatedWrapper key={service.id} index={index}>
                         <button 
                             onClick={() => navigateTo(service.id)} 
-                            className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
                             <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                                 <ServiceIcon name={service.iconName} className="h-12 w-12" />
@@ -481,6 +481,7 @@ const TeamSection = () => (
                     <AnimatedWrapper key={index} index={index}>
                         <div className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10">
                             <img 
+                                loading="lazy"
                                 src={member.imageUrl} 
                                 alt={member.name} 
                                 className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10 transition-all duration-300 ease-in-out group-hover:border-orange-400 group-hover:scale-105"
@@ -527,6 +528,7 @@ const TestimonialsSection = () => (
                 <div className="flex flex-col gap-8 w-[300px] md:w-[400px] animate-scroll-up">
                     {[...testimonialsCol1, ...testimonialsCol1].map((src, index) => (
                         <img 
+                            loading="lazy"
                             key={`col1-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + 1}`} 
@@ -538,6 +540,7 @@ const TestimonialsSection = () => (
                 <div className="hidden md:flex flex-col gap-8 w-[300px] md:w-[400px] animate-scroll-down">
                     {[...testimonialsCol2, ...testimonialsCol2].map((src, index) => (
                         <img 
+                            loading="lazy"
                             key={`col2-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + testimonialsCol1.length + 1}`} 
@@ -665,7 +668,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
         <div className="bg-[#1C1C1C] rounded-2xl">
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
-                className="w-full flex justify-between items-center text-left p-6 gap-4"
+                className="w-full flex justify-between items-center text-left p-6 gap-4 transition-transform duration-200 active:scale-[0.98]"
                 aria-expanded={isOpen}
                 aria-controls={contentId}
             >
@@ -714,7 +717,7 @@ const FAQPage = ({ navigateTo }: NavigationProps) => {
                             <h2 className="font-bold text-2xl text-white">Have a question?</h2>
                             <p className="text-orange-100 mt-1">Let's discuss it now!</p>
                          </div>
-                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full hover:bg-gray-800 transition-all ease-in-out duration-300 transform hover:scale-105 self-start sm:self-center flex-shrink-0">
+                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full transition-all ease-in-out duration-300 transform hover:scale-105 active:scale-95 self-start sm:self-center flex-shrink-0">
                             Book an appointment
                          </button>
                     </div>
@@ -744,7 +747,7 @@ type SocialIconProps = {
 
 function SocialIcon({ href, children }: SocialIconProps) {
     return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="group text-gray-400 transition-colors duration-300 ease-in-out">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="group text-gray-400 transition-transform duration-300 ease-in-out active:scale-90">
             <div className="w-10 h-10 rounded-full bg-white/5 group-hover:bg-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 ease-in-out transform group-hover:scale-110">
                  {children}
             </div>
@@ -757,7 +760,7 @@ const Footer = ({ navigateTo }: NavigationProps) => (
         <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 text-center md:text-left">
                 <div className="lg:col-span-2">
-                    <button onClick={() => navigateTo('home')} className="group flex items-center justify-center md:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105">
+                    <button onClick={() => navigateTo('home')} className="group flex items-center justify-center md:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
                         <Logo />
                         <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
                            <span className="group-hover:hidden">Phyrux Comms</span>
@@ -770,11 +773,11 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                 <div>
                     <h3 className="font-bold text-white mb-4">Navigation</h3>
                     <ul className="space-y-2">
-                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Home</button></li>
-                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Services</button></li>
-                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">About Us</button></li>
-                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">FAQs</button></li>
-                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">Contact</button></li>
+                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Home</button></li>
+                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Services</button></li>
+                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">About Us</button></li>
+                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">FAQs</button></li>
+                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Contact</button></li>
                     </ul>
                 </div>
 
@@ -782,7 +785,7 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                     <h3 className="font-bold text-white mb-4">Our Services</h3>
                     <ul className="space-y-2">
                         {services.map(item => (
-                            <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">{item.name}</button></li>
+                            <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">{item.name}</button></li>
                         ))}
                     </ul>
                 </div>
@@ -925,14 +928,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <CardComponent
             {...props}
-            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1"
+            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-100"
         >
             <div 
-                className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer"
+                className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-[#111]"
                 onClick={nextImage}
             >
                 {project.images.map((src, index) => (
                      <img
+                        loading="lazy"
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
@@ -979,9 +983,10 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
 
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
-            <div className="relative group aspect-video overflow-hidden rounded-lg">
+            <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
                 {project.images.map((src, index) => (
                     <img
+                        loading="lazy"
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
@@ -1060,13 +1065,13 @@ type AnimatedWrapperProps = {
 };
 
 const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) => {
-    const [ref, isInView] = useInView({ threshold: 0.15 });
+    const [ref, isInView] = useInView({ threshold: 0.1 });
 
     return (
         <div
             ref={ref}
-            className={`transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: `${index * 120}ms` }}
+            className={`transition-all duration-1000 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: `${index * 150}ms` }}
         >
             {children}
         </div>
@@ -1087,11 +1092,11 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-100">
             <div className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-black" onClick={handlePlay}>
                 {!isInteracted ? (
                     <>
-                        <img src={project.thumbnailUrl} alt={project.title} className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80" />
+                        <img loading="lazy" src={project.thumbnailUrl} alt={project.title} className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80" />
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <div className="w-16 h-16 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
@@ -1358,7 +1363,7 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
                                 <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleInputChange} required className="w-full bg-[#0D0D0D] border border-white/20 rounded-lg px-4 py-2.5 text-white focus:ring-orange-500 focus:border-orange-500 transition"></textarea>
                             </div>
                             <div>
-                                <button type="submit" disabled={submissionStatus === 'sending'} className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-3 rounded-full text-base hover:opacity-90 transition-opacity duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center">
+                                <button type="submit" disabled={submissionStatus === 'sending'} className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-3 rounded-full text-base transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center active:scale-95">
                                     {submissionStatus === 'sending' ? (
                                         <>
                                             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1428,7 +1433,7 @@ const AllServicesPage = ({ navigateTo }: NavigationProps) => {
                             <AnimatedWrapper key={service.id} index={index}>
                                 <button 
                                     onClick={() => navigateTo(service.id)} 
-                                    className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                    className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 >
                                     <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                                         <ServiceIcon name={service.iconName} className="h-12 w-12" />
@@ -1450,7 +1455,7 @@ const WhatsAppButton = () => (
       href="https://wa.me/923167741677"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out"
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-100 transition-transform duration-300 ease-in-out"
       aria-label="Chat on WhatsApp"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
@@ -1486,21 +1491,29 @@ const ScrollProgressBar = () => {
     );
 };
 
+const isServicePage = (page: string) => services.some(s => s.id === page);
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [preloaderVisible, setPreloaderVisible] = useState(true);
+  const [preloaderExiting, setPreloaderExiting] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
-  const [animationClass, setAnimationClass] = useState('page-transition-enter');
+  const [animationClass, setAnimationClass] = useState('');
   
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    const timer = setTimeout(() => {
-        setIsLoading(false);
-        document.body.style.overflow = '';
+    const startTimer = setTimeout(() => {
+        setPreloaderExiting(true);
     }, 1500); 
 
+    const endTimer = setTimeout(() => {
+        setPreloaderVisible(false);
+        document.body.style.overflow = '';
+        setAnimationClass('page-transition-enter');
+    }, 2100); // 1500ms wait + 600ms exit animation
+
     return () => {
-        clearTimeout(timer);
+        clearTimeout(startTimer);
+        clearTimeout(endTimer);
         document.body.style.overflow = '';
     };
   }, []);
@@ -1515,7 +1528,12 @@ export default function App() {
     setTimeout(() => {
       window.scrollTo(0, 0);
       setCurrentPage(page);
-      setAnimationClass('page-transition-enter');
+      
+      const newAnimationClass = isServicePage(page) 
+          ? 'service-page-transition-enter' 
+          : 'page-transition-enter';
+      setAnimationClass(newAnimationClass);
+
     }, 400); // exit animation duration
   };
 
@@ -1550,15 +1568,21 @@ export default function App() {
     }
   };
 
+  if (preloaderVisible) {
+    return (
+        <div className="bg-[#0D0D0D] min-h-screen text-white">
+            <div
+                className={`fixed inset-0 bg-[#0D0D0D] z-[100] flex items-center justify-center ${preloaderExiting ? 'preloader-exit' : ''}`}
+                aria-hidden={!preloaderVisible}
+            >
+                <Preloader />
+            </div>
+        </div>
+    );
+  }
+
   return (
     <div className="bg-[#0D0D0D] min-h-screen text-white">
-      <div
-          className={`fixed inset-0 bg-[#0D0D0D] z-[100] flex items-center justify-center transition-opacity duration-800 ease-in-out ${isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-          aria-hidden={!isLoading}
-      >
-          <Preloader />
-      </div>
-
       <ScrollProgressBar />
       <Header navigateTo={navigateTo} currentPage={currentPage} />
       <main className={animationClass}>

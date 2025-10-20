@@ -74,6 +74,21 @@
       .page-transition-exit {
         animation: page-exit 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
       }
+      
+      @keyframes service-page-enter {
+        from { 
+            opacity: 0; 
+            clip-path: circle(0% at 50% 50%);
+        }
+        to { 
+            opacity: 1; 
+            clip-path: circle(75% at 50% 50%);
+        }
+      }
+      .service-page-transition-enter {
+        animation: service-page-enter 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+      
       @keyframes marquee {
         from { transform: translateX(0); }
         to { transform: translateX(-50%); }
@@ -103,6 +118,20 @@
       }
       .animate-preloader-pop {
         animation: preloader-cinematic-pop 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      }
+
+      @keyframes preloader-exit {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+      }
+      .preloader-exit {
+        animation: preloader-exit 0.6s cubic-bezier(0.78, 0.1, 0.4, 0.9) forwards;
       }
     </style>
   <script type="importmap">
