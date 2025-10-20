@@ -61,32 +61,40 @@
         animation: scroll-down 60s linear infinite;
       }
       @keyframes page-enter {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { 
+            opacity: 0; 
+            transform: translateY(20px) scale(0.98);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1);
+        }
       }
       @keyframes page-exit {
         from { opacity: 1; transform: translateY(0); }
         to { opacity: 0; transform: translateY(-10px); }
       }
       .page-transition-enter {
-        animation: page-enter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation: page-enter 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
       }
       .page-transition-exit {
         animation: page-exit 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
       }
       
-      @keyframes service-page-enter {
-        from { 
-            opacity: 0; 
-            clip-path: circle(0% at 50% 50%);
+      @keyframes service-page-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.98);
+          clip-path: inset(100% 0 0 0);
         }
-        to { 
-            opacity: 1; 
-            clip-path: circle(75% at 50% 50%);
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          clip-path: inset(0 0 0 0);
         }
       }
-      .service-page-transition-enter {
-        animation: service-page-enter 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      .service-page-reveal-enter {
+        animation: service-page-reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
       }
       
       @keyframes marquee {
@@ -99,25 +107,32 @@
       .group:hover .animate-marquee, .animate-marquee:hover {
         animation-play-state: paused;
       }
-      @keyframes preloader-cinematic-pop {
+      
+      @keyframes preloader-word-pop {
         0% {
           opacity: 0;
-          transform: scale(0.5) translateY(50px);
+          transform: translateY(30px) scale(0.9);
           filter: blur(10px);
+          color: white;
         }
-        50% {
+        20% {
           opacity: 1;
-          transform: scale(1.1) translateY(0);
+          transform: translateY(0) scale(1.05);
           filter: blur(0px);
+          color: #F97316; /* Pop to orange */
+        }
+        80% {
+          transform: translateY(0) scale(1);
+          color: #F97316; /* Hold orange color */
         }
         100% {
           opacity: 1;
-          transform: scale(1) translateY(0);
-          filter: blur(0px);
+          transform: translateY(0) scale(1);
+          color: white; /* Fade back to white */
         }
       }
-      .animate-preloader-pop {
-        animation: preloader-cinematic-pop 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      .animate-preloader-word-pop {
+        animation: preloader-word-pop 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
       }
 
       @keyframes preloader-exit {
@@ -127,11 +142,12 @@
         }
         to {
           opacity: 0;
-          transform: scale(0.8);
+          transform: scale(0.95);
+          filter: blur(5px);
         }
       }
       .preloader-exit {
-        animation: preloader-exit 0.6s cubic-bezier(0.78, 0.1, 0.4, 0.9) forwards;
+        animation: preloader-exit 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
     </style>
   <script type="importmap">

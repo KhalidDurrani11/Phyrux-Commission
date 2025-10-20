@@ -1,18 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const Preloader = () => (
-    <div className="text-6xl sm:text-7xl lg:text-9xl font-black text-white tracking-widest uppercase">
-        {'PHYRUXS'.split('').map((char, index) => (
-            <span
-                key={index}
-                className="inline-block opacity-0 animate-preloader-pop"
-                style={{ animationDelay: `${100 + index * 100}ms` }}
-            >
-                {char}
-            </span>
-        ))}
+    <div className="text-6xl sm:text-7xl lg:text-9xl font-black text-white tracking-widest uppercase flex flex-col sm:flex-row items-center gap-x-6 gap-y-2">
+        <span
+            className="inline-block opacity-0 animate-preloader-word-pop"
+            style={{ animationDelay: '200ms' }}
+        >
+            Phyruxs
+        </span>
+        <span
+            className="inline-block opacity-0 animate-preloader-word-pop"
+            style={{ animationDelay: '1500ms' }} // Increased delay for strict sequential animation
+        >
+            Comms
+        </span>
     </div>
 );
+
 
 const Logo = () => (
     <svg
@@ -210,7 +214,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     };
 
     const handleMenuLeave = () => {
-        menuTimeoutRef.current = window.setTimeout(() => setIsServicesMenuOpen(false), 500);
+        menuTimeoutRef.current = window.setTimeout(() => setIsServicesMenuOpen(false), 600);
     };
 
     const handleMobileNav = (page: string) => {
@@ -247,7 +251,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                 </button>
                 <nav className="hidden md:flex items-center space-x-1">
                   {navLinks.slice(0,1).map(link => (
-                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium hover:scale-105 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                   ))}
                   <div 
                       className="relative"
@@ -256,7 +260,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                   >
                       <button 
                           onClick={() => navigateTo('services-page')}
-                          className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium flex items-center gap-1 active:scale-95 ${isServicePageActive ? 'text-orange-400 bg-white/5' : 'text-gray-300 hover:text-orange-400'}`}
+                          className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium flex items-center gap-1 hover:scale-105 active:scale-95 ${isServicePageActive ? 'text-orange-400 bg-white/5' : 'text-gray-300 hover:text-orange-400'}`}
                       >
                           Services
                           <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ease-in-out ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
@@ -265,7 +269,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                       </button>
                       <div 
                         onMouseEnter={handleMenuEnter}
-                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-[99] transition-all duration-300 ease-out ${isServicesMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
+                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-[100] transition-all duration-300 ease-out ${isServicesMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
                       >
                           {services.map(service => (
                               <button 
@@ -274,7 +278,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                                       navigateTo(service.id);
                                       setIsServicesMenuOpen(false);
                                   }} 
-                                  className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-200 active:scale-95 ${currentPage === service.id ? 'bg-orange-500/20 text-orange-300' : 'text-gray-300 hover:bg-white/10 hover:text-orange-400'}`}
+                                  className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all duration-200 hover:scale-105 active:scale-95 ${currentPage === service.id ? 'bg-orange-500/20 text-orange-300' : 'text-gray-300 hover:bg-white/10 hover:text-orange-400'}`}
                               >
                                   {service.name}
                               </button>
@@ -282,14 +286,14 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                       </div>
                   </div>
                   {navLinks.slice(2).map(link => (
-                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                    <button key={link.page} onClick={() => navigateTo(link.page)} className={`px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium hover:scale-105 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                   ))}
                 </nav>
                 <div className="flex items-center gap-2">
                     <button onClick={() => navigateTo('contact')} className="hidden md:block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95">
                       Contact us
                     </button>
-                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle menu">
+                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-95" aria-label="Toggle menu">
                        <HamburgerIcon open={isMobileMenuOpen} />
                     </button>
                 </div>
@@ -300,12 +304,12 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
 
         {/* Mobile Menu */}
         <div className={`fixed inset-0 z-40 md:hidden transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-             <div className="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
+             <div className="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
              <nav className="relative z-10 h-full flex flex-col items-center justify-center text-center">
                 <ul className="space-y-6">
                     {navLinks.map((link, index) => (
                         <li key={link.page} className="opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards ${0.1 * index}s` : 'none' }}>
-                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 hover:scale-105 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                         </li>
                     ))}
                 </ul>
@@ -320,7 +324,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     );
   };
 
-const Hero = ({ navigateTo }: NavigationProps) => (
+const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
     <section className="text-center pt-20 pb-16 px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
@@ -428,7 +432,7 @@ const VideoPlayer = () => {
     );
 };
 
-const ServicesSection = ({ navigateTo }: NavigationProps) => (
+const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
     <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
@@ -457,14 +461,14 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
 );
 
 const teamMembers = [
-    { name: 'Tayyab', role: 'Founder (VFX/GFX)', imageUrl: 'https://picsum.photos/seed/tayyab/200/200' },
-    { name: 'Ali', role: 'Co-Founder (Video Editor)', imageUrl: 'https://picsum.photos/seed/ali/200/200' },
-    { name: 'Ahmed', role: 'Manager', imageUrl: 'https://picsum.photos/seed/ahmed_manager/200/200' },
-    { name: 'Gulsher', role: 'Video Editor', imageUrl: 'https://picsum.photos/seed/gulsher/200/200' },
-    { name: 'Khalid', role: 'Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
-    { name: 'Maaz', role: 'Pixel Artist', imageUrl: 'https://picsum.photos/seed/maaz/200/200' },
-    { name: 'Taimoor', role: 'Clipping Head', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
-    { name: 'Akemi', role: 'Digital Artist', imageUrl: 'https://picsum.photos/seed/akemi/200/200' },
+    { name: 'Tayyab', role: 'Founder & VFX Artist', imageUrl: 'https://picsum.photos/seed/tayyab/200/200' },
+    { name: 'Ali', role: 'Co-Founder & Lead Editor', imageUrl: 'https://picsum.photos/seed/ali/200/200' },
+    { name: 'Ahmed', role: 'Project Manager', imageUrl: 'https://picsum.photos/seed/ahmed_manager/200/200' },
+    { name: 'Gulsher', role: 'Senior Video Editor', imageUrl: 'https://picsum.photos/seed/gulsher/200/200' },
+    { name: 'Khalid', role: 'Lead Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
+    { name: 'Maaz', role: 'Specialist Pixel Artist', imageUrl: 'https://picsum.photos/seed/maaz/200/200' },
+    { name: 'Taimoor', role: 'Head of Clipping Services', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
+    { name: 'Akemi', role: 'Lead Digital Illustrator', imageUrl: 'https://picsum.photos/seed/akemi/200/200' },
 ];
 
 const TeamSection = () => (
@@ -553,23 +557,48 @@ const TestimonialsSection = () => (
     </section>
 );
 
+
+const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#9999ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm8.25-6.375c0-2.062 1.313-3.375 3.375-3.375H22.5v10.5h-2.25v-3.75h-1.5v3.75h-2.25V12.375z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125z" fill="currentColor"/></svg>;
+const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#d291ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm8.625 0l-3.015-9.75h2.25l1.65 6.45h.075L20.4 9h2.25l-3.015 9.75h-2.25l.375-1.5z" fill="currentColor"/></svg>;
+const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#31c5f4]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm9.375 0h-2.25l-1.5-3.75H12v3.75h-2.25V9H15c2.063 0 3.375 1.313 3.375 3.375 0 1.5-.75 2.438-1.875 3L17.625 18.75z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125zm4.875 0H12v3h1.125c.75 0 1.125-.375 1.125-1.125s-.375-1.875-1.125-1.875z" fill="currentColor"/></svg>;
+const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#ff9a00]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm9.375 0h-2.25V9h2.25v9.75z" fill="currentColor"/></svg>;
+const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
+const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
+const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#000000]"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm7.188 18.563H17.5v-7.126l-5.625 7.125h-1.313v-13.125h1.75v7.125l5.625-7.125h1.313v13.125z" fill="currentColor"/></svg>;
+const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#ff7d4a]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.08 4.14l8.35 8.35c-.4.49-1.54 1.63-2.03 2.03l-8.35-8.35c.4-.49 1.54-1.63 2.03-2.03zm-4.39 1.15l8.35 8.35c-.49.4-1.63 1.54-2.03 2.03l-8.35-8.35c.49-.4 1.63-1.54 2.03-2.03zM4.14 13.08l8.35-8.35c.49-.4 1.63-1.54 2.03-2.03l-8.35 8.35c-.49.4-1.63 1.54-2.03 2.03zm1.15 4.39l8.35-8.35c.4-.49 1.54-1.63 2.03-2.03l-8.35 8.35c-.4.49-1.54 1.63-2.03 2.03z" fill="currentColor"/></svg>;
+const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
+const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#f7df1e]"><path d="M0 0h24v24H0V0zm22.034 18.262c.337-1.743.237-3.513-.288-5.182-1.1-3.463-4.113-5.25-8.15-5.25h-1.625v10.375h1.625c3.275 0 5.95-1.575 7.15-4.125.4-1.125.563-2.313.288-3.813zm-6.134-2.7c.613.825.937 1.838.937 2.938 0 1.212-.35 2.3-.987 3.112-.65.813-1.538 1.288-2.663 1.288h-1.6v-8.825h1.6c1.175 0 2.113.488 2.713 1.488zM9.42 12.05H4.155V9.69h5.265v2.36zm0 2.362H4.155v2.363h5.265V14.41z" fill="currentColor"/></svg>;
+
+
 const techLogos = [
-    'Adobe Premiere Pro', 'After Effects', 'Photoshop', 'Illustrator', 'Figma', 'React', 'Next.js', 'DaVinci Resolve', 'Tailwind CSS', 'JavaScript'
+    { name: 'Premiere Pro', component: <PremiereProLogo /> },
+    { name: 'After Effects', component: <AfterEffectsLogo /> },
+    { name: 'Photoshop', component: <PhotoshopLogo /> },
+    { name: 'Illustrator', component: <IllustratorLogo /> },
+    { name: 'Figma', component: <FigmaLogo /> },
+    { name: 'React', component: <ReactLogo /> },
+    { name: 'Next.js', component: <NextJSLogo /> },
+    { name: 'DaVinci Resolve', component: <DaVinciResolveLogo /> },
+    { name: 'Tailwind CSS', component: <TailwindLogo /> },
+    { name: 'JavaScript', component: <JavascriptLogo /> },
 ];
 
 const TechMarquee = () => (
     <section className="py-16 bg-black/20 overflow-hidden">
-        <div className="max-w-6xl mx-auto text-center mb-10">
+        <div className="max-w-6xl mx-auto text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
                 Powered by Industry-Leading Tools
             </h2>
         </div>
         <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee space-x-16 pr-16 flex-shrink-0">
+            <div className="flex animate-marquee space-x-20 pr-20 flex-shrink-0 items-center">
                 {[...techLogos, ...techLogos].map((tech, index) => (
-                    <div key={index} className="flex items-center justify-center">
-                        <span className="text-2xl font-bold text-gray-500 whitespace-nowrap transition-all duration-300 group-hover:text-gray-400 hover:!text-orange-400 hover:!scale-110 cursor-default">
-                            {tech}
+                    <div key={index} className="flex flex-col items-center justify-center gap-2 text-center group-hover:grayscale-[50%] hover:!grayscale-0 hover:!scale-110 transition-all duration-300 ease-in-out cursor-pointer">
+                        <div className="h-12 w-12 flex items-center justify-center">
+                            {tech.component}
+                        </div>
+                        <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover:text-gray-400">
+                            {tech.name}
                         </span>
                     </div>
                 ))}
@@ -586,7 +615,7 @@ const storyEvents = [
   { year: '2024', title: 'Future Forged', description: 'Launched our new brand identity and futuristic website, marking a new era of high-end creative solutions.' },
 ];
 
-const AboutUsPage = ({ navigateTo }: NavigationProps) => (
+const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => (
     <div className="pt-12">
         <section className="py-12 px-4 relative overflow-hidden">
             <div className="max-w-5xl mx-auto text-center relative z-10">
@@ -668,7 +697,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
         <div className="bg-[#1C1C1C] rounded-2xl">
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
-                className="w-full flex justify-between items-center text-left p-6 gap-4 transition-transform duration-200 active:scale-[0.98]"
+                className="w-full flex justify-between items-center text-left p-6 gap-4 transition-transform duration-200 active:scale-95"
                 aria-expanded={isOpen}
                 aria-controls={contentId}
             >
@@ -690,7 +719,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
 };
 
 
-const FAQPage = ({ navigateTo }: NavigationProps) => {
+const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const faqs = [
         { q: "What is the edit process?", a: "Our design process includes 4 phases: Discovery and Reserach, Story boarding, Editing, and Finalisation and Delivery." },
         { q: "How will I send you the footage?", a: "You can send us your footage via cloud services like Google Drive, Dropbox, or WeTransfer. We'll provide a secure link for you to upload your files directly to our project workspace." },
@@ -747,7 +776,7 @@ type SocialIconProps = {
 
 function SocialIcon({ href, children }: SocialIconProps) {
     return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="group text-gray-400 transition-transform duration-300 ease-in-out active:scale-90">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="group text-gray-400 transition-transform duration-300 ease-in-out active:scale-95">
             <div className="w-10 h-10 rounded-full bg-white/5 group-hover:bg-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 ease-in-out transform group-hover:scale-110">
                  {children}
             </div>
@@ -755,7 +784,7 @@ function SocialIcon({ href, children }: SocialIconProps) {
     );
 }
 
-const Footer = ({ navigateTo }: NavigationProps) => (
+const Footer = ({ navigateTo, currentPage }: NavigationProps) => (
     <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
         <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 text-center md:text-left">
@@ -819,9 +848,9 @@ const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
         <Hero navigateTo={navigateTo} currentPage={currentPage} />
         <VideoPlayer />
         <ServicesSection navigateTo={navigateTo} currentPage={currentPage} />
+        <TechMarquee />
         <TeamSection />
         <TestimonialsSection />
-        <TechMarquee />
     </>
 );
 
@@ -928,7 +957,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <CardComponent
             {...props}
-            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-100"
+            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95"
         >
             <div 
                 className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-[#111]"
@@ -982,7 +1011,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
                 {project.images.map((src, index) => (
                     <img
@@ -1006,7 +1035,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                         </div>
                         <button
                             onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
                             aria-label="Previous image"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -1015,7 +1044,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                         </button>
                         <button
                             onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
                             aria-label="Next image"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -1070,8 +1099,8 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
     return (
         <div
             ref={ref}
-            className={`transition-all duration-1000 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: `${index * 150}ms` }}
+            className={`transition-all duration-800 ease-in-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ transitionDelay: `${index * 200}ms` }}
         >
             {children}
         </div>
@@ -1092,7 +1121,7 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-100">
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
             <div className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-black" onClick={handlePlay}>
                 {!isInteracted ? (
                     <>
@@ -1113,7 +1142,7 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
 };
 
 
-const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
+const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const firstRowProjects = videoEditingProjects.slice(0, 3);
     const secondRowProjects = videoEditingProjects.slice(3);
 
@@ -1155,7 +1184,7 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
-const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
+const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const firstRowProjects = webDevProjects.slice(0, 3);
     const secondRowProjects = webDevProjects.slice(3);
 
@@ -1195,7 +1224,7 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
-const PixelArtPage = ({ navigateTo }: NavigationProps) => {
+const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const firstRowProjects = pixelArtProjects.slice(0, 3);
     const secondRowProjects = pixelArtProjects.slice(3);
     
@@ -1286,7 +1315,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
     );
 };
 
-const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
+const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <div className="pt-12 px-4 pb-16">
         <section className="text-center pb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
@@ -1304,7 +1333,7 @@ const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
 );
 
 
-const ContactPage = ({ navigateTo }: NavigationProps) => {
+const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -1417,7 +1446,7 @@ const ContactPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
-const AllServicesPage = ({ navigateTo }: NavigationProps) => {
+const AllServicesPage = ({ navigateTo, currentPage }: NavigationProps) => {
     return (
         <div className="pt-12 pb-16">
             <section className="py-16 px-4">
@@ -1455,7 +1484,7 @@ const WhatsAppButton = () => (
       href="https://wa.me/923167741677"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-100 transition-transform duration-300 ease-in-out"
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-95 transition-transform duration-300 ease-in-out"
       aria-label="Chat on WhatsApp"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
@@ -1503,13 +1532,13 @@ export default function App() {
     document.body.style.overflow = 'hidden';
     const startTimer = setTimeout(() => {
         setPreloaderExiting(true);
-    }, 1500); 
+    }, 2900); // Extended to accommodate sequential animation
 
     const endTimer = setTimeout(() => {
         setPreloaderVisible(false);
         document.body.style.overflow = '';
         setAnimationClass('page-transition-enter');
-    }, 2100); // 1500ms wait + 600ms exit animation
+    }, 3700); // Extended for smoother exit
 
     return () => {
         clearTimeout(startTimer);
@@ -1530,7 +1559,7 @@ export default function App() {
       setCurrentPage(page);
       
       const newAnimationClass = isServicePage(page) 
-          ? 'service-page-transition-enter' 
+          ? 'service-page-reveal-enter' 
           : 'page-transition-enter';
       setAnimationClass(newAnimationClass);
 
