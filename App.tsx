@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 
 const Preloader = () => (
@@ -10,7 +11,7 @@ const Preloader = () => (
         </span>
         <span
             className="inline-block opacity-0 animate-preloader-word-pop"
-            style={{ animationDelay: '1500ms' }} // Increased delay for strict sequential animation
+            style={{ animationDelay: '1800ms' }} // Increased delay for strict sequential animation
         >
             Comms
         </span>
@@ -324,7 +325,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     );
   };
 
-const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
+const Hero = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
     <section className="text-center pt-20 pb-16 px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
@@ -432,21 +433,25 @@ const VideoPlayer = () => {
     );
 };
 
-const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
+const ServicesSection = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
     <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
+            <div className="flex flex-col items-center justify-center gap-3 mb-4">
+                <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
+                <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Expertise</p>
+            </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
-                Our Creative Services
+                Services We Master
             </h2>
-            <p className="max-w-2xl mx-auto text-gray-400 mb-12">
-                We turn ideas into digital reality. Explore our range of services designed to make your content stand out.
+            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+                From pixel-perfect designs to cinematic video edits, we offer a comprehensive suite of creative services to elevate your brand's digital presence.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((service, index) => (
                     <AnimatedWrapper key={service.id} index={index}>
                         <button 
                             onClick={() => navigateTo(service.id)} 
-                            className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#3a2a24] hover:shadow-2xl hover:shadow-[0_0_40px_rgba(249,115,22,0.2)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
                             <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                                 <ServiceIcon name={service.iconName} className="h-12 w-12" />
@@ -474,6 +479,10 @@ const teamMembers = [
 const TeamSection = () => (
     <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
+            <div className="flex flex-col items-center justify-center gap-3 mb-4">
+                <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
+                <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Team</p>
+            </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
                 Meet Our Creative Minds
             </h2>
@@ -517,6 +526,10 @@ const testimonialsCol2 = [
 const TestimonialsSection = () => (
     <section className="py-24 px-4 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center">
+            <div className="flex flex-col items-center justify-center gap-3 mb-4">
+                <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
+                <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Testimonials</p>
+            </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
                 What our premium clients
                 <br />
@@ -593,11 +606,11 @@ const TechMarquee = () => (
         <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <div className="flex animate-marquee space-x-20 pr-20 flex-shrink-0 items-center">
                 {[...techLogos, ...techLogos].map((tech, index) => (
-                    <div key={index} className="flex flex-col items-center justify-center gap-2 text-center group-hover:grayscale-[50%] hover:!grayscale-0 hover:!scale-110 transition-all duration-300 ease-in-out cursor-pointer">
-                        <div className="h-12 w-12 flex items-center justify-center">
+                    <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer">
+                        <div className="h-12 w-12 flex items-center justify-center grayscale group-hover/item:grayscale-0 group-hover/item:scale-110 transition-all duration-300 ease-in-out">
                             {tech.component}
                         </div>
-                        <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover:text-gray-400">
+                        <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover/item:text-white">
                             {tech.name}
                         </span>
                     </div>
@@ -845,11 +858,20 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => (
 
 const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
-        <Hero navigateTo={navigateTo} currentPage={currentPage} />
+        <Hero navigateTo={navigateTo} />
         <VideoPlayer />
-        <ServicesSection navigateTo={navigateTo} currentPage={currentPage} />
+        <div className="py-16 px-4">
+            <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+        </div>
+        <ServicesSection navigateTo={navigateTo} />
         <TechMarquee />
+        <div className="py-16 px-4">
+            <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+        </div>
         <TeamSection />
+        <div className="py-16 px-4">
+            <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+        </div>
         <TestimonialsSection />
     </>
 );
@@ -1158,7 +1180,7 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
             </section>
             
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-12">
+                <div className="mb-8">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                  <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
@@ -1199,7 +1221,7 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
                 </p>
             </section>
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-12">
+                <div className="mb-8">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
@@ -1240,7 +1262,7 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
             </section>
 
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-12">
+                <div className="mb-8">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
@@ -1290,7 +1312,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
                 </p>
             </section>
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-12">
+                <div className="mb-8">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
@@ -1325,7 +1347,7 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
                 Precision is paramount. Our clipping path service provides clean, professional cutouts for your product photos, ensuring they look perfect for e-commerce sites, catalogs, and marketing materials. We meticulously handle complex images with care to deliver flawless results every time.
             </p>
         </section>
-        <div className="max-w-6xl mx-auto mb-12">
+        <div className="max-w-6xl mx-auto mb-8">
             <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
         </div>
         <VideoPlayer />
@@ -1532,13 +1554,13 @@ export default function App() {
     document.body.style.overflow = 'hidden';
     const startTimer = setTimeout(() => {
         setPreloaderExiting(true);
-    }, 2900); // Extended to accommodate sequential animation
+    }, 3600); // Extended to accommodate sequential animation
 
     const endTimer = setTimeout(() => {
         setPreloaderVisible(false);
         document.body.style.overflow = '';
         setAnimationClass('page-transition-enter');
-    }, 3700); // Extended for smoother exit
+    }, 4400); // Extended for smoother exit
 
     return () => {
         clearTimeout(startTimer);
@@ -1566,34 +1588,36 @@ export default function App() {
     }, 400); // exit animation duration
   };
 
-
   const renderPage = () => {
     const servicePage = services.find(s => s.id === currentPage);
 
+    // This is a workaround to remove props that are not expected by the child components.
+    const navigationProps = { navigateTo, currentPage };
+
     switch(currentPage) {
         case 'home':
-            return <HomePage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <HomePage {...navigationProps} />;
         case 'services-page':
-            return <AllServicesPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <AllServicesPage {...navigationProps} />;
         case 'video-editing':
-            return <VideoEditingPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <VideoEditingPage {...navigationProps} />;
         case 'web-development':
-            return <WebDevelopmentPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <WebDevelopmentPage {...navigationProps} />;
         case 'pixel-art':
-            return <PixelArtPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <PixelArtPage {...navigationProps} />;
         case 'clipping-service':
-            return <ClippingServicePage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <ClippingServicePage {...navigationProps} />;
         case 'about-us':
-            return <AboutUsPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <AboutUsPage {...navigationProps} />;
         case 'faqs':
-            return <FAQPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <FAQPage {...navigationProps} />;
         case 'contact':
-            return <ContactPage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <ContactPage {...navigationProps} />;
         default:
             if (servicePage) {
                 return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
             }
-            return <HomePage navigateTo={navigateTo} currentPage={currentPage} />;
+            return <HomePage {...navigationProps} />;
     }
   };
 

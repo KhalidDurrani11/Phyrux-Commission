@@ -84,17 +84,17 @@
       @keyframes service-page-reveal {
         from {
           opacity: 0;
-          transform: translateY(30px) scale(0.98);
+          transform: translateY(50px);
           clip-path: inset(100% 0 0 0);
         }
         to {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: translateY(0);
           clip-path: inset(0 0 0 0);
         }
       }
       .service-page-reveal-enter {
-        animation: service-page-reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        animation: service-page-reveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
       }
       
       @keyframes marquee {
@@ -111,19 +111,23 @@
       @keyframes preloader-word-pop {
         0% {
           opacity: 0;
-          transform: translateY(30px) scale(0.9);
-          filter: blur(10px);
+          transform: translateY(40px) scale(0.8);
+          filter: blur(15px);
           color: white;
         }
-        20% {
+        30% {
           opacity: 1;
-          transform: translateY(0) scale(1.05);
+          transform: translateY(0) scale(1.2); /* Overshoot */
           filter: blur(0px);
-          color: #F97316; /* Pop to orange */
+          color: #F97316;
         }
-        80% {
-          transform: translateY(0) scale(1);
-          color: #F97316; /* Hold orange color */
+        70% {
+          transform: translateY(0) scale(1.05); /* Settle */
+          color: #F97316;
+        }
+        90% {
+            transform: translateY(0) scale(1);
+            color: #F97316;
         }
         100% {
           opacity: 1;
@@ -132,7 +136,7 @@
         }
       }
       .animate-preloader-word-pop {
-        animation: preloader-word-pop 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation: preloader-word-pop 1.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
       }
 
       @keyframes preloader-exit {
