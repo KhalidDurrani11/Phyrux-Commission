@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 
 const Logo = () => (
@@ -187,7 +186,7 @@ const Header = ({ navigateTo }: NavigationProps) => {
                 </span>
               </button>
               <nav className="hidden md:flex items-center space-x-1">
-                <button onClick={() => navigateTo('home')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 transform hover:-translate-y-0.5">Home</button>
+                <button onClick={() => navigateTo('home')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">Home</button>
                 <div 
                     className="relative"
                     onMouseEnter={handleMenuEnter}
@@ -195,7 +194,7 @@ const Header = ({ navigateTo }: NavigationProps) => {
                 >
                     <button 
                         onClick={() => navigateTo('services-page')}
-                        className="px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 flex items-center gap-1 transform hover:-translate-y-0.5"
+                        className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 flex items-center gap-1"
                     >
                         Services
                         <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ease-in-out ${isServicesMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
@@ -219,8 +218,8 @@ const Header = ({ navigateTo }: NavigationProps) => {
                         </div>
                     )}
                 </div>
-                <button onClick={() => navigateTo('about-us')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 transform hover:-translate-y-0.5">About Us</button>
-                <button onClick={() => navigateTo('faqs')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-all duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400 transform hover:-translate-y-0.5">FAQs</button>
+                <button onClick={() => navigateTo('about-us')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">About Us</button>
+                <button onClick={() => navigateTo('faqs')} className="px-4 py-2 hover:bg-white/10 rounded-full transition-colors duration-300 ease-in-out text-sm font-medium text-gray-300 hover:text-orange-400">FAQs</button>
               </nav>
               <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:opacity-90 transition-opacity duration-300 ease-in-out transform hover:scale-105">
                 Contact us
@@ -234,7 +233,7 @@ const Header = ({ navigateTo }: NavigationProps) => {
 
 const Hero = ({ navigateTo }: NavigationProps) => (
     <section className="text-center pt-32 pb-16 px-4">
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-none tracking-tight opacity-0 animate-fade-in-up">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
             <SparkleIcon />
             <br />
@@ -354,7 +353,7 @@ const ServicesSection = ({ navigateTo }: NavigationProps) => (
                     <button 
                         key={service.id} 
                         onClick={() => navigateTo(service.id)} 
-                        className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     >
                         <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                             <ServiceIcon name={service.iconName} className="h-12 w-12" />
@@ -389,7 +388,7 @@ const TeamSection = () => (
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {teamMembers.map((member, index) => (
-                    <div key={index} className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/20">
+                    <div key={index} className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10">
                         <img 
                             src={member.imageUrl} 
                             alt={member.name} 
@@ -529,36 +528,47 @@ const AboutUsPage = ({ navigateTo }: NavigationProps) => (
 
 type FAQItemProps = { question: string; answer: string; defaultOpen?: boolean; };
 
+const PlusIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
+    </svg>
+);
+
+const CloseIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+);
+
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
+    const contentId = `faq-content-${question.replace(/\s+/g, '-').toLowerCase()}`;
+
     return (
-        <div className="bg-[#1a1a1a] p-6 rounded-2xl">
+        <div className="bg-[#1C1C1C] rounded-2xl">
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
-                className="w-full flex justify-between items-start text-left gap-4"
+                className="w-full flex justify-between items-center text-left p-6 gap-4"
                 aria-expanded={isOpen}
+                aria-controls={contentId}
             >
-                <span className="font-semibold text-white text-lg flex-1">{question}</span>
-                <div className="flex-shrink-0 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white transition-transform duration-300 ease-in-out transform hover:scale-110">
-                    {isOpen ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
-                        </svg>
-                    ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"/>
-                        </svg>
-                    )}
+                <h3 className="font-semibold text-white text-base md:text-lg flex-1">{question}</h3>
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                    {isOpen ? <CloseIcon /> : <PlusIcon />}
                 </div>
             </button>
-            <div className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+            <div 
+                id={contentId}
+                className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+            >
                 <div className="overflow-hidden">
-                    <p className="text-gray-400 pt-4 pr-12">{answer}</p>
+                    <p className="text-gray-400 pb-6 px-6">{answer}</p>
                 </div>
             </div>
         </div>
     );
 };
+
 
 const FAQPage = ({ navigateTo }: NavigationProps) => {
     const faqs = [
@@ -571,27 +581,30 @@ const FAQPage = ({ navigateTo }: NavigationProps) => {
     ];
 
     return (
-        <div className="pt-32 pb-24 px-4 min-h-screen">
-            <section className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
-                <div className="lg:sticky lg:top-32">
-                     <div className="flex items-center gap-3">
-                        <span className="w-2.5 h-2.5 bg-orange-500 rounded-full"></span>
-                        <p className="font-semibold text-gray-300">FAQ</p>
+        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 min-h-screen">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+                {/* Left Column */}
+                <div className="lg:col-span-2 lg:sticky lg:top-28">
+                    <div className="flex items-center gap-3">
+                        <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
+                        <p className="font-semibold text-gray-300 uppercase tracking-widest text-sm">FAQ</p>
                     </div>
-                    <h1 className="text-5xl font-black text-white leading-tight mt-4">
+                    <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mt-4">
                         Frequently asked questions about us
                     </h1>
-                    <div className="bg-orange-600 rounded-3xl p-8 mt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
-                        <div className="text-white text-center sm:text-left">
-                            <h3 className="font-bold text-xl">Have a question? Let's discuss it now!</h3>
-                        </div>
-                        <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full hover:bg-gray-800 transition-colors ease-in-out duration-300 flex-shrink-0 transform hover:scale-105">
+                    <div className="mt-12 bg-orange-500 rounded-2xl p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-lg shadow-orange-500/20">
+                         <div>
+                            <h2 className="font-bold text-2xl text-white">Have a question?</h2>
+                            <p className="text-orange-100 mt-1">Let's discuss it now!</p>
+                         </div>
+                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full hover:bg-gray-800 transition-colors ease-in-out duration-300 transform hover:scale-105 self-start sm:self-center flex-shrink-0">
                             Book an appointment
-                        </button>
+                         </button>
                     </div>
                 </div>
 
-                <div className="space-y-4">
+                {/* Right Column */}
+                <div className="lg:col-span-3 space-y-4">
                     {faqs.map((faq, index) => (
                         <FAQItem 
                             key={index} 
@@ -601,7 +614,7 @@ const FAQPage = ({ navigateTo }: NavigationProps) => {
                         />
                     ))}
                 </div>
-            </section>
+            </div>
         </div>
     );
 };
@@ -692,50 +705,50 @@ const HomePage = ({ navigateTo }: NavigationProps) => (
 );
 
 const videoEditingProjects = [
-    { title: 'Corporate Branding Video', images: ['https://picsum.photos/seed/project1/600/400', 'https://picsum.photos/seed/vep1_2/600/400'] },
-    { title: 'Social Media Ad Campaign', images: ['https://picsum.photos/seed/project2/600/400'] },
-    { title: 'Gaming Montage', images: ['https://picsum.photos/seed/project3/600/400', 'https://picsum.photos/seed/vep3_2/600/400', 'https://picsum.photos/seed/vep3_3/600/400'] },
-    { title: 'Wedding Highlight Reel', images: ['https://picsum.photos/seed/project4/600/400', 'https://picsum.photos/seed/vep4_2/600/400'] },
-    { title: 'Music Video Production', images: ['https://picsum.photos/seed/project5/600/400', 'https://picsum.photos/seed/vep5_2/600/400'] },
+    { title: 'Corporate Branding Video', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep1/600/400' },
+    { title: 'Social Media Ad Campaign', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep2/600/400' },
+    { title: 'Gaming Montage', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep3/600/400' },
+    { title: 'Wedding Highlight Reel', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep4/600/400' },
+    { title: 'Music Video Production', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep5/600/400' },
 ];
 
 const webDevProjects = [
     { 
         title: 'Gym Website', 
         description: 'A dynamic website for a fitness center with class schedules and membership info.', 
-        images: ['https://picsum.photos/seed/gymweb1/600/400', 'https://picsum.photos/seed/gymweb2/600/400', 'https://picsum.photos/seed/gymweb3/600/400'],
-        url: 'https://example.com/gym-website'
+        images: ['https://image.thum.io/get/width/1200/crop/800/https://goldsgymqta.netlify.app'],
+        url: 'https://goldsgymqta.netlify.app'
     },
     { 
         title: 'High-Conversion Landing Page', 
-        description: 'A focused landing page designed to maximize lead generation.', 
-        images: ['https://picsum.photos/seed/landingpage1/600/400', 'https://picsum.photos/seed/landingpage2/600/400'],
-        url: 'https://example.com/landing-page'
+        description: 'A focused landing page designed to maximize lead generation for a tech product.', 
+        images: ['https://image.thum.io/get/width/1200/crop/800/https://stripe.com/'],
+        url: 'https://stripe.com/'
     },
     { 
         title: 'Personal Portfolio Website', 
-        description: 'A creative portfolio to showcase skills and projects.', 
-        images: ['https://picsum.photos/seed/portfolioweb1/600/400', 'https://picsum.photos/seed/portfolioweb2/600/400', 'https://picsum.photos/seed/portfolioweb3/600/400'],
-        url: 'https://example.com/portfolio'
+        description: 'A creative portfolio to showcase skills and projects with interactive 3D elements.', 
+        images: ['https://image.thum.io/get/width/1200/crop/800/https://bruno-simon.com/'],
+        url: 'https://bruno-simon.com/'
     },
     { 
         title: 'E-commerce Store', 
-        description: 'A feature-rich online store for selling products.', 
-        images: ['https://picsum.photos/seed/ecomweb1/600/400', 'https://picsum.photos/seed/ecomweb2/600/400', 'https://picsum.photos/seed/ecomweb3/600/400', 'https://picsum.photos/seed/ecomweb4/600/400'],
-        url: 'https://example.com/ecommerce'
+        description: 'A feature-rich online store for selling premium electronic products.', 
+        images: ['https://image.thum.io/get/width/1200/crop/800/https://www.apple.com/store'],
+        url: 'https://www.apple.com/store'
     },
     { 
         title: 'Corporate Business Website', 
-        description: 'A professional site to represent a company\'s brand and services.', 
-        images: ['https://picsum.photos/seed/corpweb1/600/400', 'https://picsum.photos/seed/corpweb2/600/400'],
-        url: 'https://example.com/corporate'
+        description: 'A professional site to represent a company\'s brand and cloud services.', 
+        images: ['https://image.thum.io/get/width/1200/crop/800/https://vercel.com'],
+        url: 'https://vercel.com'
     },
 ];
 
 const pixelArtProjects = [
     {
         title: 'Cyberpunk Cityscape',
-        images: [ // 3
+        images: [
             'https://picsum.photos/seed/p1-img1/600/400',
             'https://media.giphy.com/media/l41lHDSbE2A26Y35K/giphy.gif',
             'https://picsum.photos/seed/p1-img2/600/400',
@@ -743,13 +756,13 @@ const pixelArtProjects = [
     },
     {
         title: 'Fantasy Characters',
-        images: [ // 1
+        images: [
             'https://media.giphy.com/media/8v326d2I02h2g/giphy.gif',
         ]
     },
     {
         title: 'Enchanted Forest Tileset',
-        images: [ // 2
+        images: [
             'https://picsum.photos/seed/p3-img1/600/400',
             'https://picsum.photos/seed/p3-img2/600/400',
         ]
@@ -760,7 +773,7 @@ const pixelArtProjects = [
     },
     {
         title: 'Sci-Fi Vehicle Sprites',
-        images: [ // 4
+        images: [
           'https://media.giphy.com/media/3oKIPtjElAmG42YyA0/giphy.gif',
           'https://picsum.photos/seed/p5-img2/600/400',
           'https://picsum.photos/seed/p5-img3/600/400',
@@ -778,7 +791,6 @@ type ProjectCardProps = {
     };
 };
 
-// FIX: Explicitly type ProjectCard as a React.FC to correctly handle the 'key' prop in lists.
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -795,7 +807,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <CardComponent
             {...props}
-            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20"
+            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10"
         >
             <div 
                 className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer"
@@ -814,6 +826,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                           }}
                     />
                 ))}
+                 {project.url && (
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                        <span className="flex items-center gap-2 text-white font-semibold border-2 border-white/50 rounded-full px-5 py-2.5 transform group-hover:scale-105 transition-transform bg-black/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                               <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                               <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                            </svg>
+                            <span>View Site</span>
+                        </span>
+                    </div>
+                )}
             </div>
             <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
             {project.description && (
@@ -822,6 +845,150 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </CardComponent>
     );
 };
+
+const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[] } }> = ({ project }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const prevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    };
+
+    const nextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % project.images.length);
+    };
+
+    return (
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4">
+            <div className="relative group aspect-video overflow-hidden rounded-lg">
+                {project.images.map((src, index) => (
+                    <img
+                        key={index}
+                        src={src}
+                        alt={`${project.title} preview ${index + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; 
+                            target.src = 'https://i.imgur.com/8rqwdLX.png';
+                        }}
+                    />
+                ))}
+                
+                {project.images.length > 1 && (
+                    <>
+                        <div className="absolute top-2 right-2 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                            {currentIndex + 1} / {project.images.length}
+                        </div>
+                        <button
+                            onClick={prevImage}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10"
+                            aria-label="Previous image"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={nextImage}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10"
+                            aria-label="Next image"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    </>
+                )}
+            </div>
+            <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
+        </div>
+    );
+};
+
+
+const useInView = (options: IntersectionObserverInit = { threshold: 0.1 }) => {
+    const [isInView, setIsInView] = React.useState(false);
+    const ref = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if(ref.current) {
+              observer.unobserve(ref.current);
+          }
+        }
+      }, options);
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [options]);
+
+    return [ref, isInView] as const;
+  };
+
+type AnimatedWrapperProps = {
+    children: React.ReactNode;
+    index: number;
+};
+
+const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) => {
+    const [ref, isInView] = useInView({ threshold: 0.2 });
+
+    return (
+        <div
+            ref={ref}
+            className={`transition-all duration-500 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+        >
+            {children}
+        </div>
+    );
+};
+
+type VideoProject = { title: string; videoUrl: string; thumbnailUrl: string; };
+
+const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isInteracted, setIsInteracted] = useState(false);
+
+    const handlePlay = () => {
+        setIsInteracted(true);
+        setTimeout(() => {
+            videoRef.current?.play();
+        }, 0);
+    };
+
+    return (
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-black" onClick={handlePlay}>
+                {!isInteracted ? (
+                    <>
+                        <img src={project.thumbnailUrl} alt={project.title} className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80" />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div className="w-16 h-16 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <video ref={videoRef} src={project.videoUrl} className="w-full h-full object-cover" controls playsInline autoPlay />
+                )}
+            </div>
+            <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
+        </div>
+    );
+};
+
 
 const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
     const firstRowProjects = videoEditingProjects.slice(0, 3);
@@ -848,14 +1015,18 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
                  <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <AnimatedWrapper key={index} index={index}>
+                            <VideoProjectCard project={project} />
+                        </AnimatedWrapper>
                     ))}
                 </div>
 
                 {secondRowProjects.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
-                            <ProjectCard key={index + firstRowProjects.length} project={project} />
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <VideoProjectCard project={project} />
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 )}
@@ -888,83 +1059,21 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                         <AnimatedWrapper key={index} index={index}>
+                            <ProjectCard project={project} />
+                         </AnimatedWrapper>
                     ))}
                 </div>
                 {secondRowProjects.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
-                            <ProjectCard key={index + firstRowProjects.length} project={project} />
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <ProjectCard project={project} />
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 )}
             </section>
-        </div>
-    );
-};
-
-// FIX: Explicitly type InteractiveProjectCard as a React.FC to correctly handle the 'key' prop in lists.
-const InteractiveProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const nextImage = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (project.images.length > 1) {
-            setCurrentIndex((prev) => (prev + 1) % project.images.length);
-        }
-    };
-
-    const prevImage = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (project.images.length > 1) {
-            setCurrentIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
-        }
-    };
-
-    return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 group">
-            <div className="relative aspect-video overflow-hidden rounded-lg">
-                {project.images.map((src, index) => (
-                    <img
-                        key={index}
-                        src={src}
-                        alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.onerror = null;
-                            target.src = 'https://i.imgur.com/8rqwdLX.png';
-                        }}
-                    />
-                ))}
-
-                {project.images.length > 1 && (
-                    <>
-                        <button
-                            onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 focus:outline-none"
-                            aria-label="Previous image"
-                        >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-                        <button
-                            onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 focus:outline-none"
-                            aria-label="Next image"
-                        >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
-                    </>
-                )}
-
-                <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded-full pointer-events-none">
-                    Preview {currentIndex + 1} / {project.images.length}
-                </div>
-            </div>
-            <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
-            {project.description && (
-                <p className="text-sm text-gray-400 mt-1">{project.description}</p>
-            )}
         </div>
     );
 };
@@ -995,14 +1104,18 @@ const PixelArtPage = ({ navigateTo }: NavigationProps) => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
-                        <InteractiveProjectCard key={index} project={project} />
+                         <AnimatedWrapper key={index} index={index}>
+                            <PixelArtProjectCard project={project} />
+                         </AnimatedWrapper>
                     ))}
                 </div>
 
                 {secondRowProjects.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
-                            <InteractiveProjectCard key={index + firstRowProjects.length} project={project} />
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <PixelArtProjectCard project={project} />
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 )}
@@ -1043,13 +1156,17 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
-                        <ProjectCard key={index} project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
+                        <AnimatedWrapper key={index} index={index}>
+                            <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
+                        </AnimatedWrapper>
                     ))}
                 </div>
                 {secondRowProjects.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
                         {secondRowProjects.map((project, index) => (
-                            <ProjectCard key={index + firstRowProjects.length} project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 )}
@@ -1057,6 +1174,26 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
         </div>
     );
 };
+
+const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
+    <div className="pt-24 px-4 pb-16">
+        <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            Back to Services
+        </button>
+        <section className="text-center pb-16">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                Clipping Service
+            </h1>
+            <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg">
+                Precision is paramount. Our clipping path service provides clean, professional cutouts for your product photos, ensuring they look perfect for e-commerce sites, catalogs, and marketing materials. We meticulously handle complex images with care to deliver flawless results every time.
+            </p>
+        </section>
+        <VideoPlayer />
+    </div>
+);
 
 
 const ContactPage = ({ navigateTo }: NavigationProps) => {
@@ -1188,7 +1325,7 @@ const AllServicesPage = ({ navigateTo }: NavigationProps) => {
                             <button 
                                 key={service.id} 
                                 onClick={() => navigateTo(service.id)} 
-                                className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500"
                             >
                                 <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
                                     <ServiceIcon name={service.iconName} className="h-12 w-12" />
@@ -1241,6 +1378,8 @@ export default function App() {
             return <WebDevelopmentPage navigateTo={navigateTo} />;
         case 'pixel-art':
             return <PixelArtPage navigateTo={navigateTo} />;
+        case 'clipping-service':
+            return <ClippingServicePage navigateTo={navigateTo} />;
         case 'about-us':
             return <AboutUsPage navigateTo={navigateTo} />;
         case 'faqs':
@@ -1249,7 +1388,9 @@ export default function App() {
             return <ContactPage navigateTo={navigateTo} />;
         default:
             if (servicePage) {
-                return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
+                if (servicePage.id === 'graphics-designing' || servicePage.id === 'digital-art') {
+                    return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
+                }
             }
             return <HomePage navigateTo={navigateTo} />;
     }
