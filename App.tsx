@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 
 const Logo = () => (
@@ -66,10 +67,16 @@ const iconPaths: { [key: string]: React.ReactNode } = {
       </>
     ),
     'pixel-art': (
-      <path d="M21 15.9999L17 19.9999L13 15.9999L17 11.9999L21 15.9999Z M17 19.9999L17 21.9999 M17 19.9999L21 15.9999 M7 3.9999L3 7.9999L7 11.9999L11 7.9999L7 3.9999Z M7 7.9999L11 11.9999 M7 7.9999L3 11.9999 M17 3.9999L13 7.9999L17 11.9999L21 7.9999L17 3.9999Z M11 15.9999L7 19.9999L3 15.9999L7 11.9999L11 15.9999Z" />
+        <path d="M10 4H4v6h6V4zm6 0h-4v6h4V4zM4 12v6h6v-6H4zm6 0h4v6h-4v-6z" />
     ),
     'clipping-service': (
-      <path d="M3 10C3 8.34315 4.34315 7 6 7H18C19.6569 7 21 8.34315 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10Z M7 3L17 3M12 7V4.5C12 3.67157 11.3284 3 10.5 3H8.5C7.67157 3 7 3.67157 7 4.5V7 M17 3L19.5 5.5M7 3L4.5 5.5" />
+      <>
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <path d="M20 4L8.12 15.88" />
+        <path d="M14.47 14.48L20 20" />
+        <path d="M8.12 8.12L12 12" />
+      </>
     ),
   };
   
@@ -175,7 +182,8 @@ const Header = ({ navigateTo }: NavigationProps) => {
               <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105">
                 <Logo />
                 <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                  Phyrux Comms
+                    <span className="group-hover:hidden">Phyrux Comms</span>
+                    <span className="hidden group-hover:inline">Phyrux Commissions</span>
                 </span>
               </button>
               <nav className="hidden md:flex items-center space-x-1">
@@ -622,7 +630,8 @@ const Footer = ({ navigateTo }: NavigationProps) => (
                     <button onClick={() => navigateTo('home')} className="group flex items-center justify-center md:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105">
                         <Logo />
                         <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                           Phyrux Comms
+                           <span className="group-hover:hidden">Phyrux Comms</span>
+                           <span className="hidden group-hover:inline">Phyrux Commissions</span>
                         </span>
                     </button>
                     <p className="text-gray-400 text-sm">Phyrux Commissions is a creative powerhouse born from the dynamic worlds of digital art and gaming. We specialize in transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.</p>
@@ -694,27 +703,32 @@ const webDevProjects = [
     { 
         title: 'Gym Website', 
         description: 'A dynamic website for a fitness center with class schedules and membership info.', 
-        images: ['https://picsum.photos/seed/gymweb1/600/400', 'https://picsum.photos/seed/gymweb2/600/400', 'https://picsum.photos/seed/gymweb3/600/400']
+        images: ['https://picsum.photos/seed/gymweb1/600/400', 'https://picsum.photos/seed/gymweb2/600/400', 'https://picsum.photos/seed/gymweb3/600/400'],
+        url: 'https://example.com/gym-website'
     },
     { 
         title: 'High-Conversion Landing Page', 
         description: 'A focused landing page designed to maximize lead generation.', 
-        images: ['https://picsum.photos/seed/landingpage1/600/400', 'https://picsum.photos/seed/landingpage2/600/400']
+        images: ['https://picsum.photos/seed/landingpage1/600/400', 'https://picsum.photos/seed/landingpage2/600/400'],
+        url: 'https://example.com/landing-page'
     },
     { 
         title: 'Personal Portfolio Website', 
         description: 'A creative portfolio to showcase skills and projects.', 
-        images: ['https://picsum.photos/seed/portfolioweb1/600/400', 'https://picsum.photos/seed/portfolioweb2/600/400', 'https://picsum.photos/seed/portfolioweb3/600/400']
+        images: ['https://picsum.photos/seed/portfolioweb1/600/400', 'https://picsum.photos/seed/portfolioweb2/600/400', 'https://picsum.photos/seed/portfolioweb3/600/400'],
+        url: 'https://example.com/portfolio'
     },
     { 
         title: 'E-commerce Store', 
         description: 'A feature-rich online store for selling products.', 
-        images: ['https://picsum.photos/seed/ecomweb1/600/400', 'https://picsum.photos/seed/ecomweb2/600/400', 'https://picsum.photos/seed/ecomweb3/600/400', 'https://picsum.photos/seed/ecomweb4/600/400']
+        images: ['https://picsum.photos/seed/ecomweb1/600/400', 'https://picsum.photos/seed/ecomweb2/600/400', 'https://picsum.photos/seed/ecomweb3/600/400', 'https://picsum.photos/seed/ecomweb4/600/400'],
+        url: 'https://example.com/ecommerce'
     },
     { 
         title: 'Corporate Business Website', 
         description: 'A professional site to represent a company\'s brand and services.', 
-        images: ['https://picsum.photos/seed/corpweb1/600/400', 'https://picsum.photos/seed/corpweb2/600/400']
+        images: ['https://picsum.photos/seed/corpweb1/600/400', 'https://picsum.photos/seed/corpweb2/600/400'],
+        url: 'https://example.com/corporate'
     },
 ];
 
@@ -760,21 +774,29 @@ type ProjectCardProps = {
         title: string;
         images: string[];
         description?: string;
+        url?: string;
     };
 };
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+// FIX: Explicitly type ProjectCard as a React.FC to correctly handle the 'key' prop in lists.
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextImage = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (project.images.length > 1) {
-          setCurrentIndex((prev) => (prev + 1) % project.images.length);
+        if (!project.url && project.images.length > 1) {
+            e.stopPropagation();
+            setCurrentIndex((prev) => (prev + 1) % project.images.length);
         }
     };
 
+    const CardComponent = project.url ? 'a' : 'div';
+    const props = project.url ? { href: project.url, target: '_blank', rel: 'noopener noreferrer' } : {};
+
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20">
+        <CardComponent
+            {...props}
+            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20"
+        >
             <div 
                 className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer"
                 onClick={nextImage}
@@ -797,7 +819,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             {project.description && (
                 <p className="text-sm text-gray-400 mt-1">{project.description}</p>
             )}
-        </div>
+        </CardComponent>
     );
 };
 
@@ -881,7 +903,8 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
     );
 };
 
-const InteractiveProjectCard = ({ project }: ProjectCardProps) => {
+// FIX: Explicitly type InteractiveProjectCard as a React.FC to correctly handle the 'key' prop in lists.
+const InteractiveProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextImage = (e: React.MouseEvent) => {
