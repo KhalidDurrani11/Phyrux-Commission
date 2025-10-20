@@ -84,22 +84,25 @@
       .group:hover .animate-marquee, .animate-marquee:hover {
         animation-play-state: paused;
       }
-      @keyframes preloader-char-fade-in {
+      @keyframes preloader-cinematic-pop {
         0% {
           opacity: 0;
-          transform: translateY(20px) scale(0.8);
+          transform: scale(0.5) translateY(50px);
+          filter: blur(10px);
         }
         50% {
           opacity: 1;
-          transform: translateY(0) scale(1.1);
+          transform: scale(1.1) translateY(0);
+          filter: blur(0px);
         }
         100% {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: scale(1) translateY(0);
+          filter: blur(0px);
         }
       }
-      .animate-preloader-char {
-        animation: preloader-char-fade-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      .animate-preloader-pop {
+        animation: preloader-cinematic-pop 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
       }
     </style>
   <script type="importmap">

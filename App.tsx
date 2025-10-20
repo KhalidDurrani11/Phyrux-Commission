@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const Preloader = () => (
-    <div className="text-3xl sm:text-4xl font-black text-white tracking-widest uppercase">
-        {'Phyrux Comms'.split('').map((char, index) => (
+    <div className="text-6xl sm:text-7xl lg:text-9xl font-black text-white tracking-widest uppercase">
+        {'PHYRUXS'.split('').map((char, index) => (
             <span
                 key={index}
-                className="inline-block opacity-0 animate-preloader-char"
-                style={{ animationDelay: `${index * 80}ms` }}
+                className="inline-block opacity-0 animate-preloader-pop"
+                style={{ animationDelay: `${100 + index * 100}ms` }}
             >
-                {char === ' ' ? '\u00A0' : char}
+                {char}
             </span>
         ))}
     </div>
@@ -210,7 +210,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     };
 
     const handleMenuLeave = () => {
-        menuTimeoutRef.current = window.setTimeout(() => setIsServicesMenuOpen(false), 300);
+        menuTimeoutRef.current = window.setTimeout(() => setIsServicesMenuOpen(false), 500);
     };
 
     const handleMobileNav = (page: string) => {
@@ -263,7 +263,10 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                       </button>
-                      <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-[60] transition-all duration-300 ease-out ${isServicesMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+                      <div 
+                        onMouseEnter={handleMenuEnter}
+                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-xl shadow-lg p-2 z-[99] transition-all duration-300 ease-out ${isServicesMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
+                      >
                           {services.map(service => (
                               <button 
                                   key={service.id} 
@@ -808,7 +811,6 @@ const Footer = ({ navigateTo }: NavigationProps) => (
 );
 
 
-// FIX: The HomePage component was not accepting the 'currentPage' prop, causing a type error when calling child components that required it. This has been fixed by adding 'currentPage' to the component's props and passing it down to 'Hero' and 'ServicesSection'.
 const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
         <Hero navigateTo={navigateTo} currentPage={currentPage} />
@@ -1058,13 +1060,13 @@ type AnimatedWrapperProps = {
 };
 
 const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) => {
-    const [ref, isInView] = useInView({ threshold: 0.2 });
+    const [ref, isInView] = useInView({ threshold: 0.15 });
 
     return (
         <div
             ref={ref}
-            className={`transition-all duration-800 ease-in-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: `${index * 100}ms` }}
+            className={`transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: `${index * 120}ms` }}
         >
             {children}
         </div>
