@@ -39,6 +39,27 @@ const SparkleIcon = () => (
     </div>
 );
 
+const BackButton = ({ navigateTo, page, text }: { navigateTo: (page: string) => void; page: string; text: string; }) => (
+    <button
+        onClick={() => navigateTo(page)}
+        className="group inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-black/20 px-4 py-2 text-sm font-semibold text-orange-400 transition-all duration-300 ease-in-out hover:bg-orange-500/10 hover:border-orange-500/50 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-[#0D0D0D]"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 transition-transform duration-300 ease-in-out group-hover:-translate-x-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+        >
+            <path
+                fillRule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clipRule="evenodd"
+            />
+        </svg>
+        <span>{text}</span>
+    </button>
+);
+
 type NavigationProps = {
     navigateTo: (page: string) => void;
 };
@@ -996,12 +1017,6 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
 
     return (
         <div className="pt-24 px-4">
-            <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Back to Services
-            </button>
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Video Editing
@@ -1012,6 +1027,9 @@ const VideoEditingPage = ({ navigateTo }: NavigationProps) => {
             </section>
             
             <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
                  <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
@@ -1041,12 +1059,6 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
 
     return (
         <div className="pt-24 px-4">
-            <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Back to Services
-            </button>
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Web Development
@@ -1056,6 +1068,9 @@ const WebDevelopmentPage = ({ navigateTo }: NavigationProps) => {
                 </p>
             </section>
             <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
@@ -1084,12 +1099,6 @@ const PixelArtPage = ({ navigateTo }: NavigationProps) => {
     
     return (
         <div className="pt-24 px-4">
-            <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Back to Services
-            </button>
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     Pixel Art
@@ -1100,6 +1109,9 @@ const PixelArtPage = ({ navigateTo }: NavigationProps) => {
             </section>
 
             <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1138,12 +1150,6 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
 
     return (
         <div className="pt-24 px-4">
-            <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Back to Services
-            </button>
             <section className="text-center pb-16">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                     {service.name}
@@ -1153,6 +1159,9 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
                 </p>
             </section>
             <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
@@ -1177,13 +1186,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
 
 const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
     <div className="pt-24 px-4 pb-16">
-        <button onClick={() => navigateTo('services-page')} className="mb-8 text-orange-400 hover:text-orange-300 transition-colors ease-in-out duration-300 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
-            Back to Services
-        </button>
-        <section className="text-center pb-16">
+        <section className="text-center pb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
                 Clipping Service
             </h1>
@@ -1191,6 +1194,9 @@ const ClippingServicePage = ({ navigateTo }: NavigationProps) => (
                 Precision is paramount. Our clipping path service provides clean, professional cutouts for your product photos, ensuring they look perfect for e-commerce sites, catalogs, and marketing materials. We meticulously handle complex images with care to deliver flawless results every time.
             </p>
         </section>
+        <div className="max-w-6xl mx-auto mb-12">
+            <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+        </div>
         <VideoPlayer />
     </div>
 );
