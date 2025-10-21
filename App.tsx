@@ -4,11 +4,11 @@ const Preloader = () => {
     const [visibleWord, setVisibleWord] = useState<'Phyruxs' | 'Comms'>('Phyruxs');
 
     useEffect(() => {
-        // This timer waits for the first word's animation (1.2s) to complete
+        // This timer waits for the first word's animation (0.8s) to complete
         // before switching to the second word.
         const wordSwitchTimer = setTimeout(() => {
             setVisibleWord('Comms');
-        }, 1200);
+        }, 800);
 
         return () => {
             clearTimeout(wordSwitchTimer);
@@ -361,8 +361,8 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
         </div>
         <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
-                <img loading="lazy" className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1005/100/100" alt="customer 1" />
-                <img loading="lazy" className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
+                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1005/100/100" alt="customer 1" />
+                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
                 <div className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] bg-purple-600 flex items-center justify-center text-xs font-bold text-white">VIX</div>
             </div>
             <p className="ml-4 text-gray-400 text-sm">100+ Happy customers</p>
@@ -371,7 +371,7 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
 );
 
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: string; objectFitClass?: string; }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -403,48 +403,45 @@ const VideoPlayer = () => {
     }, []);
 
     return (
-        <section className="px-4 pb-12">
-            <div className="max-w-6xl mx-auto">
-                <div 
-                    className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50 cursor-pointer group"
-                    onClick={togglePlay}
-                >
-                    <video
-                        ref={videoRef}
-                        className="w-full h-full aspect-video object-cover"
-                        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                        loop
-                        playsInline
-                        muted
-                    >
-                        Your browser does not support the video tag.
-                    </video>
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                        <div className={`w-20 h-20 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out ${isPlaying ? 'opacity-0 scale-150' : 'opacity-100 scale-100 group-hover:scale-110'}`}>
-                           <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-                        </div>
-                    </div>
-                    <div className="absolute bottom-6 left-6">
-                        <button 
-                            onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-                            className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out"
-                        >
-                            {isPlaying ? (
-                                <>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-                                    <span>Pause</span>
-                                </>
-                            ) : (
-                                <>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
-                                    <span>Play</span>
-                                </>
-                            )}
-                        </button>
-                    </div>
+        <div
+            className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50 cursor-pointer group bg-black"
+            onClick={togglePlay}
+        >
+            <video
+                ref={videoRef}
+                className={`w-full h-full ${objectFitClass || 'object-cover'} ${videoClassName || 'aspect-video'}`}
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                loop
+                playsInline
+                muted
+                preload="metadata"
+            >
+                Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                <div className={`w-20 h-20 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out ${isPlaying ? 'opacity-0 scale-150' : 'opacity-100 scale-100 group-hover:scale-110'}`}>
+                   <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                 </div>
             </div>
-        </section>
+            <div className="absolute bottom-6 left-6">
+                <button
+                    onClick={(e) => { e.stopPropagation(); togglePlay(); }}
+                    className="bg-black/50 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 border border-white/20 transform hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out"
+                >
+                    {isPlaying ? (
+                        <>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                            <span>Pause</span>
+                        </>
+                    ) : (
+                        <>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+                            <span>Play</span>
+                        </>
+                    )}
+                </button>
+            </div>
+        </div>
     );
 };
 
@@ -468,7 +465,7 @@ const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
                             onClick={() => navigateTo(service.id)} 
                             className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#3a2a24] hover:shadow-2xl hover:shadow-[0_0_40px_rgba(249,115,22,0.2)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
-                            <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
+                            <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-105 group-hover:-rotate-3">
                                 <ServiceIcon name={service.iconName} className="h-12 w-12" />
                             </div>
                             <h3 className="font-bold text-xl text-white">{service.name}</h3>
@@ -591,7 +588,7 @@ const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http:/
 const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#31c5f4]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm9.375 0h-2.25l-1.5-3.75H12v3.75h-2.25V9H15c2.063 0 3.375 1.313 3.375 3.375 0 1.5-.75 2.438-1.875 3L17.625 18.75z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125zm4.875 0H12v3h1.125c.75 0 1.125-.375 1.125-1.125s-.375-1.875-1.125-1.875z" fill="currentColor"/></svg>;
 const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff9a00]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm9.375 0h-2.25V9h2.25v9.75z" fill="currentColor"/></svg>;
 const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
-const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
+const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15-.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
 const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm7.188 18.563H17.5v-7.126l-5.625 7.125h-1.313v-13.125h1.75v7.125l5.625-7.125h1.313v13.125z" fill="currentColor"/></svg>;
 const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.08 4.14l8.35 8.35c-.4.49-1.54 1.63-2.03 2.03l-8.35-8.35c.4-.49 1.54-1.63 2.03-2.03zm-4.39 1.15l8.35 8.35c-.49.4-1.63 1.54-2.03 2.03l-8.35-8.35c.49-.4 1.63-1.54 2.03-2.03zM4.14 13.08l8.35-8.35c.49-.4 1.63-1.54 2.03-2.03l-8.35 8.35c-.49.4-1.63 1.54-2.03 2.03zm1.15 4.39l8.35-8.35c.4-.49 1.54-1.63 2.03-2.03l-8.35 8.35c-.4.49-1.54 1.63-2.03 2.03z" fill="currentColor"/></svg>;
 const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
@@ -626,7 +623,7 @@ const TechMarquee = () => (
             <div className="flex animate-marquee space-x-16 pr-16 flex-shrink-0 items-center">
                 {[...techLogos, ...techLogos].map((tech, index) => (
                     <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer">
-                        <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center grayscale group-hover/item:grayscale-0 group-hover/item:scale-110 transition-all duration-300 ease-in-out group-hover/item:bg-orange-500/10 group-hover/item:shadow-lg group-hover/item:shadow-orange-500/20 group-hover/item:border-orange-500/30">
+                        <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center group-hover/item:scale-110 transition-all duration-300 ease-in-out group-hover/item:bg-orange-500/10 group-hover/item:shadow-lg group-hover/item:shadow-orange-500/20 group-hover/item:border-orange-500/30">
                             {tech.component}
                         </div>
                         <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover/item:text-white">
@@ -816,25 +813,6 @@ function SocialIcon({ href, children }: SocialIconProps) {
     );
 }
 
-const CallToAction = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
-    <section className="py-20 px-4">
-      <div className="max-w-6xl mx-auto bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 rounded-3xl p-12 text-center shadow-2xl shadow-orange-500/20 transform hover:-translate-y-2 transition-transform duration-300 ease-in-out">
-        <h2 className="text-4xl lg:text-5xl font-black text-white leading-tight">
-          Have a project in mind?
-        </h2>
-        <p className="text-white/80 mt-4 text-lg max-w-2xl mx-auto">
-          Let's turn your vision into a reality. We're here to help you create something extraordinary.
-        </p>
-        <button
-          onClick={() => navigateTo('contact')}
-          className="mt-8 bg-white text-orange-600 font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 ease-in-out hover:bg-white/90 transform hover:scale-105 active:scale-95"
-        >
-          Get a Quote
-        </button>
-      </div>
-    </section>
-);
-  
 const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
@@ -929,7 +907,11 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
 const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
         <Hero navigateTo={navigateTo} currentPage={currentPage} />
-        <VideoPlayer />
+        <section className="px-4 pb-12">
+            <div className="max-w-6xl mx-auto">
+                <VideoPlayer />
+            </div>
+        </section>
         <div className="py-10 px-4">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
@@ -1192,7 +1174,7 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
         <div
             ref={ref}
             className={`transition-all duration-500 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-            style={{ transitionDelay: `${index * 150}ms` }}
+            style={{ transitionDelay: `${index * 75}ms` }}
         >
             {children}
         </div>
@@ -1410,17 +1392,57 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
 const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <div className="pt-12 px-4 pb-16">
         <section className="text-center pb-12">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
-                Clipping Service
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight max-w-7xl mx-auto">
+                Clipping & Social Media Growth Service
             </h1>
-            <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg">
-                Precision is paramount. Our clipping path service provides clean, professional cutouts for your product photos, ensuring they look perfect for e-commerce sites, catalogs, and marketing materials. We meticulously handle complex images with care to deliver flawless results every time.
-            </p>
         </section>
-        <div className="max-w-6xl mx-auto mb-8">
-            <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
-        </div>
-        <VideoPlayer />
+
+        <section className="max-w-7xl mx-auto">
+            <div className="mb-12">
+                <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+            </div>
+
+            <div className="text-left text-gray-300 space-y-8 text-base md:text-lg">
+                <p>
+                    Our Clipping and Social Media Growth Service is designed to help creators and businesses from all industries amplify their presence and reach across multiple platforms. Whether you’re a gaming creator, YouTuber, fitness coach, restaurant owner, or any other business, we transform your content into engaging, bite-sized video clips perfect for social media.
+                </p>
+                <div>
+                    <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Provide:</h3>
+                    <ul className="space-y-3 pl-4">
+                        <li className="flex items-start gap-3">
+                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                           <span><strong>High-Quality Clips:</strong> We capture your most exciting and engaging moments, turning them into short, shareable content tailored to your industry.</span>
+                        </li>
+                         <li className="flex items-start gap-3">
+                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                           <span><strong>Multi-Platform Exposure:</strong> We distribute these clips across 60+ platforms, from TikTok to Instagram Reels, YouTube Shorts, and more, ensuring maximum visibility.</span>
+                        </li>
+                         <li className="flex items-start gap-3">
+                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                           <span><strong>SEO Optimization:</strong> We optimize your clips to reach the right audience and boost engagement.</span>
+                        </li>
+                         <li className="flex items-start gap-3">
+                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                           <span><strong>Regular Posting:</strong> We post 15+ clips a day to maintain consistent content flow and visibility.</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                           <span><strong>Performance Tracking:</strong> You’ll have access to a shared Google Sheet to track the progress and engagement of each clip.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Need From You:</h3>
+                    <p>
+                        To get started, we simply need information about what you’re looking to promote—whether it’s a product, service, event, or brand. Tell us your goals: Are you aiming to increase customer engagement, boost sales, grow your social media following, or promote a new program or product? We’ll tailor the content to meet your needs and ensure it helps you achieve your goals.
+                    </p>
+                </div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto mt-16">
+                <VideoPlayer videoClassName="aspect-[21/9]" objectFitClass="object-contain" />
+            </div>
+        </section>
     </div>
 );
 
@@ -1556,7 +1578,7 @@ const AllServicesPage = ({ navigateTo, currentPage }: NavigationProps) => {
                                     onClick={() => navigateTo(service.id)} 
                                     className="group bg-[#1a1a1a] border border-white/10 p-8 rounded-2xl flex flex-col items-center justify-center text-center w-full h-full transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 >
-                                    <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-110 group-hover:-rotate-6">
+                                    <div className="text-orange-400 mb-4 transition-all duration-300 ease-in-out group-hover:text-orange-300 group-hover:scale-105 group-hover:-rotate-3">
                                         <ServiceIcon name={service.iconName} className="h-12 w-12" />
                                     </div>
                                     <h3 className="font-bold text-xl text-white mb-2">{service.name}</h3>
@@ -1623,10 +1645,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Total duration for the two sequential word animations (1.2s each)
-    const totalWordAnimationTime = 2400;
+    // Total duration for the two sequential word animations (0.8s each)
+    const totalWordAnimationTime = 1600;
     // Duration for the final preloader exit animation
-    const exitAnimationTime = 800;
+    const exitAnimationTime = 500;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {
@@ -1718,7 +1740,6 @@ export default function App() {
       <main className={animationClass}>
         {renderPage()}
       </main>
-      <CallToAction navigateTo={navigateTo} />
       <Footer navigateTo={navigateTo} currentPage={currentPage} />
       <WhatsAppButton />
     </div>

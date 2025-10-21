@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: 'Inter', sans-serif;
       }
@@ -102,7 +105,7 @@
         to { transform: translateX(-50%); }
       }
       .animate-marquee {
-        animation: marquee 40s linear infinite;
+        animation: marquee 25s linear infinite;
       }
       .group:hover .animate-marquee, .animate-marquee:hover {
         animation-play-state: paused;
@@ -131,7 +134,7 @@
         }
       }
       .animate-preloader-pop-in-out {
-        animation: preloader-pop-in-out 1.2s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        animation: preloader-pop-in-out 0.8s cubic-bezier(0.45, 0, 0.55, 1) forwards;
       }
 
       @keyframes preloader-exit {
@@ -145,7 +148,7 @@
         }
       }
       .preloader-exit {
-        animation: preloader-exit 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation: preloader-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
     </style>
   <script type="importmap">
