@@ -1,22 +1,37 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 
-const Preloader = () => (
-    <div className="text-6xl sm:text-7xl lg:text-9xl font-black text-white tracking-widest uppercase flex flex-col sm:flex-row items-center gap-x-6 gap-y-2">
-        <span
-            className="inline-block opacity-0 animate-preloader-word-pop"
-            style={{ animationDelay: '200ms' }}
-        >
-            Phyruxs
-        </span>
-        <span
-            className="inline-block opacity-0 animate-preloader-word-pop"
-            style={{ animationDelay: '1800ms' }} // Increased delay for strict sequential animation
-        >
-            Comms
-        </span>
-    </div>
-);
+const Preloader = () => {
+    const [visibleWord, setVisibleWord] = useState<'Phyruxs' | 'Comms'>('Phyruxs');
+
+    useEffect(() => {
+        // This timer waits for the first word's animation (1.2s) to complete
+        // before switching to the second word.
+        const wordSwitchTimer = setTimeout(() => {
+            setVisibleWord('Comms');
+        }, 1200);
+
+        return () => {
+            clearTimeout(wordSwitchTimer);
+        };
+    }, []);
+    
+    return (
+        <div className="text-6xl sm:text-7xl lg:text-9xl font-black tracking-widest uppercase relative h-32 w-full flex items-center justify-center">
+            {/* Using a key prop on the span ensures that React treats each word as a new element,
+                forcing the animation to restart correctly when the word changes. */}
+            {visibleWord === 'Phyruxs' && (
+                <span key="phyruxs" className="absolute animate-preloader-pop-in-out text-orange-500">
+                    Phyruxs
+                </span>
+            )}
+            {visibleWord === 'Comms' && (
+                <span key="comms" className="absolute animate-preloader-pop-in-out text-white">
+                    Comms
+                </span>
+            )}
+        </div>
+    );
+};
 
 
 const Logo = () => (
@@ -325,7 +340,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
     );
   };
 
-const Hero = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
+const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
     <section className="text-center pt-20 pb-16 px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Great Story
@@ -388,7 +403,7 @@ const VideoPlayer = () => {
     }, []);
 
     return (
-        <section className="px-4 pb-16">
+        <section className="px-4 pb-12">
             <div className="max-w-6xl mx-auto">
                 <div 
                     className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50 cursor-pointer group"
@@ -433,7 +448,7 @@ const VideoPlayer = () => {
     );
 };
 
-const ServicesSection = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
+const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
     <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
@@ -477,7 +492,7 @@ const teamMembers = [
 ];
 
 const TeamSection = () => (
-    <section className="py-16 px-4">
+    <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
@@ -524,7 +539,7 @@ const testimonialsCol2 = [
 ];
 
 const TestimonialsSection = () => (
-    <section className="py-24 px-4 overflow-hidden">
+    <section className="py-16 px-4 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
@@ -571,16 +586,16 @@ const TestimonialsSection = () => (
 );
 
 
-const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#9999ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm8.25-6.375c0-2.062 1.313-3.375 3.375-3.375H22.5v10.5h-2.25v-3.75h-1.5v3.75h-2.25V12.375z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125z" fill="currentColor"/></svg>;
-const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#d291ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm8.625 0l-3.015-9.75h2.25l1.65 6.45h.075L20.4 9h2.25l-3.015 9.75h-2.25l.375-1.5z" fill="currentColor"/></svg>;
-const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#31c5f4]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm9.375 0h-2.25l-1.5-3.75H12v3.75h-2.25V9H15c2.063 0 3.375 1.313 3.375 3.375 0 1.5-.75 2.438-1.875 3L17.625 18.75z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125zm4.875 0H12v3h1.125c.75 0 1.125-.375 1.125-1.125s-.375-1.875-1.125-1.875z" fill="currentColor"/></svg>;
-const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#ff9a00]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm9.375 0h-2.25V9h2.25v9.75z" fill="currentColor"/></svg>;
-const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
-const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
-const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#000000]"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm7.188 18.563H17.5v-7.126l-5.625 7.125h-1.313v-13.125h1.75v7.125l5.625-7.125h1.313v13.125z" fill="currentColor"/></svg>;
-const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#ff7d4a]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.08 4.14l8.35 8.35c-.4.49-1.54 1.63-2.03 2.03l-8.35-8.35c.4-.49 1.54-1.63 2.03-2.03zm-4.39 1.15l8.35 8.35c-.49.4-1.63 1.54-2.03 2.03l-8.35-8.35c.49-.4 1.63-1.54 2.03-2.03zM4.14 13.08l8.35-8.35c.49-.4 1.63-1.54 2.03-2.03l-8.35 8.35c-.49.4-1.63 1.54-2.03 2.03zm1.15 4.39l8.35-8.35c.4-.49 1.54-1.63 2.03-2.03l-8.35 8.35c-.4.49-1.54 1.63-2.03 2.03z" fill="currentColor"/></svg>;
-const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
-const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#f7df1e]"><path d="M0 0h24v24H0V0zm22.034 18.262c.337-1.743.237-3.513-.288-5.182-1.1-3.463-4.113-5.25-8.15-5.25h-1.625v10.375h1.625c3.275 0 5.95-1.575 7.15-4.125.4-1.125.563-2.313.288-3.813zm-6.134-2.7c.613.825.937 1.838.937 2.938 0 1.212-.35 2.3-.987 3.112-.65.813-1.538 1.288-2.663 1.288h-1.6v-8.825h1.6c1.175 0 2.113.488 2.713 1.488zM9.42 12.05H4.155V9.69h5.265v2.36zm0 2.362H4.155v2.363h5.265V14.41z" fill="currentColor"/></svg>;
+const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#9999ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm8.25-6.375c0-2.062 1.313-3.375 3.375-3.375H22.5v10.5h-2.25v-3.75h-1.5v3.75h-2.25V12.375z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125z" fill="currentColor"/></svg>;
+const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#d291ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm8.625 0l-3.015-9.75h2.25l1.65 6.45h.075L20.4 9h2.25l-3.015 9.75h-2.25l.375-1.5z" fill="currentColor"/></svg>;
+const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#31c5f4]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm9.375 0h-2.25l-1.5-3.75H12v3.75h-2.25V9H15c2.063 0 3.375 1.313 3.375 3.375 0 1.5-.75 2.438-1.875 3L17.625 18.75z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125zm4.875 0H12v3h1.125c.75 0 1.125-.375 1.125-1.125s-.375-1.875-1.125-1.875z" fill="currentColor"/></svg>;
+const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff9a00]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm9.375 0h-2.25V9h2.25v9.75z" fill="currentColor"/></svg>;
+const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
+const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
+const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm7.188 18.563H17.5v-7.126l-5.625 7.125h-1.313v-13.125h1.75v7.125l5.625-7.125h1.313v13.125z" fill="currentColor"/></svg>;
+const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.08 4.14l8.35 8.35c-.4.49-1.54 1.63-2.03 2.03l-8.35-8.35c.4-.49 1.54-1.63 2.03-2.03zm-4.39 1.15l8.35 8.35c-.49.4-1.63 1.54-2.03 2.03l-8.35-8.35c.49-.4 1.63-1.54 2.03-2.03zM4.14 13.08l8.35-8.35c.49-.4 1.63-1.54 2.03-2.03l-8.35 8.35c-.49.4-1.63 1.54-2.03 2.03zm1.15 4.39l8.35-8.35c.4-.49 1.54-1.63 2.03-2.03l-8.35 8.35c-.4.49-1.54 1.63-2.03 2.03z" fill="currentColor"/></svg>;
+const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
+const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f7df1e]"><path d="M0 0h24v24H0V0zm22.034 18.262c.337-1.743.237-3.513-.288-5.182-1.1-3.463-4.113-5.25-8.15-5.25h-1.625v10.375h1.625c3.275 0 5.95-1.575 7.15-4.125.4-1.125.563-2.313.288-3.813zm-6.134-2.7c.613.825.937 1.838.937 2.938 0 1.212-.35 2.3-.987 3.112-.65.813-1.538 1.288-2.663 1.288h-1.6v-8.825h1.6c1.175 0 2.113.488 2.713 1.488zM9.42 12.05H4.155V9.69h5.265v2.36zm0 2.362H4.155v2.363h5.265V14.41z" fill="currentColor"/></svg>;
 
 
 const techLogos = [
@@ -597,17 +612,21 @@ const techLogos = [
 ];
 
 const TechMarquee = () => (
-    <section className="py-16 bg-black/20 overflow-hidden">
+    <section className="py-12 bg-black/20 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
+            <div className="flex flex-col items-center justify-center gap-3 mb-4">
+                <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
+                <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Toolkit</p>
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
                 Powered by Industry-Leading Tools
             </h2>
         </div>
         <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee space-x-20 pr-20 flex-shrink-0 items-center">
+            <div className="flex animate-marquee space-x-16 pr-16 flex-shrink-0 items-center">
                 {[...techLogos, ...techLogos].map((tech, index) => (
                     <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer">
-                        <div className="h-12 w-12 flex items-center justify-center grayscale group-hover/item:grayscale-0 group-hover/item:scale-110 transition-all duration-300 ease-in-out">
+                        <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center grayscale group-hover/item:grayscale-0 group-hover/item:scale-110 transition-all duration-300 ease-in-out group-hover/item:bg-orange-500/10 group-hover/item:shadow-lg group-hover/item:shadow-orange-500/20 group-hover/item:border-orange-500/30">
                             {tech.component}
                         </div>
                         <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover/item:text-white">
@@ -797,79 +816,130 @@ function SocialIcon({ href, children }: SocialIconProps) {
     );
 }
 
-const Footer = ({ navigateTo, currentPage }: NavigationProps) => (
-    <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 text-center md:text-left">
-                <div className="lg:col-span-2">
-                    <button onClick={() => navigateTo('home')} className="group flex items-center justify-center md:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
-                        <Logo />
-                        <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                           <span className="group-hover:hidden">Phyrux Comms</span>
-                           <span className="hidden group-hover:inline">Phyrux Commissions</span>
-                        </span>
-                    </button>
-                    <p className="text-gray-400 text-sm">Phyrux Commissions is a creative powerhouse born from the dynamic worlds of digital art and gaming. We specialize in transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.</p>
-                </div>
-                
-                <div>
-                    <h3 className="font-bold text-white mb-4">Navigation</h3>
-                    <ul className="space-y-2">
-                        <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Home</button></li>
-                        <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Services</button></li>
-                        <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">About Us</button></li>
-                        <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">FAQs</button></li>
-                        <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Contact</button></li>
-                    </ul>
-                </div>
+const CallToAction = ({ navigateTo }: { navigateTo: (page: string) => void }) => (
+    <section className="py-20 px-4">
+      <div className="max-w-6xl mx-auto bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 rounded-3xl p-12 text-center shadow-2xl shadow-orange-500/20 transform hover:-translate-y-2 transition-transform duration-300 ease-in-out">
+        <h2 className="text-4xl lg:text-5xl font-black text-white leading-tight">
+          Have a project in mind?
+        </h2>
+        <p className="text-white/80 mt-4 text-lg max-w-2xl mx-auto">
+          Let's turn your vision into a reality. We're here to help you create something extraordinary.
+        </p>
+        <button
+          onClick={() => navigateTo('contact')}
+          className="mt-8 bg-white text-orange-600 font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 ease-in-out hover:bg-white/90 transform hover:scale-105 active:scale-95"
+        >
+          Get a Quote
+        </button>
+      </div>
+    </section>
+);
+  
+const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
+    const [email, setEmail] = useState('');
+    const [subscribed, setSubscribed] = useState(false);
 
-                <div>
-                    <h3 className="font-bold text-white mb-4">Our Services</h3>
-                    <ul className="space-y-2">
-                        {services.map(item => (
-                            <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">{item.name}</button></li>
-                        ))}
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 className="font-bold text-white mb-4">Get in Touch</h3>
-                    <a href="mailto:tezurect82@gmail.com" className="text-gray-400 hover:text-orange-400 text-sm transition-colors duration-300 ease-in-out block mb-4">tezurect82@gmail.com</a>
-                    <div className="flex justify-center md:justify-start space-x-4">
-                        <SocialIcon href="#">
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
-                        </SocialIcon>
-                        <SocialIcon href="#">
-                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
-                        </SocialIcon>
-                        <SocialIcon href="#">
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
-                        </SocialIcon>
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault();
+        if(email && email.includes('@')) {
+            setSubscribed(true);
+            setEmail('');
+            setTimeout(() => setSubscribed(false), 5000);
+        }
+    };
+
+    return (
+        <footer className="bg-transparent border-t border-white/10 pt-16 pb-8 px-4">
+            <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    {/* Left Column: Brand Info */}
+                    <div className="lg:col-span-4 text-center lg:text-left">
+                        <button onClick={() => navigateTo('home')} className="group flex items-center justify-center lg:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
+                            <Logo />
+                            <span className="font-bold text-xl text-white tracking-wider ml-3">Phyrux Comms</span>
+                        </button>
+                        <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto lg:mx-0">
+                            A creative powerhouse transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.
+                        </p>
+                        <div className="flex justify-center lg:justify-start space-x-4">
+                           <SocialIcon href="#">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
+                            </SocialIcon>
+                        </div>
+                    </div>
+
+                    {/* Middle Columns: Links */}
+                    <div className="lg:col-span-5 grid grid-cols-2 md:grid-cols-2 gap-8 text-center sm:text-left">
+                        <div>
+                            <h3 className="font-bold text-white mb-4">Navigation</h3>
+                            <ul className="space-y-2">
+                                <li><button onClick={() => navigateTo('home')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Home</button></li>
+                                <li><button onClick={() => navigateTo('services-page')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Services</button></li>
+                                <li><button onClick={() => navigateTo('about-us')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">About Us</button></li>
+                                <li><button onClick={() => navigateTo('faqs')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">FAQs</button></li>
+                                <li><button onClick={() => navigateTo('contact')} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">Contact</button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-white mb-4">Our Services</h3>
+                            <ul className="space-y-2">
+                                {services.slice(0, 5).map(item => (
+                                    <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">{item.name}</button></li>
+                                ))}
+                                <li><button onClick={() => navigateTo('services-page')} className="text-orange-400 hover:text-orange-300 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">View All...</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    {/* Right Column: Newsletter */}
+                    <div className="lg:col-span-3 text-center lg:text-left">
+                        <h3 className="font-bold text-white mb-4">Subscribe to our Newsletter</h3>
+                        <p className="text-gray-400 text-sm mb-4">Get the latest updates on our work and insights.</p>
+                        <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                                className="flex-grow bg-[#0D0D0D] border border-white/20 rounded-lg px-4 py-2.5 text-white focus:ring-orange-500 focus:border-orange-500 transition w-full"
+                            />
+                            <button type="submit" className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-300 hover:opacity-90 active:scale-95 flex-shrink-0">
+                                Subscribe
+                            </button>
+                        </form>
+                        {subscribed && <p className="text-green-400 text-sm mt-2 text-center lg:text-left">Thank you for subscribing!</p>}
                     </div>
                 </div>
+                <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                    <p>&copy; {new Date().getFullYear()} Phyrux Commissions. All Rights Reserved.</p>
+                </div>
             </div>
-            <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} Phyrux Commissions. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-);
+        </footer>
+    );
+};
 
 
 const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
-        <Hero navigateTo={navigateTo} />
+        <Hero navigateTo={navigateTo} currentPage={currentPage} />
         <VideoPlayer />
-        <div className="py-16 px-4">
+        <div className="py-10 px-4">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
-        <ServicesSection navigateTo={navigateTo} />
+        <ServicesSection navigateTo={navigateTo} currentPage={currentPage} />
         <TechMarquee />
-        <div className="py-16 px-4">
+        <div className="py-10 px-4">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
         <TeamSection />
-        <div className="py-16 px-4">
+        <div className="py-10 px-4">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
         <TestimonialsSection />
@@ -1121,8 +1191,8 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
     return (
         <div
             ref={ref}
-            className={`transition-all duration-800 ease-in-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={{ transitionDelay: `${index * 200}ms` }}
+            className={`transition-all duration-500 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ transitionDelay: `${index * 150}ms` }}
         >
             {children}
         </div>
@@ -1452,7 +1522,7 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
@@ -1552,15 +1622,23 @@ export default function App() {
   
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    
+    // Total duration for the two sequential word animations (1.2s each)
+    const totalWordAnimationTime = 2400;
+    // Duration for the final preloader exit animation
+    const exitAnimationTime = 800;
+
+    // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {
         setPreloaderExiting(true);
-    }, 3600); // Extended to accommodate sequential animation
+    }, totalWordAnimationTime);
 
+    // Completely remove the preloader from the DOM after its exit animation finishes
     const endTimer = setTimeout(() => {
         setPreloaderVisible(false);
         document.body.style.overflow = '';
         setAnimationClass('page-transition-enter');
-    }, 4400); // Extended for smoother exit
+    }, totalWordAnimationTime + exitAnimationTime);
 
     return () => {
         clearTimeout(startTimer);
@@ -1591,7 +1669,6 @@ export default function App() {
   const renderPage = () => {
     const servicePage = services.find(s => s.id === currentPage);
 
-    // This is a workaround to remove props that are not expected by the child components.
     const navigationProps = { navigateTo, currentPage };
 
     switch(currentPage) {
@@ -1641,6 +1718,7 @@ export default function App() {
       <main className={animationClass}>
         {renderPage()}
       </main>
+      <CallToAction navigateTo={navigateTo} />
       <Footer navigateTo={navigateTo} currentPage={currentPage} />
       <WhatsAppButton />
     </div>
