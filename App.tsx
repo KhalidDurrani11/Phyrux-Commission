@@ -30,7 +30,7 @@ const Preloader=()=> {
             )}
             {visibleWord === 'Comms' && (
                 <span key="comms" className="absolute animate-preloader-pop-in-out text-white">
-                    Comms
+                    Commissions
                 </span>
             )}
         </div>
@@ -277,10 +277,10 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
             <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
               <div className="flex items-center justify-between">
                 <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
-                  <Logo />
+                  
                   <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                      <span className="group-hover:hidden">Phyrux Comms</span>
-                      <span className="hidden group-hover:inline">Phyrux Commissions</span>
+                      <span className="group-hover:hidden">Phyrux Commissions</span>
+                      <span className="hidden group-hover:inline">Phyrux Comms</span>
                   </span>
                 </button>
                 <nav className="hidden md:flex items-center space-x-1">
@@ -361,14 +361,14 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
 const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
     <section className="text-center pt-20 pb-16 px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
-            Every Great Story
+            Every Concept Needs 
             <SparkleIcon />
             <br />
-            Deserves a Great Editor.
+            the Right Touch.
         </h1>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up animation-delay-400">
             <button onClick={() => navigateTo('contact')} className="group flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)] transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transform hover:scale-105 active:scale-95">
-                Book a Free Call
+                Get a Quote
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -383,7 +383,7 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
                 <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="https://picsum.photos/id/1011/100/100" alt="customer 2" />
                 <div className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] bg-purple-600 flex items-center justify-center text-xs font-bold text-white">VIX</div>
             </div>
-            <p className="ml-4 text-gray-400 text-sm">100+ Happy customers</p>
+            <p className="ml-4 text-gray-400 text-sm">500+ Happy customers</p>
         </div>
     </section>
 );
@@ -591,9 +591,9 @@ const TestimonialsSection = () => (
                 <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Testimonials</p>
             </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
-                What our premium clients
+                What Our Valued Clients
                 <br />
-                are saying about us
+                Are Saying
             </h2>
             <p className="max-w-2xl mx-auto text-gray-400 mb-12">
                 Real feedback from real partners. We're proud to share the success stories of those we've worked with.
@@ -686,71 +686,115 @@ const TechMarquee = () => (
 
 
 const storyEvents = [
-  { year: '2018', title: 'Genesis Spark', description: 'Phyrux Commissions was founded with a passion for digital art and gaming aesthetics, starting with small commissions.' },
-  { year: '2020', title: 'Service Expansion', description: 'Expanded our services to include video editing and graphic design, attracting a wider range of clients.' },
+  { year: '2020', title: 'Genesis Spark', description: 'Phyrux Commissions was founded with a passion for digital art and gaming aesthetics, starting with small commissions.' },
+  { year: '2021', title: 'Service Expansion', description: 'Expanded our services to include video editing and graphic design, attracting a wider range of clients.' },
   { year: '2022', title: 'Studio Establishment', description: 'Officially established a small, dedicated team and moved into our first creative studio space.' },
-  { year: '2024', title: 'Future Forged', description: 'Launched our new brand identity and futuristic website, marking a new era of high-end creative solutions.' },
+  { year: '2023', title: 'Future Forged', description: 'Launched our new brand identity and futuristic website, marking a new era of high-end creative solutions.' },
 ];
 
-const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => (
-    <div className="pt-12">
-        <section className="py-12 px-4 relative overflow-hidden">
-            <div className="max-w-5xl mx-auto text-center relative z-10">
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
-                    Our Story
-                </h2>
-                <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-lg">
-                    Born from a shared passion for gaming culture and cutting-edge design, Phyrux Commissions is more than a studio—it's an arsenal of creativity. We arm brands with the visual power to dominate their digital landscapes.
-                </p>
-                <div className="relative">
-                    <div className="hidden md:block">
-                        <div className="absolute left-1/2 top-2 bottom-2 w-0.5 bg-white/10 -translate-x-1/2" aria-hidden="true"></div>
-                        {storyEvents.map((event, index) => (
-                            <div key={index} className="mb-12 flex justify-between items-center w-full">
-                                <div className="w-5/12">
-                                    {index % 2 === 0 && (
-                                        <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
-                                            <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
-                                            <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
-                                            <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="z-10">
-                                    <div className="w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
-                                </div>
-                                <div className="w-5/12">
-                                    {index % 2 !== 0 && (
-                                         <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
-                                            <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
-                                            <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
-                                            <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
+const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
+    const aboutServices = [
+        { title: 'Video Editing & Clipping', description: 'We craft engaging, high-impact video content that captures attention and drives engagement.' },
+        { title: 'Graphic Design', description: 'From logos to full brand identities, our designs are tailored to elevate your visual presence.' },
+        { title: 'Digital Art', description: 'Our custom digital art brings your ideas to life with a unique and captivating visual style.' },
+        { title: 'Website Development', description: 'We build responsive, user-friendly websites designed to perform and impress.' },
+        { title: 'Pixel Art', description: 'Whether for games, branding, or projects, our pixel art adds a nostalgic yet modern touch to your designs.' }
+    ];
+
+    return (
+        <div className="pt-12 px-4">
+            {/* Section 1: About Us Introduction */}
+            <section className="py-12">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
+                        About Us
+                    </h1>
+                    <p className="mx-auto text-gray-400 mb-12 text-lg leading-relaxed">
+                        Welcome to Phyrux Commissions, where creativity meets professionalism. We are a dynamic creative services group, driven by a passion for producing high-quality content that helps brands, creators, and businesses stand out in the digital world.
+                    </p>
+                </div>
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg">
+                    <div>
+                        <p>At Phyrux Commissions, we offer a diverse range of services to cater to your unique needs, including:</p>
+                        <ul className="mt-6 space-y-4">
+                            {aboutServices.map(service => (
+                                <ServiceFeature key={service.title} title={service.title} description={service.description} />
+                            ))}
+                        </ul>
                     </div>
-                    <div className="md:hidden relative">
-                        <div className="absolute top-2 left-2 bottom-2 w-0.5 bg-white/10" aria-hidden="true"></div>
-                        <div className="space-y-8">
-                            {storyEvents.map((event) => (
-                                <div key={event.year} className="pl-10 relative">
-                                    <div className="absolute top-1 left-0 w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
-                                    <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left flex-grow">
-                                        <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
-                                        <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                    <div>
+                        <p>Our team is passionate about collaboration, and we pride ourselves on being more than just service providers — we are partners in your creative journey. We listen to your ideas, understand your goals, and deliver the perfect blend of artistry and technical expertise to make your vision a reality.</p>
+                    </div>
+                    <div>
+                        <p>Whether you’re a growing brand, a seasoned creator, or a business looking to enhance your digital footprint, Phyrux Commissions is here to bring your ideas to life. Let’s create something amazing together.</p>
+                    </div>
+                </div>
+            </section>
+    
+            {/* Separator */}
+            <div className="py-10">
+                <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+            </div>
+    
+            {/* Section 2: Our Story */}
+            <section className="py-12 relative overflow-hidden">
+                <div className="max-w-5xl mx-auto text-center relative z-10">
+                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
+                        Our Story
+                    </h2>
+                    <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-lg">
+                        Born from a shared passion for gaming culture and cutting-edge design, Phyrux Commissions is more than just a studio — it’s an arsenal of creativity. We empower brands with the visual power to dominate their digital landscapes.
+                    </p>
+                    <div className="relative">
+                        <div className="hidden md:block">
+                            <div className="absolute left-1/2 top-2 bottom-2 w-0.5 bg-white/10 -translate-x-1/2" aria-hidden="true"></div>
+                            {storyEvents.map((event, index) => (
+                                <div key={index} className="mb-12 flex justify-between items-center w-full">
+                                    <div className="w-5/12">
+                                        {index % 2 === 0 && (
+                                            <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
+                                                <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                                <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                                <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="z-10">
+                                        <div className="w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
+                                    </div>
+                                    <div className="w-5/12">
+                                        {index % 2 !== 0 && (
+                                             <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left">
+                                                <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                                <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                                <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))}
                         </div>
+                        <div className="md:hidden relative">
+                            <div className="absolute top-2 left-2 bottom-2 w-0.5 bg-white/10" aria-hidden="true"></div>
+                            <div className="space-y-8">
+                                {storyEvents.map((event) => (
+                                    <div key={event.year} className="pl-10 relative">
+                                        <div className="absolute top-1 left-0 w-5 h-5 bg-[#0D0D0D] rounded-full border-2 border-orange-400 ring-4 ring-[#0D0D0D]"></div>
+                                        <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-lg shadow-black/30 text-left flex-grow">
+                                            <p className="text-orange-400 font-bold text-sm mb-1">{event.year}</p>
+                                            <h3 className="font-bold text-xl text-white mb-2">{event.title}</h3>
+                                            <p className="text-gray-400 text-sm leading-relaxed">{event.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
-);
+            </section>
+        </div>
+    );
+};
 
 type FAQItemProps = { question: string; answer: string; defaultOpen?: boolean; };
 
@@ -870,14 +914,14 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                     {/* Left Column: Brand Info */}
                     <div className="lg:col-span-5 text-center lg:text-left">
                         <button onClick={() => navigateTo('home')} className="group flex items-center justify-center lg:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
-                            <Logo />
+                            
                             <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                                <span className="group-hover:hidden">Phyrux Comms</span>
-                                <span className="hidden group-hover:inline">Phyrux Commissions</span>
+                                <span className="group-hover:hidden">Phyrux Commissions</span>
+                                <span className="hidden group-hover:inline">Phyrux Comms</span>
                             </span>
                         </button>
                         <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto lg:mx-0">
-                            A creative powerhouse transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.
+                           Phyrux Commissions is a creative services group dedicated to bringing your ideas to life across multiple platforms. We specialize in a wide range of digital services, including video editing, clipping, graphic design, digital art, website development, and pixel art. Our goal is to help brands, creators, and businesses create compelling and professional content that resonates with their audience. With a focus on quality, creativity, and innovation, we’re here to turn your visions into polished, impactful digital experiences.
                         </p>
                     </div>
 
