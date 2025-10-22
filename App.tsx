@@ -833,12 +833,14 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
 
 const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const faqs = [
-        { q: "What is the edit process?", a: "Our design process includes 4 phases: Discovery and Reserach, Story boarding, Editing, and Finalisation and Delivery." },
-        { q: "How will I send you the footage?", a: "You can send us your footage via cloud services like Google Drive, Dropbox, or WeTransfer. We'll provide a secure link for you to upload your files directly to our project workspace." },
-        { q: "What if I'm not satisfied?", a: "Your satisfaction is our top priority. We include two rounds of revisions in our standard pricing to ensure the final product is exactly what you envisioned. We'll work closely with you on your feedback." },
-        { q: "I need this video ASAP! Can you deliver in 24 hours?", a: "We understand that some projects are time-sensitive. We offer rush services for an additional fee. Please contact us with your deadline, and we'll do our best to accommodate your request." },
-        { q: "How do I get started?", a: "Getting started is simple! Click the 'Book an appointment' button below or use the contact form on our contact page. Let us know about your project, and we'll schedule a free consultation to discuss your needs." },
-        { q: "What payment methods do you accept?", a: "We accept all major credit cards, PayPal, and bank transfers. Payment is securely processed through our online invoicing system." },
+        { q: "What services do you offer?", a: "At Phyrux Commissions, we provide a wide range of services including video editing, clipping, graphic design, digital art, website development, and pixel art. We tailor each service to your specific needs to help bring your vision to life." },
+        { q: "Do you offer custom graphic designs for branding?", a: "Yes! Whether you need a logo, a complete brand identity, or marketing collateral, our graphic design team works closely with you to create visuals that perfectly represent your brand." },
+        { q: "Can you help with website development?", a: "Absolutely! Our website development services are focused on creating responsive, user-friendly websites that are optimized for performance. We’ll work with you from start to finish to ensure your site meets your needs." },
+        { q: "Do you create digital art for video games or apps?", a: "Yes, we specialize in digital art tailored to the gaming and tech industries. Whether it's character designs, environment art, or assets for apps and games, we can bring your project to life with stunning visuals." },
+        { q: "Do you do pixel art for games or projects?", a: "Yes, we offer pixel art services, whether for game development, branding, or creative projects. Our pixel art adds both nostalgia and modern flair, making your design stand out." },
+        { q: "How do I collaborate with you on my project?", a: "Starting a project with us is simple! You can book a free consultation through our website or contact us directly. We’ll discuss your needs and create a personalized plan for your project." },
+        { q: "How do you ensure the quality of your work?", a: "We take pride in delivering top-tier work. For every service, we involve you in the creative process through regular updates and revisions to ensure the final result aligns with your vision. Quality is key in everything we do." },
+        
     ];
 
     return (
@@ -851,7 +853,7 @@ const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
                         <p className="font-semibold text-gray-300 uppercase tracking-widest text-sm">FAQ</p>
                     </div>
                     <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mt-4">
-                        Frequently asked questions about us
+                        Frequently Asked Questions
                     </h1>
                     <div className="mt-12 bg-[#1a1a1a] border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                          <div>
