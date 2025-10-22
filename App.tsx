@@ -941,7 +941,7 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                         <h3 className="font-bold text-white mb-4">Connect</h3>
                         <div className="flex justify-center lg:justify-start space-x-4">
                            <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0 3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
@@ -1073,6 +1073,20 @@ const pixelArtProjects = [
       },
 ];
   
+const graphicsDesignProjects = [
+    { images: Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/gd-cat1-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 9 }, (_, i) => `https://picsum.photos/seed/gd-cat2-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 3 }, (_, i) => `https://picsum.photos/seed/gd-cat3-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 4 }, (_, i) => `https://picsum.photos/seed/gd-cat4-img${i + 1}/600/400`) }
+];
+
+const digitalArtProjects = [
+    { images: Array.from({ length: 3 }, (_, i) => `https://picsum.photos/seed/da-cat1-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 2 }, (_, i) => `https://picsum.photos/seed/da-cat2-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 3 }, (_, i) => `https://picsum.photos/seed/da-cat3-img${i + 1}/600/400`) },
+    { images: Array.from({ length: 2 }, (_, i) => `https://picsum.photos/seed/da-cat4-img${i + 1}/600/400`) }
+];
+
 type ProjectCardProps = {
     project: {
         title: string;
@@ -1178,7 +1192,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                         </div>
                         <button
                             onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
                             aria-label="Previous image"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -1187,7 +1201,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                         </button>
                         <button
                             onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
                             aria-label="Next image"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -1202,6 +1216,64 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
     );
 };
 
+const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const prevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    const nextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+
+    return (
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
+            <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
+                {images.map((src, index) => (
+                    <img
+                        loading="lazy"
+                        key={index}
+                        src={src}
+                        alt={`Graphic design sample ${index + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; 
+                            target.src = 'https://i.imgur.com/8rqwdLX.png';
+                        }}
+                    />
+                ))}
+                
+                <>
+                    <div className="absolute top-2 right-2 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                        {currentIndex + 1} / {images.length}
+                    </div>
+                    <button
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
+                        aria-label="Previous image"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    <button
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
+                        aria-label="Next image"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                </>
+            </div>
+        </div>
+    );
+};
 
 const useInView = (options: IntersectionObserverInit = { threshold: 0.1 }) => {
     // FIX: 'React.a' is not a function. Replaced with 'React.useState'.
@@ -1357,8 +1429,6 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
 };
 
 const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => {
-    const firstRowProjects = placeholderProjects.slice(0, 3);
-    const secondRowProjects = placeholderProjects.slice(3);
     const features = [
         { title: 'Social Media Graphics', description: 'Custom designs for Instagram posts, stories, and ads.' },
         { title: 'Event Promotions', description: 'Stunning event flyers, banners, and social media visuals.' },
@@ -1393,23 +1463,13 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
                     </div>
                 </div>
 
-                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {firstRowProjects.map((project, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {graphicsDesignProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
-                            <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=graphics-designing`) }} />
+                            <GraphicProjectSlider images={project.images} />
                         </AnimatedWrapper>
                     ))}
                 </div>
-                {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
-                        {secondRowProjects.map((project, index) => (
-                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
-                                <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=graphics-designing`) }} />
-                            </AnimatedWrapper>
-                        ))}
-                    </div>
-                )}
             </section>
         </div>
     );
@@ -1474,8 +1534,6 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
 };
 
 const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
-    const firstRowProjects = placeholderProjects.slice(0, 3);
-    const secondRowProjects = placeholderProjects.slice(3);
     const features = [
         { title: 'Character & Environment Concept Art', description: 'Stunning designs for characters and environments in anime, semi-realistic, and other creative styles.' },
         { title: 'Emotes & GIF Animations', description: 'Expressive emotes and animated GIFs that bring personality to your brand or character.' },
@@ -1510,22 +1568,13 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                 </div>
 
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {firstRowProjects.map((project, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {digitalArtProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
-                            <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=digital-art`) }} />
+                            <GraphicProjectSlider images={project.images} />
                         </AnimatedWrapper>
                     ))}
                 </div>
-                {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
-                        {secondRowProjects.map((project, index) => (
-                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
-                                <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=digital-art`) }} />
-                            </AnimatedWrapper>
-                        ))}
-                    </div>
-                )}
             </section>
         </div>
     );
@@ -1798,7 +1847,7 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0 3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
