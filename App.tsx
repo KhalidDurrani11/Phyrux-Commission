@@ -375,15 +375,31 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
 const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: string; objectFitClass?: string; }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const togglePlay = () => {
         if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
+            if (videoRef.current.paused) {
                 videoRef.current.play();
+            } else {
+                videoRef.current.pause();
             }
-            setIsPlaying(!isPlaying);
+        }
+    };
+    
+    const toggleFullScreen = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        const container = containerRef.current;
+        if (!container) return;
+
+        if (!document.fullscreenElement) {
+            container.requestFullscreen().catch((err) => {
+                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
         }
     };
 
@@ -405,6 +421,7 @@ const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: stri
 
     return (
         <div
+            ref={containerRef}
             className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50 cursor-pointer group bg-black"
             onClick={togglePlay}
         >
@@ -440,6 +457,15 @@ const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: stri
                             <span>Play</span>
                         </>
                     )}
+                </button>
+            </div>
+            <div className="absolute bottom-6 right-6">
+                <button
+                    onClick={toggleFullScreen}
+                    className="bg-black/50 backdrop-blur-sm text-white p-2.5 rounded-full flex items-center justify-center border border-white/20 transform hover:scale-105 active:scale-95 transition-all duration-300 ease-in-out"
+                    aria-label="Toggle fullscreen"
+                >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
                 </button>
             </div>
         </div>
@@ -1417,7 +1443,7 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
             </div>
             
             <div className="max-w-4xl mx-auto mt-16">
-                <VideoPlayer videoClassName="aspect-[21/9]" objectFitClass="object-contain" />
+                <VideoPlayer />
             </div>
         </section>
     </div>
