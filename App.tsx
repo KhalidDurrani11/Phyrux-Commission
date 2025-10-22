@@ -1,4 +1,3 @@
-
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
 import React, { useState, useEffect, useRef } from'react';
 
@@ -526,41 +525,32 @@ const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
 );
 
 const teamMembers = [
-    { name: 'Tayyab', role: 'Founder & VFX Artist', imageUrl: 'https://picsum.photos/seed/tayyab/200/200' },
-    { name: 'Ali', role: 'Co-Founder & Lead Editor', imageUrl: 'https://picsum.photos/seed/ali/200/200' },
-    { name: 'Ahmed', role: 'Project Manager', imageUrl: 'https://picsum.photos/seed/ahmed_manager/200/200' },
-    { name: 'Gulsher', role: 'Senior Video Editor', imageUrl: 'https://picsum.photos/seed/gulsher/200/200' },
-    { name: 'Khalid', role: 'Lead Web Developer', imageUrl: 'https://picsum.photos/seed/khalid/200/200' },
-    { name: 'Maaz', role: 'Specialist Pixel Artist', imageUrl: 'https://picsum.photos/seed/maaz/200/200' },
-    { name: 'Taimoor', role: 'Head of Clipping Services', imageUrl: 'https://picsum.photos/seed/taimoor/200/200' },
-    { name: 'Akemi', role: 'Lead Digital Illustrator', imageUrl: 'https://picsum.photos/seed/akemi/200/200' },
+    { name: 'Tayyab', role: 'Founder & VFX Artist', description: "A creative force behind the scenes, Tayyab's expertise in visual effects brings an extraordinary edge to every project." },
+    { name: 'Ali', role: 'Co-Founder & Lead Editor', description: "With a keen eye for detail and a passion for editing, Ali ensures each project flows seamlessly, delivering top-tier results." },
+    { name: 'Ahmed', role: 'Project Manager', description: "The glue that holds everything together, Ahmed coordinates timelines, resources, and communication for every project, ensuring smooth execution." },
+    { name: 'Gulsher', role: 'Senior Video Editor', description: "A master of editing, Gulsher brings your footage to life, creating stunning visuals and a cohesive narrative." },
+    { name: 'Khalid', role: 'Lead Web Developer', description: "With a strong background in development, Khalid ensures that every website we create is responsive, functional, and aesthetically pleasing." },
+    { name: 'Maaz', role: 'Specialist Pixel Artist', description: "Maaz's pixel art expertise adds a unique charm to projects, from games to branding, with striking designs that stand out." },
+    { name: 'Taimoor', role: 'Head of Clipping Services', description: "Taimoor leads the clipping team, turning raw footage into impactful highlights that tell your story effectively." },
+    { name: 'Akemi', role: 'Lead Digital Illustrator', description: "Akemi brings stories to life through her illustrations, adding depth and visual appeal to each project she touches." },
 ];
 
 const TeamSection = () => (
     <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
-            <div className="flex flex-col items-center justify-center gap-3 mb-4">
-                <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
-                <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Team</p>
-            </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
-                Meet Our Creative Minds
+                Our Team
             </h2>
-            <p className="max-w-2xl mx-auto text-gray-400 mb-12">
-                We are a team of passionate creators, dedicated to bringing your vision to life with style and precision.
+            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+                We are a group of passionate creatives, each bringing unique expertise and vision to every project. Meet the talented individuals behind Phyrux Commissions who help turn your ideas into reality:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {teamMembers.map((member, index) => (
                     <AnimatedWrapper key={index} index={index}>
-                        <div className="group bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl flex flex-col items-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10">
-                            <img 
-                                loading="lazy"
-                                src={member.imageUrl} 
-                                alt={member.name} 
-                                className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10 transition-all duration-300 ease-in-out group-hover:border-orange-400 group-hover:scale-105"
-                            />
-                            <h3 className="font-bold text-lg text-white">{member.name}</h3>
-                            <p className="text-sm text-orange-400">{member.role}</p>
+                        <div className="bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl h-full flex flex-col items-center text-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10">
+                            <h3 className="font-bold text-xl text-orange-400">{member.name}</h3>
+                            <p className="text-sm text-gray-300 font-semibold mt-1">{member.role}</p>
+                            <p className="text-gray-400 mt-4 text-sm leading-relaxed">{member.description}</p>
                         </div>
                     </AnimatedWrapper>
                 ))}
@@ -913,13 +903,11 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Left Column: Brand Info */}
                     <div className="lg:col-span-5 text-center lg:text-left">
-                        <button onClick={() => navigateTo('home')} className="group flex items-center justify-center lg:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
-                            
-                            <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                                <span className="group-hover:hidden">Phyrux Commissions</span>
-                                <span className="hidden group-hover:inline">Phyrux Comms</span>
+                        <div className="flex items-center justify-center lg:justify-start mb-4">
+                            <span className="font-bold text-xl text-orange-400 tracking-wider">
+                                Phyrux Commissions
                             </span>
-                        </button>
+                        </div>
                         <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto lg:mx-0">
                            Phyrux Commissions is a creative services group dedicated to bringing your ideas to life across multiple platforms. We specialize in a wide range of digital services, including video editing, clipping, graphic design, digital art, website development, and pixel art. Our goal is to help brands, creators, and businesses create compelling and professional content that resonates with their audience. With a focus on quality, creativity, and innovation, we’re here to turn your visions into polished, impactful digital experiences.
                         </p>
@@ -943,6 +931,7 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                                 {services.slice(0, 5).map(item => (
                                     <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">{item.name}</button></li>
                                 ))}
+                                <li><button onClick={() => navigateTo('services-page')} className="text-orange-400 hover:text-orange-300 text-sm font-semibold transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">View All...</button></li>
                             </ul>
                         </div>
                     </div>
@@ -960,6 +949,16 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                             <SocialIcon href="https://wa.me/923167741677">
                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z"/></svg>
                            </SocialIcon>
+                        </div>
+                        <div className="mt-6">
+                            <p className="text-gray-400 text-sm mb-1">Email Us</p>
+                            <a href="mailto:tezurect82@gmail.com" className="font-semibold text-white hover:text-orange-400 text-sm transition-all duration-300 ease-in-out inline-flex items-center gap-2 active:scale-95">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                                <span>tezurect82@gmail.com</span>
+                            </a>
                         </div>
                     </div>
                 </div>
