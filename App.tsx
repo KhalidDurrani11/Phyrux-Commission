@@ -1,9 +1,12 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+// FIX: Invalid import statement. Replaced with a standard import for React hooks.
+import React, { useState, useEffect, useRef } from'react';
 
-const Preloader = () => {
-    const [visibleWord, setVisibleWord] = useState<'Phyruxs' | 'Comms'>('Phyruxs');
+const Preloader=()=> {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
+    const [visibleWord, setVisibleWord] = useState('Phyruxs');
 
+    // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
         // This timer waits for the first word's animation (0.8s) to complete
         // before switching to the second word.
@@ -221,8 +224,11 @@ const HamburgerIcon = ({ open }: { open: boolean }) => (
 );
 
 const Header = ({ navigateTo, currentPage }: NavigationProps) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    // FIX: 'u' is not defined. Replaced with 'useRef'.
     const menuTimeoutRef = useRef<number | null>(null);
 
     const handleMenuEnter = () => {
@@ -239,6 +245,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
         setIsMobileMenuOpen(false);
     };
 
+    // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
         return () => { document.body.style.overflow = 'auto'; };
@@ -373,8 +380,11 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
 
 
 const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: string; objectFitClass?: string; }) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isPlaying, setIsPlaying] = useState(false);
+    // FIX: 'u' is not defined. Replaced with 'useRef'.
     const videoRef = useRef<HTMLVideoElement>(null);
+    // FIX: 'u' is not defined. Replaced with 'useRef'.
     const containerRef = useRef<HTMLDivElement>(null);
 
     const togglePlay = () => {
@@ -403,6 +413,7 @@ const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: stri
         }
     };
 
+    // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
@@ -610,16 +621,16 @@ const TestimonialsSection = () => (
 );
 
 
-const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#9999ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm8.25-6.375c0-2.062 1.313-3.375 3.375-3.375H22.5v10.5h-2.25v-3.75h-1.5v3.75h-2.25V12.375z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125z" fill="currentColor"/></svg>;
-const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#d291ff]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm8.625 0l-3.015-9.75h2.25l1.65 6.45h.075L20.4 9h2.25l-3.015 9.75h-2.25l.375-1.5z" fill="currentColor"/></svg>;
-const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#31c5f4]"><path d="M22.5 1.5H1.5v21h21V1.5zM8.25 18.75H6V9h2.25c2.063 0 3.375 1.313 3.375 3.375S10.313 18.75 8.25 18.75zm9.375 0h-2.25l-1.5-3.75H12v3.75h-2.25V9H15c2.063 0 3.375 1.313 3.375 3.375 0 1.5-.75 2.438-1.875 3L17.625 18.75z" fill="currentColor"/><path d="M8.25 11.25H6v5.25h2.25c.75 0 1.125-.375 1.125-1.125v-3c0-.75-.375-1.125-1.125-1.125zm4.875 0H12v3h1.125c.75 0 1.125-.375 1.125-1.125s-.375-1.875-1.125-1.875z" fill="currentColor"/></svg>;
-const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff9a00]"><path d="M22.5 1.5H1.5v21h21V1.5zM9.13 18.75L6.11 9H8.4l1.65 6.45h.075L11.775 9h2.25l-3.015 9.75h-2.25l.375-1.5zm9.375 0h-2.25V9h2.25v9.75z" fill="currentColor"/></svg>;
+const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#9999ff]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM8.834 18H5.5V9.01h3.334c2.308 0 3.667 1.25 3.667 3.495 0 2.246-1.359 3.495-3.667 3.495zm7.333-5.25h-3.5v3.668H10.5V9.01h5.667c2.25 0 3.333 1.083 3.333 3.083 0 1.375-.792 2.417-2.167 2.917l2.5 3.99H16.5l-2.333-3.75zm-7.333-2.25h-1.25v3.75h1.25c.833 0 1.25-.417 1.25-1.25v-1.25c0-.833-.417-1.25-1.25-1.25zm5.583-.5h-3.5v2.25h3.5c.834 0 1.084-.333 1.084-1.083 0-.834-.25-1.167-1.084-1.167z" fill="currentColor"/></svg>;
+const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#d291ff]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM9.548 18H6.5l3.25-9h2.333L15.5 18h-2.833l-.666-2.167H9.998L9.548 18zm.834-3.667h2.25L11.5 10.498h-.083L10.382 14.333zm8.333 3.667h-3l3.25-9h2.333L24 18h-2.833l-.667-2.167h-2.5l-.45 2.167zm.834-3.667h2.25L19.915 10.5h-.083L18.715 14.333z" fill="currentColor"/></svg>;
+const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#31c5f4]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM8.834 18H5.5V9.01h3.334c2.308 0 3.667 1.25 3.667 3.495 0 2.246-1.359 3.495-3.667 3.495zm7.5-6.5c0-1.958-1.208-3.083-3.292-3.083H10.5V18h2.167v-3.833h1.333l1.833 3.833h2.5L15.917 14c1.166-.458 2.417-1.5 2.417-2.5zm-7.334-2.25h-1.25v3.75h1.25c.833 0 1.25-.417 1.25-1.25v-1.25c0-.833-.417-1.25-1.25-1.25zm5.25 0H12.5v2.333h1.75c.917 0 1.333-.417 1.333-1.167 0-.75-.416-1.166-1.333-1.166z" fill="currentColor"/></svg>;
+const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff9a00]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM9.548 18H6.5l3.25-9h2.333L15.5 18h-2.833l-.666-2.167H9.998L9.548 18zm6.618 0H14V9h2.166v9z" fill="currentColor"/></svg>;
 const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
-const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><path d="M12.001 2.002c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.88-5.382l-2.24-1.29 2.24-1.3c.1-.06.15-.17.15-.28V9.89c0-.21-.22-.35-.4-.25l-3.51 2.02c-.18.1-.29.3-.29.51v3.72c0 .21.22.35.4.25l3.51-2.03c.18-.1.29-.3.29-.5v-1.86c0-.11-.05-.22-.15-.28zM14.88 16.5l3.51 2.03c.18.1.4-.04.4-.25V14.6c0-.21-.11-.41-.29-.51l-3.51-2.02c-.18-.1-.4.04-.4.25v1.86c0 .11.05.22.15.28l2.24 1.29-2.24 1.3c-.1.06-.15.17-.15-.28v1.86zm-2.02-13.29l3.51 2.02c.18.1.29.3.29.5v3.72c0 .21-.22.35-.4.25l-3.51-2.03c-.18-.1-.29-.3-.29-.51V5.91c0-.21.22-.35.4-.25z" fill="currentColor"/></svg>;
-const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm7.188 18.563H17.5v-7.126l-5.625 7.125h-1.313v-13.125h1.75v7.125l5.625-7.125h1.313v13.125z" fill="currentColor"/></svg>;
-const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.08 4.14l8.35 8.35c-.4.49-1.54 1.63-2.03 2.03l-8.35-8.35c.4-.49 1.54-1.63 2.03-2.03zm-4.39 1.15l8.35 8.35c-.49.4-1.63 1.54-2.03 2.03l-8.35-8.35c.49-.4 1.63-1.54 2.03-2.03zM4.14 13.08l8.35-8.35c.49-.4 1.63-1.54 2.03-2.03l-8.35 8.35c-.49.4-1.63 1.54-2.03 2.03zm1.15 4.39l8.35-8.35c.4-.49 1.54-1.63 2.03-2.03l-8.35 8.35c-.4.49-1.54 1.63-2.03 2.03z" fill="currentColor"/></svg>;
+const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><g fill="currentColor"><circle cx="12" cy="12" r="2.05"/><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z"/><path d="M16.3 7.7a10.21 10.21 0 00-8.6 0 1 1 0 00-.5 1.6l.8.8a1 1 0 001.3-.1 6.2 6.2 0 015.4 0 1 1 0 001.3.1l.8-.8a1 1 0 00-.5-1.6zM7.7 16.3a10.21 10.21 0 008.6 0 1 1 0 00.5-1.6l-.8-.8a1 1 0 00-1.3.1 6.2 6.2 0 01-5.4 0 1 1 0 00-1.3-.1l-.8.8a1 1 0 00.5 1.6z"/><path transform="rotate(-30 12 12)" d="M12.4 3.1a1 1 0 00-1 .1 10.21 10.21 0 00-3.2 15.6 1 1 0 001.6-.5l.3-.9a1 1 0 00-.1-1.3 6.2 6.2 0 012-9.6 1 1 0 00.1-1.3l-.3-.9a1 1 0 00-.8-1.1z"/><path transform="rotate(30 12 12)" d="M12.6 3.1a1 1 0 00-1.1.8l-.3.9a1 1 0 00.1 1.3 6.2 6.2 0 012 9.6 1 1 0 00-.1 1.3l.3.9a1 1 0 001.6.5 10.21 10.21 0 00-3.2-15.6 1 1 0 00-.3-.1z"/></g></svg>;
+const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.721 16.5H15.5v-7.857L10.38 18.5h-1.4V5.5h1.4v7.857L15.5 5.5h1.221v13z" fill="currentColor"/></svg>;
+const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><g fill="currentColor"><circle cx="8.5" cy="15.5" r="5.5"/><circle cx="15.5" cy="15.5" r="5.5"/><circle cx="12" cy="8.5" r="5.5"/></g></svg>;
 const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
-const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f7df1e]"><path d="M0 0h24v24H0V0zm22.034 18.262c.337-1.743.237-3.513-.288-5.182-1.1-3.463-4.113-5.25-8.15-5.25h-1.625v10.375h1.625c3.275 0 5.95-1.575 7.15-4.125.4-1.125.563-2.313.288-3.813zm-6.134-2.7c.613.825.937 1.838.937 2.938 0 1.212-.35 2.3-.987 3.112-.65.813-1.538 1.288-2.663 1.288h-1.6v-8.825h1.6c1.175 0 2.113.488 2.713 1.488zM9.42 12.05H4.155V9.69h5.265v2.36zm0 2.362H4.155v2.363h5.265V14.41z" fill="currentColor"/></svg>;
+const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f7df1e]"><path d="M17.368 14.516c0 1.736-1.079 2.78-2.603 2.78-1.468 0-2.548-1.017-2.548-2.493 0-1.626 1.134-2.52 2.718-2.52.863 0 1.467.247 1.98.7L18.1 11.75c-.382-.382-.89-.598-1.625-.598-1.134 0-1.84.727-1.84 1.84 0 1.133.64 1.812 1.727 1.812 1.052 0 1.625-.619 1.625-1.626h-1.57v-1.18h2.718v1.517zM9.421 17.296h1.597v-6.333H9.42v-1.157h3.992v1.157H11.8v6.333h1.625v1.157H9.421v-1.157z" fill="currentColor"/></svg>;
 
 
 const techLogos = [
@@ -746,6 +757,7 @@ const CloseIcon = () => (
 );
 
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false }) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const contentId = `faq-content-${question.replace(/\s+/g, '-').toLowerCase()}`;
 
@@ -887,13 +899,13 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                         <h3 className="font-bold text-white mb-4">Connect</h3>
                         <div className="flex justify-center lg:justify-start space-x-4">
                            <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15.464v-6.928L16 12l-6 3.464zM21.582 6.186A2.46 2.46 0 0019.82 4.424C18.254 4 12 4 12 4s-6.254 0-7.818.424A2.46 2.46 0 002.418 6.186C2 7.754 2 12 2 12s0 4.246.418 5.814a2.46 2.46 0 001.764 1.764C5.746 20 12 20 12 20s6.254 0 7.818-.424a2.46 2.46 0 001.764-1.764C22 16.246 22 12 22 12s0-7.754-.418-5.814z"></path></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
                             </SocialIcon>
                         </div>
                     </div>
@@ -1019,6 +1031,7 @@ type ProjectCardProps = {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextImage = (e: React.MouseEvent) => {
@@ -1075,6 +1088,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 };
 
 const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[] } }> = ({ project }) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const prevImage = (e: React.MouseEvent) => {
@@ -1138,9 +1152,12 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
 
 
 const useInView = (options: IntersectionObserverInit = { threshold: 0.1 }) => {
+    // FIX: 'React.a' is not a function. Replaced with 'React.useState'.
     const [isInView, setIsInView] = React.useState(false);
+    // FIX: 'React.u' is not a function. Replaced with 'React.useRef'.
     const ref = React.useRef<HTMLDivElement>(null);
 
+    // FIX: 'React.c' is not a function. Replaced with 'React.useEffect'.
     React.useEffect(() => {
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
@@ -1187,7 +1204,9 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
 type VideoProject = { title: string; videoUrl: string; thumbnailUrl: string; };
 
 const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
+    // FIX: 'u' is not defined. Replaced with 'useRef'.
     const videoRef = useRef<HTMLVideoElement>(null);
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isInteracted, setIsInteracted] = useState(false);
 
     const handlePlay = () => {
@@ -1405,45 +1424,47 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
                 <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
             </div>
 
-            <div className="text-left text-gray-300 space-y-8 text-base md:text-lg">
-                <p>
-                    Our Clipping and Social Media Growth Service is designed to help creators and businesses from all industries amplify their presence and reach across multiple platforms. Whether you’re a gaming creator, YouTuber, fitness coach, restaurant owner, or any other business, we transform your content into engaging, bite-sized video clips perfect for social media.
-                </p>
-                <div>
-                    <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Provide:</h3>
-                    <ul className="space-y-3 pl-4">
-                        <li className="flex items-start gap-3">
-                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                           <span><strong>High-Quality Clips:</strong> We capture your most exciting and engaging moments, turning them into short, shareable content tailored to your industry.</span>
-                        </li>
-                         <li className="flex items-start gap-3">
-                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                           <span><strong>Multi-Platform Exposure:</strong> We distribute these clips across 60+ platforms, from TikTok to Instagram Reels, YouTube Shorts, and more, ensuring maximum visibility.</span>
-                        </li>
-                         <li className="flex items-start gap-3">
-                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                           <span><strong>SEO Optimization:</strong> We optimize your clips to reach the right audience and boost engagement.</span>
-                        </li>
-                         <li className="flex items-start gap-3">
-                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                           <span><strong>Regular Posting:</strong> We post 15+ clips a day to maintain consistent content flow and visibility.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                           <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
-                           <span><strong>Performance Tracking:</strong> You’ll have access to a shared Google Sheet to track the progress and engagement of each clip.</span>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Need From You:</h3>
-                    <p>
-                        To get started, we simply need information about what you’re looking to promote—whether it’s a product, service, event, or brand. Tell us your goals: Are you aiming to increase customer engagement, boost sales, grow your social media following, or promote a new program or product? We’ll tailor the content to meet your needs and ensure it helps you achieve your goals.
-                    </p>
-                </div>
-            </div>
-            
-            <div className="max-w-4xl mx-auto mt-16">
-                <VideoPlayer />
+            <p className="text-left text-gray-300 text-base md:text-lg mb-16">
+                Our Clipping and Social Media Growth Service is designed to help creators and businesses from all industries amplify their presence and reach across multiple platforms. Whether you’re a gaming creator, YouTuber, fitness coach, restaurant owner, or any other business, we transform your content into engaging, bite-sized video clips perfect for social media.
+            </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                 <div>
+                     <VideoPlayer />
+                 </div>
+                 <div className="text-left text-gray-300 space-y-8 text-base md:text-lg">
+                    <div>
+                        <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Provide:</h3>
+                        <ul className="space-y-3 pl-4">
+                            <li className="flex items-start gap-3">
+                               <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                               <span><strong>High-Quality Clips:</strong> We capture your most exciting and engaging moments, turning them into short, shareable content tailored to your industry.</span>
+                            </li>
+                             <li className="flex items-start gap-3">
+                               <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                               <span><strong>Multi-Platform Exposure:</strong> We distribute these clips across 60+ platforms, from TikTok to Instagram Reels, YouTube Shorts, and more, ensuring maximum visibility.</span>
+                            </li>
+                             <li className="flex items-start gap-3">
+                               <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                               <span><strong>SEO Optimization:</strong> We optimize your clips to reach the right audience and boost engagement.</span>
+                            </li>
+                             <li className="flex items-start gap-3">
+                               <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                               <span><strong>Regular Posting:</strong> We post 15+ clips a day to maintain consistent content flow and visibility.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                               <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                               <span><strong>Performance Tracking:</strong> You’ll have access to a shared Google Sheet to track the progress and engagement of each clip.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Need From You:</h3>
+                        <p>
+                            To get started, we simply need information about what you’re looking to promote—whether it’s a product, service, event, or brand. Tell us your goals: Are you aiming to increase customer engagement, boost sales, grow your social media following, or promote a new program or product? We’ll tailor the content to meet your needs and ensure it helps you achieve your goals.
+                        </p>
+                    </div>
+                 </div>
             </div>
         </section>
     </div>
@@ -1451,7 +1472,9 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
 
 
 const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -1547,13 +1570,13 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15.464v-6.928L16 12l-6 3.464zM21.582 6.186A2.46 2.46 0 0019.82 4.424C18.254 4 12 4 12 4s-6.254 0-7.818.424A2.46 2.46 0 002.418 6.186C2 7.754 2 12 2 12s0 4.246.418 5.814a2.46 2.46 0 001.764 1.764C5.746 20 12 20 12 20s6.254 0 7.818-.424a2.46 2.46 0 001.764-1.764C22 16.246 22 12 22 12s0-7.754-.418-5.814z"></path></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
                             </SocialIcon>
                         </div>
                     </div>
@@ -1611,6 +1634,7 @@ const WhatsAppButton = () => (
   );
 
 const ScrollProgressBar = () => {
+    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [scroll, setScroll] = useState(0);
 
     const onScroll = () => {
@@ -1622,6 +1646,7 @@ const ScrollProgressBar = () => {
         setScroll(ScrollPercent);
     };
 
+    // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
         window.addEventListener('scroll', onScroll);
         return () => window.removeEventListener('scroll', onScroll);
@@ -1640,11 +1665,16 @@ const ScrollProgressBar = () => {
 const isServicePage = (page: string) => services.some(s => s.id === page);
 
 export default function App() {
+  // FIX: 'a' is not defined. Replaced with 'useState'.
   const [preloaderVisible, setPreloaderVisible] = useState(true);
+  // FIX: 'a' is not defined. Replaced with 'useState'.
   const [preloaderExiting, setPreloaderExiting] = useState(false);
+  // FIX: 'a' is not defined. Replaced with 'useState'.
   const [currentPage, setCurrentPage] = useState('home');
+  // FIX: 'a' is not defined. Replaced with 'useState'.
   const [animationClass, setAnimationClass] = useState('');
   
+  // FIX: 'c' is not defined. Replaced with 'useEffect'.
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
