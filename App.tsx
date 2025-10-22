@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from'react';
 
 const Preloader=()=> {
     // FIX: 'a' is not defined. Replaced with 'useState'.
-    const [visibleWord, setVisibleWord] = useState('Phyruxs');
+    const [visibleWord, setVisibleWord] = useState('Phyrux');
 
     // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
@@ -23,9 +23,9 @@ const Preloader=()=> {
         <div className="text-6xl sm:text-7xl lg:text-9xl font-black tracking-widest uppercase relative h-32 w-full flex items-center justify-center">
             {/* Using a key prop on the span ensures that React treats each word as a new element,
                 forcing the animation to restart correctly when the word changes. */}
-            {visibleWord === 'Phyruxs' && (
-                <span key="phyruxs" className="absolute animate-preloader-pop-in-out text-orange-500">
-                    Phyruxs
+            {visibleWord === 'Phyrux' && (
+                <span key="phyrux" className="absolute animate-preloader-pop-in-out text-orange-500">
+                    Phyrux
                 </span>
             )}
             {visibleWord === 'Comms' && (
@@ -125,7 +125,17 @@ const iconPaths: { [key: string]: React.ReactNode } = {
       </>
     ),
     'pixel-art': (
-        <path d="M10 4H4v6h6V4zm6 0h-4v6h4V4zM4 12v6h6v-6H4zm6 0h4v6h-4v-6z" />
+        <>
+            <path d="M11 5h2v2h-2z"/>
+            <path d="M9 7h2v2H9z"/>
+            <path d="M13 7h2v2h-2z"/>
+            <path d="M7 9h2v2H7z"/>
+            <path d="M11 9h2v2h-2z"/>
+            <path d="M15 9h2v2h-2z"/>
+            <path d="M9 11h2v2H9z"/>
+            <path d="M13 11h2v2h-2z"/>
+            <path d="M11 13h2v2h-2z"/>
+        </>
     ),
     'clipping-service': (
       <>
@@ -358,7 +368,7 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
         </h1>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up animation-delay-400">
             <button onClick={() => navigateTo('contact')} className="group flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(238,155,123,0.5)] transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transform hover:scale-105 active:scale-95">
-                Get a Quote
+                Book a Free Call
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -809,13 +819,13 @@ const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mt-4">
                         Frequently asked questions about us
                     </h1>
-                    <div className="mt-12 bg-orange-500 rounded-2xl p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-lg shadow-orange-500/20">
+                    <div className="mt-12 bg-[#1a1a1a] border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                          <div>
-                            <h2 className="font-bold text-2xl text-white">Have a question?</h2>
-                            <p className="text-orange-100 mt-1">Let's discuss it now!</p>
+                            <h2 className="font-bold text-2xl text-white">Still have questions?</h2>
+                            <p className="text-gray-400 mt-1">Can't find the answer you're looking for? Please chat to our friendly team.</p>
                          </div>
-                         <button onClick={() => navigateTo('contact')} className="bg-black text-white font-semibold px-6 py-3 rounded-full transition-all ease-in-out duration-300 transform hover:scale-105 active:scale-95 self-start sm:self-center flex-shrink-0">
-                            Book an appointment
+                         <button onClick={() => navigateTo('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95 flex-shrink-0">
+                            Get in Touch
                          </button>
                     </div>
                 </div>
@@ -889,7 +899,6 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                                 {services.slice(0, 5).map(item => (
                                     <li key={item.id}><button onClick={() => navigateTo(item.id)} className="text-gray-400 hover:text-orange-400 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">{item.name}</button></li>
                                 ))}
-                                <li><button onClick={() => navigateTo('services-page')} className="text-orange-400 hover:text-orange-300 text-sm transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 active:scale-95">View All...</button></li>
                             </ul>
                         </div>
                     </div>
@@ -902,11 +911,11 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15.464v-6.928L16 12l-6 3.464zM21.582 6.186A2.46 2.46 0 0019.82 4.424C18.254 4 12 4 12 4s-6.254 0-7.818.424A2.46 2.46 0 002.418 6.186C2 7.754 2 12 2 12s0 4.246.418 5.814a2.46 2.46 0 001.764 1.764C5.746 20 12 20 12 20s6.254 0 7.818-.424a2.46 2.46 0 001.764-1.764C22 16.246 22 12 22 12s0-7.754-.418-5.814z"></path></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
                             </SocialIcon>
+                            <SocialIcon href="https://wa.me/923167741677">
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z"/></svg>
+                           </SocialIcon>
                         </div>
                     </div>
                 </div>
@@ -1237,26 +1246,50 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
     );
 };
 
+// FIX: Corrected the typing for the `ServiceFeature` component to resolve errors where the `key` prop was being incorrectly validated.
+const ServiceFeature: React.FC<{ title: string; description: string }> = ({ title, description }) => (
+    <li className="flex items-start gap-3">
+        <svg className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+        <span><strong>{title}:</strong> {description}</span>
+    </li>
+);
 
 const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const firstRowProjects = videoEditingProjects.slice(0, 3);
     const secondRowProjects = videoEditingProjects.slice(3);
+    const features = [
+        { title: 'Short & Long Form Edits', description: 'Tailored for any platform, from quick clips to full-length videos.' },
+        { title: 'Fast Turnaround', description: 'Delivered within 1-2 days, depending on the project.' },
+        { title: 'Custom Styles', description: 'We can match any editing style and create animations in After Effects.' },
+        { title: 'Bulk Discounts', description: 'Get great offers on bundles and large orders.' },
+    ];
 
     return (
         <div className="pt-12 px-4">
-            <section className="text-center pb-16">
+            <section className="text-center pb-12">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
-                    Video Editing
+                    Video Editing Services
                 </h1>
-                <p className="max-w-2xl mx-auto text-gray-400 mt-4">
-                    From cinematic cuts to engaging social media clips, we bring your footage to life with professional-grade editing that tells a compelling story.
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                    Take your content to the next level with our expert video editing services. Whether you need short-form clips for TikTok and Instagram Reels or long-form YouTube videos, we deliver top-notch edits that fit your style. We can mimic any editing style, ensuring your videos align with your brand’s vision.
                 </p>
             </section>
             
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-8">
+                <div className="mb-12">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
+                 
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                    <div>
+                        <h3 className="text-3xl font-bold text-orange-400 mb-6">Our services include:</h3>
+                        <ul className="space-y-4">
+                           {features.map(f => <ServiceFeature key={f.title} title={f.title} description={f.description} />)}
+                        </ul>
+                        <p className="mt-8">No matter the project, we’re here to make your vision a reality.</p>
+                    </div>
+                </div>
+
                  <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
@@ -1280,24 +1313,101 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
     );
 };
 
+const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => {
+    const firstRowProjects = placeholderProjects.slice(0, 3);
+    const secondRowProjects = placeholderProjects.slice(3);
+    const features = [
+        { title: 'Social Media Graphics', description: 'Custom designs for Instagram posts, stories, and ads.' },
+        { title: 'Event Promotions', description: 'Stunning event flyers, banners, and social media visuals.' },
+        { title: 'Logo Design', description: 'Tailored logos to reflect your brand’s unique identity.' },
+        { title: 'Thumbnails', description: 'Attention-grabbing thumbnails for YouTube, TikTok, and more.' },
+        { title: 'Other Visual Designs', description: 'Posters, digital ads, and any other design you need.' },
+    ];
+    
+    return (
+        <div className="pt-12 px-4">
+            <section className="text-center pb-12">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                    Graphic Design Services
+                </h1>
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                    Stand out with professional graphic designs that captivate and convey your message. Whether it’s social media posts, event promotions, logos, thumbnails, or any other visual content, we provide creative designs that make your brand shine.
+                </p>
+            </section>
+            
+            <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
+
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                    <div>
+                        <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
+                        <ul className="space-y-4">
+                           {features.map(f => <ServiceFeature key={f.title} title={f.title} description={f.description} />)}
+                        </ul>
+                        <p className="mt-8">Get designs that boost your presence, engage your audience, and elevate your brand.</p>
+                    </div>
+                </div>
+
+                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {firstRowProjects.map((project, index) => (
+                        <AnimatedWrapper key={index} index={index}>
+                            <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=graphics-designing`) }} />
+                        </AnimatedWrapper>
+                    ))}
+                </div>
+                {secondRowProjects.length > 0 && (
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                        {secondRowProjects.map((project, index) => (
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=graphics-designing`) }} />
+                            </AnimatedWrapper>
+                        ))}
+                    </div>
+                )}
+            </section>
+        </div>
+    );
+};
+
 const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const firstRowProjects = webDevProjects.slice(0, 3);
     const secondRowProjects = webDevProjects.slice(3);
+    const features = [
+        { title: 'Custom Website Design', description: 'Unique, responsive websites that adapt seamlessly to all devices.' },
+        { title: 'Web Applications', description: 'Fully functional, interactive web apps built to streamline your business processes.' },
+        { title: 'E-commerce Solutions', description: 'Build your online store with user-friendly interfaces, secure payments, and smooth customer experiences.' },
+        { title: 'SEO & Performance Optimization', description: 'Websites designed to perform fast and rank well on search engines.' },
+        { title: 'Content Management Systems (CMS)', description: 'Easy-to-use backends, enabling you to manage content without technical knowledge.' },
+    ];
 
     return (
         <div className="pt-12 px-4">
-            <section className="text-center pb-16">
+            <section className="text-center pb-12">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
-                    Web Development
+                    Web Development Services
                 </h1>
-                <p className="max-w-2xl mx-auto text-gray-400 mt-4">
-                    We build beautiful, high-performance websites that provide a seamless user experience and drive results for your business.
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                    Transform your online presence with custom web development solutions tailored to your needs. From sleek, modern websites to robust web applications, we handle it all, ensuring your site is not only visually appealing but also functional and user-friendly.
                 </p>
             </section>
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-8">
+                <div className="mb-12">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
+                
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                    <div>
+                        <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
+                        <ul className="space-y-4">
+                           {features.map(f => <ServiceFeature key={f.title} title={f.title} description={f.description} />)}
+                        </ul>
+                        <p className="mt-8">Let us help you create a website that not only looks great but works perfectly for your business.</p>
+                    </div>
+                </div>
+
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {firstRowProjects.map((project, index) => (
@@ -1320,25 +1430,100 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
     );
 };
 
-const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
-    const firstRowProjects = pixelArtProjects.slice(0, 3);
-    const secondRowProjects = pixelArtProjects.slice(3);
+const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
+    const firstRowProjects = placeholderProjects.slice(0, 3);
+    const secondRowProjects = placeholderProjects.slice(3);
+    const features = [
+        { title: 'Character & Environment Concept Art', description: 'Stunning designs for characters and environments in anime, semi-realistic, and other creative styles.' },
+        { title: 'Emotes & GIF Animations', description: 'Expressive emotes and animated GIFs that bring personality to your brand or character.' },
+        { title: 'Cover Art & Illustrations', description: 'Custom cover art for projects, books, or games, blending digital expertise with traditional artistry.' },
+        { title: 'Traditional Mediums', description: 'Expertise in watercolor, color pencils, gouache, and pastels for one-of-a-kind art pieces.' },
+        { title: 'Creative & Expressive Styles', description: 'Personalized, characterized drawings with a strong focus on detail and style.' },
+    ];
     
     return (
         <div className="pt-12 px-4">
-            <section className="text-center pb-16">
+            <section className="text-center pb-12">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
-                    Pixel Art
+                    Digital Art Services
                 </h1>
-                <p className="max-w-2xl mx-auto text-gray-400 mt-4">
-                    Crafting charming and nostalgic visuals, one pixel at a time. Explore our gallery of custom pixel art for games, animations, and more.
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                    Bring your ideas to life with expressive, character-driven artwork, expertly crafted in both digital and traditional mediums. Whether you're looking for emotes, cover art, animations, or concept art, we deliver unique, creative designs that capture the essence of your vision.
+                </p>
+            </section>
+            
+            <section className="pb-16 max-w-7xl mx-auto">
+                <div className="mb-12">
+                    <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
+                </div>
+
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                    <div>
+                        <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
+                        <ul className="space-y-4">
+                           {features.map(f => <ServiceFeature key={f.title} title={f.title} description={f.description} />)}
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {firstRowProjects.map((project, index) => (
+                        <AnimatedWrapper key={index} index={index}>
+                            <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=digital-art`) }} />
+                        </AnimatedWrapper>
+                    ))}
+                </div>
+                {secondRowProjects.length > 0 && (
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                        {secondRowProjects.map((project, index) => (
+                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
+                                <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=digital-art`) }} />
+                            </AnimatedWrapper>
+                        ))}
+                    </div>
+                )}
+            </section>
+        </div>
+    );
+};
+
+const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
+    const firstRowProjects = pixelArtProjects.slice(0, 3);
+    const secondRowProjects = pixelArtProjects.slice(3);
+    const features = [
+        { title: 'Character & Animation Design', description: 'Complete sprite sheets for dynamic characters.' },
+        { title: 'Level & Parallax Design', description: 'Full-level concept art with detailed pixel art and parallax layers.' },
+        { title: 'Game Design Documents', description: 'From small concepts to full-fledged game documents, including storylines, character concepts, level designs, and map layouts.' },
+        { title: 'Game Covers & Logos (Raster Art)', description: 'Eye-catching cover arts and logos created in Photoshop to make your game stand out.' },
+    ];
+    
+    return (
+        <div className="pt-12 px-4">
+            <section className="text-center pb-12">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                    Pixel Art & Game Design Services
+                </h1>
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                    Bring your game to life with custom pixel art and game design solutions. From character concepts to full sprite sheet animations, we craft every detail with precision. Our pixel art also extends to level designs, featuring layer-by-layer parallax backgrounds that add depth to your worlds.
                 </p>
             </section>
 
             <section className="pb-16 max-w-7xl mx-auto">
-                <div className="mb-8">
+                <div className="mb-12">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
+
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                    <div>
+                        <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
+                        <ul className="space-y-4">
+                           {features.map(f => <ServiceFeature key={f.title} title={f.title} description={f.description} />)}
+                        </ul>
+                        <p className="mt-8">Let us help turn your game ideas into pixel-perfect reality, with every aspect covered, from design to mechanics!</p>
+                    </div>
+                </div>
+
                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1573,11 +1758,11 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15.464v-6.928L16 12l-6 3.464zM21.582 6.186A2.46 2.46 0 0019.82 4.424C18.254 4 12 4 12 4s-6.254 0-7.818.424A2.46 2.46 0 002.418 6.186C2 7.754 2 12 2 12s0 4.246.418 5.814a2.46 2.46 0 001.764 1.764C5.746 20 12 20 12 20s6.254 0 7.818-.424a2.46 2.46 0 001.764-1.764C22 16.246 22 12 22 12s0-7.754-.418-5.814z"></path></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
                             </SocialIcon>
+                            <SocialIcon href="https://wa.me/923167741677">
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z"/></svg>
+                           </SocialIcon>
                         </div>
                     </div>
                 </div>
@@ -1733,8 +1918,12 @@ export default function App() {
             return <AllServicesPage {...navigationProps} />;
         case 'video-editing':
             return <VideoEditingPage {...navigationProps} />;
+        case 'graphics-designing':
+            return <GraphicsDesigningPage {...navigationProps} />;
         case 'web-development':
             return <WebDevelopmentPage {...navigationProps} />;
+        case 'digital-art':
+            return <DigitalArtPage {...navigationProps} />;
         case 'pixel-art':
             return <PixelArtPage {...navigationProps} />;
         case 'clipping-service':
