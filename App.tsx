@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 
 const Preloader = () => {
@@ -254,7 +255,7 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
 
     return (
       <>
-        <header className="py-4 px-4 relative z-50">
+        <header className="sticky top-0 w-full py-4 px-4 z-50 bg-[#0D0D0D]/95 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto">
             <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
               <div className="flex items-center justify-between">
@@ -814,46 +815,26 @@ function SocialIcon({ href, children }: SocialIconProps) {
 }
 
 const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
-    const [email, setEmail] = useState('');
-    const [subscribed, setSubscribed] = useState(false);
-
-    const handleSubscribe = (e: React.FormEvent) => {
-        e.preventDefault();
-        if(email && email.includes('@')) {
-            setSubscribed(true);
-            setEmail('');
-            setTimeout(() => setSubscribed(false), 5000);
-        }
-    };
-
     return (
         <footer className="bg-transparent border-t border-white/10 pt-16 pb-8 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Left Column: Brand Info */}
-                    <div className="lg:col-span-4 text-center lg:text-left">
+                    <div className="lg:col-span-5 text-center lg:text-left">
                         <button onClick={() => navigateTo('home')} className="group flex items-center justify-center lg:justify-start mb-4 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
                             <Logo />
-                            <span className="font-bold text-xl text-white tracking-wider ml-3">Phyrux Comms</span>
+                            <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
+                                <span className="group-hover:hidden">Phyrux Comms</span>
+                                <span className="hidden group-hover:inline">Phyrux Commissions</span>
+                            </span>
                         </button>
                         <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto lg:mx-0">
                             A creative powerhouse transforming concepts into compelling visual narratives through expert video editing, graphic design, and web development.
                         </p>
-                        <div className="flex justify-center lg:justify-start space-x-4">
-                           <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
-                            </SocialIcon>
-                            <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
-                            </SocialIcon>
-                        </div>
                     </div>
 
                     {/* Middle Columns: Links */}
-                    <div className="lg:col-span-5 grid grid-cols-2 md:grid-cols-2 gap-8 text-center sm:text-left">
+                    <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-2 gap-8 text-center sm:text-left">
                         <div>
                             <h3 className="font-bold text-white mb-4">Navigation</h3>
                             <ul className="space-y-2">
@@ -874,25 +855,21 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                             </ul>
                         </div>
                     </div>
-                    
-                    {/* Right Column: Newsletter */}
+
+                    {/* Right Column: Socials */}
                     <div className="lg:col-span-3 text-center lg:text-left">
-                        <h3 className="font-bold text-white mb-4">Subscribe to our Newsletter</h3>
-                        <p className="text-gray-400 text-sm mb-4">Get the latest updates on our work and insights.</p>
-                        <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
-                                required
-                                className="flex-grow bg-[#0D0D0D] border border-white/20 rounded-lg px-4 py-2.5 text-white focus:ring-orange-500 focus:border-orange-500 transition w-full"
-                            />
-                            <button type="submit" className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-300 hover:opacity-90 active:scale-95 flex-shrink-0">
-                                Subscribe
-                            </button>
-                        </form>
-                        {subscribed && <p className="text-green-400 text-sm mt-2 text-center lg:text-left">Thank you for subscribing!</p>}
+                        <h3 className="font-bold text-white mb-4">Connect</h3>
+                        <div className="flex justify-center lg:justify-start space-x-4">
+                           <SocialIcon href="#">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049 1.064.218 1.791.465 2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z" clipRule="evenodd" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.854-0.908-1.532-1.762-1.762C18.254,4,12,4,12,4S5.746,4,4.18,4.424 c-0.854,0.23-1.532,0.908-1.762,1.762C2,7.754,2,12,2,12s0,4.246,0.418,5.814c0.23,0.854,0.908,1.532,1.762,1.762 C5.746,20,12,20,12,20s6.254,0,7.82-0.424c0.854-0.23,1.532-0.908,1.762-1.762C22,16.246,22,12,22,12S22,7.754,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" /></svg>
+                            </SocialIcon>
+                            <SocialIcon href="#">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 5.623c-.452-.225-1.135-.562-1.81-.787-.562-.112-1.125-.112-1.574-.112-.562 0-1.125.112-1.687.337-.45.113-.899.338-1.349.563-1.124.562-2.248 1.237-3.147 2.024-.45.45-.899.899-1.237 1.462-.225.45-.337.899-.45 1.349-.112.45-.112.899-.112 1.462s0 .899.112 1.349c.112.563.225 1.125.45 1.574.337.563.675 1.125 1.125 1.574.45.45.899.899 1.462 1.349.45.337.899.562 1.349.787.562.225 1.125.45 1.687.563.562.112 1.125.225 1.81.225.562 0 1.125-.112 1.687-.225.562-.112 1.125-.337 1.574-.563.563-.225 1.125-.562 1.574-.899.45-.338.899-.675 1.237-1.125.338-.45.675-.899.899-1.462.225-.45.338-.899.45-1.462.113-.45.113-.899.113-1.349s-.113-.899-.113-1.349c-.112-.563-.225-1.125-.45-1.574-.225-.45-.562-.899-.787-1.349-.338-.45-.675-.899-1.125-1.237a8.775 8.775 0 0 0-1.574-1.237zM12.001 15.126c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687s-.788 1.687-1.687 1.687zm3.897-2.698c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687.113.899-.788 1.687-1.687 1.687zm-7.794 0c-.899 0-1.687-.787-1.687-1.687s.788-1.687 1.687-1.687c.899 0 1.687.787 1.687 1.687 0 .899-.788 1.687-1.687 1.687z"/></svg>
+                            </SocialIcon>
+                        </div>
                     </div>
                 </div>
                 <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-500">
@@ -1174,7 +1151,7 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
         <div
             ref={ref}
             className={`transition-all duration-500 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-            style={{ transitionDelay: `${index * 75}ms` }}
+            style={{ transitionDelay: `${index * 50}ms` }}
         >
             {children}
         </div>
