@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Agency Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      .animation-delay-200 {
+        animation-delay: 0.2s;
+      }
+      .animation-delay-400 {
+        animation-delay: 0.4s;
+      }
+      .animation-delay-600 {
+        animation-delay: 0.6s;
+      }
+      @keyframes subtle-bounce {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-5px) scale(1.05);
+        }
+      }
+      .animate-subtle-bounce {
+        animation: subtle-bounce 2s ease-in-out infinite;
+      }
+      @keyframes scroll-up {
+        from { transform: translateY(0); }
+        to { transform: translateY(-50%); }
+      }
+      @keyframes scroll-down {
+        from { transform: translateY(-50%); }
+        to { transform: translateY(0); }
+      }
+      .animate-scroll-up {
+        animation: scroll-up 30s linear infinite;
+      }
+      .animate-scroll-down {
+        animation: scroll-down 30s linear infinite;
+      }
+      @keyframes page-enter {
+        from { 
+            opacity: 0; 
+            transform: translateY(20px) scale(0.98);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1);
+        }
+      }
+      @keyframes page-exit {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-10px); }
+      }
+      .page-transition-enter {
+        animation: page-enter 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+      .page-transition-exit {
+        animation: page-exit 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+      }
+      
+      @keyframes service-page-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+          clip-path: inset(100% 0 0 0);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          clip-path: inset(0 0 0 0);
+        }
+      }
+      .service-page-reveal-enter {
+        animation: service-page-reveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+      
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 8s linear infinite;
+      }
+      .group:hover .animate-marquee, .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+      
+      @keyframes preloader-pop-in-out {
+        0% { /* Pop In Start */
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+        25% { /* Overshoot */
+          opacity: 1;
+          transform: translateY(0) scale(1.1);
+        }
+        50% { /* Hold */
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        75% { /* Pop Out Start (Overshoot) */
+          opacity: 1;
+          transform: translateY(0) scale(1.1);
+        }
+        100% { /* Pop Out End */
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+      }
+      .animate-preloader-pop-in-out {
+        animation: preloader-pop-in-out 0.8s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+      }
+
+      @keyframes preloader-exit {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+      }
+      .preloader-exit {
+        animation: preloader-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      @keyframes pulse-bg {
+        0%, 100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .animate-pulse-bg {
+        animation: pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#0D0D0D]">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
