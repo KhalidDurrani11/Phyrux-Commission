@@ -150,6 +150,19 @@
       .preloader-exit {
         animation: preloader-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
+      
+      @keyframes pulse-bg {
+        0%, 100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .animate-pulse-bg {
+        animation: pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
     </style>
   <script type="importmap">
 {

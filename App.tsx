@@ -10,7 +10,7 @@ const Preloader=()=> {
         // This timer waits for the first word's animation (0.8s) to complete
         // before switching to the second word.
         const wordSwitchTimer = setTimeout(() => {
-            setVisibleWord('Comms');
+            setVisibleWord('Commissions');
         }, 800);
 
         return () => {
@@ -27,9 +27,9 @@ const Preloader=()=> {
                     Phyrux
                 </span>
             )}
-            {visibleWord === 'Comms' && (
-                <span key="comms" className="absolute animate-preloader-pop-in-out text-white">
-                    Comms
+            {visibleWord === 'Commissions' && (
+                <span key="commissions" className="absolute animate-preloader-pop-in-out text-white">
+                    Commissions
                 </span>
             )}
         </div>
@@ -124,17 +124,21 @@ const iconPaths: { [key: string]: React.ReactNode } = {
       </>
     ),
     'pixel-art': (
-        <>
-            <path d="M11 5h2v2h-2z"/>
-            <path d="M9 7h2v2H9z"/>
-            <path d="M13 7h2v2h-2z"/>
-            <path d="M7 9h2v2H7z"/>
-            <path d="M11 9h2v2h-2z"/>
-            <path d="M15 9h2v2h-2z"/>
-            <path d="M9 11h2v2H9z"/>
-            <path d="M13 11h2v2h-2z"/>
-            <path d="M11 13h2v2h-2z"/>
-        </>
+        <g fill="currentColor" strokeWidth="0">
+            <path d="M12 2 L10.5 5.5 L13.5 5.5 Z" opacity="1"/>
+            <path d="M10.5 5.5 L8 7.5 L10.5 9.5 Z" opacity="0.8"/>
+            <path d="M13.5 5.5 L16 7.5 L13.5 9.5 Z" opacity="0.8"/>
+            <path d="M10.5 9.5 L13.5 9.5 L12 6.5 Z" opacity="0.9"/>
+            <path d="M8 7.5 L7 12 L10.5 9.5 Z" opacity="0.7"/>
+            <path d="M16 7.5 L17 12 L13.5 9.5 Z" opacity="0.7"/>
+            <path d="M10.5 9.5 L7 12 L10.5 15 Z" opacity="0.6"/>
+            <path d="M13.5 9.5 L17 12 L13.5 15 Z" opacity="0.6"/>
+            <path d="M10.5 15 L13.5 15 L12 9.5 Z" opacity="0.8"/>
+            <path d="M7 12 L8 18 L10.5 15 Z" opacity="0.5"/>
+            <path d="M17 12 L16 18 L13.5 15 Z" opacity="0.5"/>
+            <path d="M10.5 15 L8 18 L12 22 Z" opacity="0.7"/>
+            <path d="M13.5 15 L16 18 L12 22 Z" opacity="0.7"/>
+        </g>
     ),
     'clipping-service': (
       <>
@@ -1001,8 +1005,8 @@ const videoEditingProjects = [
     { title: 'Corporate Branding Video', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep1/600/400' },
     { title: 'Social Media Ad Campaign', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep2/600/400' },
     { title: 'Gaming Montage', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep3/600/400' },
-    { title: 'Wedding Highlight Reel', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep4/600/400' },
-    { title: 'Music Video Production', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep5/600/400' },
+    { videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', thumbnailUrl: 'https://picsum.photos/seed/wedding/400/600', isShortForm: true },
+    { videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', thumbnailUrl: 'https://picsum.photos/seed/music/400/600', isShortForm: true },
 ];
 
 const webDevProjects = [
@@ -1089,6 +1093,17 @@ const digitalArtProjects = [
     { images: Array.from({ length: 2 }, (_, i) => `https://picsum.photos/seed/da-cat4-img${i + 1}/600/400`) }
 ];
 
+const useImageLoader = () => {
+    const [loadedIndices, setLoadedIndices] = useState<number[]>([]);
+    const handleLoad = (index: number) => {
+        setLoadedIndices(prev => {
+            if (prev.includes(index)) return prev;
+            return [...prev, index];
+        });
+    };
+    return { loadedIndices, handleLoad };
+};
+
 type ProjectCardProps = {
     project: {
         title: string;
@@ -1101,6 +1116,22 @@ type ProjectCardProps = {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { loadedIndices, handleLoad } = useImageLoader();
+    const isCurrentLoading = !loadedIndices.includes(currentIndex);
+
+    useEffect(() => {
+        // Reset loaded state if project changes
+        // This is unlikely in this app structure, but good practice
+        const newLoaded: number[] = [];
+        project.images.forEach((_, index) => {
+            const img = new Image();
+            img.src = project.images[index];
+            if (img.complete) {
+                newLoaded.push(index);
+            }
+        });
+        if (newLoaded.length > 0) handleLoad(newLoaded[0]);
+    }, [project]);
 
     const nextImage = (e: React.MouseEvent) => {
         if (!project.url && project.images.length > 1) {
@@ -1121,14 +1152,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-[#111]"
                 onClick={nextImage}
             >
+                {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
                 {project.images.map((src, index) => (
                      <img
                         loading="lazy"
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        onLoad={() => handleLoad(index)}
                         onError={(e) => {
+                            handleLoad(index);
                             const target = e.target as HTMLImageElement;
                             target.onerror = null; 
                             target.src = 'https://i.imgur.com/8rqwdLX.png';
@@ -1158,6 +1192,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[] } }> = ({ project }) => {
     // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { loadedIndices, handleLoad } = useImageLoader();
+    const isCurrentLoading = !loadedIndices.includes(currentIndex);
 
     const prevImage = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1172,14 +1208,17 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
+                {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
                 {project.images.map((src, index) => (
                     <img
                         loading="lazy"
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        onLoad={() => handleLoad(index)}
                         onError={(e) => {
+                            handleLoad(index);
                             const target = e.target as HTMLImageElement;
                             target.onerror = null; 
                             target.src = 'https://i.imgur.com/8rqwdLX.png';
@@ -1220,6 +1259,8 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
 
 const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { loadedIndices, handleLoad } = useImageLoader();
+    const isCurrentLoading = !loadedIndices.includes(currentIndex);
 
     const prevImage = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1234,14 +1275,17 @@ const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
+                {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
                 {images.map((src, index) => (
                     <img
                         loading="lazy"
                         key={index}
                         src={src}
                         alt={`Graphic design sample ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        onLoad={() => handleLoad(index)}
                         onError={(e) => {
+                            handleLoad(index);
                             const target = e.target as HTMLImageElement;
                             target.onerror = null; 
                             target.src = 'https://i.imgur.com/8rqwdLX.png';
@@ -1327,15 +1371,18 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
     );
 };
 
-type VideoProject = { title: string; videoUrl: string; thumbnailUrl: string; };
+type VideoProject = { title?: string; videoUrl: string; thumbnailUrl: string; isShortForm?: boolean };
 
 const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
     // FIX: 'u' is not defined. Replaced with 'useRef'.
     const videoRef = useRef<HTMLVideoElement>(null);
     // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isInteracted, setIsInteracted] = useState(false);
+    const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+
 
     const handlePlay = () => {
+        if(isInteracted) return;
         setIsInteracted(true);
         setTimeout(() => {
             videoRef.current?.play();
@@ -1344,11 +1391,12 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
 
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
-            <div className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-black" onClick={handlePlay}>
+            <div className={`relative group ${project.isShortForm ? 'aspect-[9/16]' : 'aspect-video'} overflow-hidden rounded-lg cursor-pointer bg-black`} onClick={handlePlay}>
                 {!isInteracted ? (
                     <>
-                        <img loading="lazy" src={project.thumbnailUrl} alt={project.title} className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80" />
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        {!thumbnailLoaded && <div className="absolute inset-0 animate-pulse-bg"></div>}
+                        <img loading="lazy" src={project.thumbnailUrl} alt={project.title || 'Video project thumbnail'} className={`w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setThumbnailLoaded(true)} />
+                        <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`}>
                             <div className="w-16 h-16 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                             </div>
@@ -1358,7 +1406,7 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
                     <video ref={videoRef} src={project.videoUrl} className="w-full h-full object-cover" controls playsInline autoPlay />
                 )}
             </div>
-            <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
+            {project.title && <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>}
         </div>
     );
 };
