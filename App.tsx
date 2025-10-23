@@ -19,7 +19,7 @@ const Preloader=()=> {
     }, []);
     
     return (
-        <div className="text-6xl sm:text-7xl lg:text-9xl font-black tracking-widest uppercase relative h-32 w-full flex items-center justify-center">
+        <div className="text-5xl sm:text-7xl lg:text-9xl font-black tracking-tighter sm:tracking-widest uppercase relative h-32 w-full flex items-center justify-center text-center">
             {/* Using a key prop on the span ensures that React treats each word as a new element,
                 forcing the animation to restart correctly when the word changes. */}
             {visibleWord === 'Phyrux' && (
@@ -29,7 +29,7 @@ const Preloader=()=> {
             )}
             {visibleWord === 'Comms' && (
                 <span key="comms" className="absolute animate-preloader-pop-in-out text-white">
-                    Commissions
+                    Comms
                 </span>
             )}
         </div>
@@ -271,13 +271,13 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
 
     return (
       <>
-        <header className="sticky top-0 w-full py-4 px-4 z-50 bg-[#0D0D0D]/95 backdrop-blur-sm">
+        <header className="sticky top-0 w-full py-4 px-4 sm:px-6 lg:px-8 z-50 bg-[#0D0D0D]/95 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto">
             <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-2 pl-4 pr-3 shadow-lg ring-1 ring-white/10">
               <div className="flex items-center justify-between">
                 <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
                   
-                  <span className="font-bold text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
+                  <span className="font-bold text-lg sm:text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
                       <span className="group-hover:hidden">Phyrux Commissions</span>
                       <span className="hidden group-hover:inline">Phyrux Comms</span>
                   </span>
@@ -342,12 +342,12 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                 <ul className="space-y-6">
                     {navLinks.map((link, index) => (
                         <li key={link.page} className="opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards ${0.1 * index}s` : 'none' }}>
-                            <button onClick={() => handleMobileNav(link.page)} className={`text-3xl font-bold transition-colors duration-300 hover:scale-105 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
+                            <button onClick={() => handleMobileNav(link.page)} className={`text-2xl sm:text-3xl font-bold transition-colors duration-300 hover:scale-105 active:scale-95 ${link.isActive ? 'text-orange-400' : 'text-gray-300 hover:text-orange-400'}`}>{link.label}</button>
                         </li>
                     ))}
                 </ul>
                 <div className="mt-12 opacity-0" style={{ animation: isMobileMenuOpen ? `fadeInUp 0.5s ease forwards 0.5s` : 'none' }}>
-                    <button onClick={() => handleMobileNav('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95">
+                    <button onClick={() => handleMobileNav('contact')} className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg transition-all duration-300 ease-in-out hover:opacity-90 transform hover:scale-105 active:scale-95">
                         Contact us
                     </button>
                 </div>
@@ -358,8 +358,8 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
   };
 
 const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
-    <section className="text-center pt-20 pb-16 px-4">
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
+    <section className="text-center pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight opacity-0 animate-fade-in-up">
             Every Concept Needs 
             <SparkleIcon />
             <br />
@@ -493,19 +493,19 @@ const VideoPlayer = ({ videoClassName, objectFitClass }: { videoClassName?: stri
 };
 
 const ServicesSection = ({ navigateTo, currentPage }: NavigationProps) => (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
                 <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Expertise</p>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4">
                 Services We Master
             </h2>
-            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-base sm:text-lg">
                 From pixel-perfect designs to cinematic video edits, we offer a comprehensive suite of creative services to elevate your brand's digital presence.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {services.map((service, index) => (
                     <AnimatedWrapper key={service.id} index={index}>
                         <button 
@@ -536,15 +536,15 @@ const teamMembers = [
 ];
 
 const TeamSection = () => (
-    <section className="py-12 px-4">
+    <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4">
                 Our Team
             </h2>
-            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+            <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-base sm:text-lg">
                 We are a group of passionate creatives, each bringing unique expertise and vision to every project. Meet the talented individuals behind Phyrux Commissions who help turn your ideas into reality:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {teamMembers.map((member, index) => (
                     <AnimatedWrapper key={index} index={index}>
                         <div className="bg-[#1a1a1a] border border-white/10 p-6 rounded-2xl h-full flex flex-col items-center text-center transform hover:-translate-y-2 transition-all duration-300 ease-in-out hover:border-orange-500/60 hover:bg-gradient-to-br from-[#1a1a1a] to-[#2a201c] hover:shadow-2xl hover:shadow-orange-500/10">
@@ -574,13 +574,13 @@ const testimonialsCol2 = [
 ];
 
 const TestimonialsSection = () => (
-    <section className="py-16 px-4 overflow-hidden">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
                 <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Testimonials</p>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4">
                 What Our Valued Clients
                 <br />
                 Are Saying
@@ -589,7 +589,7 @@ const TestimonialsSection = () => (
                 Real feedback from real partners. We're proud to share the success stories of those we've worked with.
             </p>
         </div>
-        <div className="relative max-w-5xl mx-auto h-[600px] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+        <div className="relative max-w-5xl mx-auto h-[500px] sm:h-[600px] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
             <div className="absolute inset-0 flex items-start justify-center gap-8">
                 {/* Column 1 */}
                 <div className="flex flex-col gap-8 w-[300px] md:w-[400px] animate-scroll-up">
@@ -648,12 +648,12 @@ const techLogos = [
 
 const TechMarquee = () => (
     <section className="py-12 bg-black/20 overflow-hidden">
-        <div className="max-w-6xl mx-auto text-center mb-12">
+        <div className="max-w-6xl mx-auto text-center mb-12 px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
                 <p className="font-semibold text-orange-400 uppercase tracking-widest text-sm">Our Toolkit</p>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
                 Powered by Industry-Leading Tools
             </h2>
         </div>
@@ -692,18 +692,18 @@ const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
     ];
 
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             {/* Section 1: About Us Introduction */}
             <section className="py-12">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
                         About Us
                     </h1>
-                    <p className="mx-auto text-gray-400 mb-12 text-lg leading-relaxed">
+                    <p className="mx-auto text-gray-400 mb-12 text-base sm:text-lg leading-relaxed">
                         Welcome to Phyrux Commissions, where creativity meets professionalism. We are a dynamic creative services group, driven by a passion for producing high-quality content that helps brands, creators, and businesses stand out in the digital world.
                     </p>
                 </div>
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base">
                     <div>
                         <p>At Phyrux Commissions, we offer a diverse range of services to cater to your unique needs, including:</p>
                         <ul className="mt-6 space-y-4">
@@ -729,10 +729,10 @@ const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
             {/* Section 2: Our Story */}
             <section className="py-12 relative overflow-hidden">
                 <div className="max-w-5xl mx-auto text-center relative z-10">
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4 uppercase">
                         Our Story
                     </h2>
-                    <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-lg">
+                    <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-base sm:text-lg">
                         Born from a shared passion for gaming culture and cutting-edge design, Phyrux Commissions is more than just a studio — it’s an arsenal of creativity. We empower brands with the visual power to dominate their digital landscapes.
                     </p>
                     <div className="relative">
@@ -852,10 +852,10 @@ const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
                         <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
                         <p className="font-semibold text-gray-300 uppercase tracking-widest text-sm">FAQ</p>
                     </div>
-                    <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mt-4">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mt-4">
                         Frequently Asked Questions
                     </h1>
-                    <div className="mt-12 bg-[#1a1a1a] border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                    <div className="mt-12 bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                          <div>
                             <h2 className="font-bold text-2xl text-white">Still have questions?</h2>
                             <p className="text-gray-400 mt-1">Can't find the answer you're looking for? Please chat to our friendly team.</p>
@@ -900,7 +900,7 @@ function SocialIcon({ href, children }: SocialIconProps) {
 
 const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
     return (
-        <footer className="bg-transparent border-t border-white/10 pt-16 pb-8 px-4">
+        <footer className="bg-transparent border-t border-white/10 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Left Column: Brand Info */}
@@ -976,21 +976,21 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
 const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
     <>
         <Hero navigateTo={navigateTo} currentPage={currentPage} />
-        <section className="px-4 pb-12">
+        <section className="px-4 sm:px-6 lg:px-8 pb-12">
             <div className="max-w-6xl mx-auto">
                 <VideoPlayer />
             </div>
         </section>
-        <div className="py-10 px-4">
+        <div className="py-10 px-4 sm:px-6 lg:px-8">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
         <ServicesSection navigateTo={navigateTo} currentPage={currentPage} />
         <TechMarquee />
-        <div className="py-10 px-4">
+        <div className="py-10 px-4 sm:px-6 lg:px-8">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
         <TeamSection />
-        <div className="py-10 px-4">
+        <div className="py-10 px-4 sm:px-6 lg:px-8">
             <div className="h-px w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
         </div>
         <TestimonialsSection />
@@ -1382,12 +1382,12 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
     ];
 
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-12">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Video Editing Services
                 </h1>
-                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
                     Take your content to the next level with our expert video editing services. Whether you need short-form clips for TikTok and Instagram Reels or long-form YouTube videos, we deliver top-notch edits that fit your style. We can mimic any editing style, ensuring your videos align with your brand’s vision.
                 </p>
             </section>
@@ -1397,7 +1397,7 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                  
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base mb-20">
                     <div>
                         <h3 className="text-3xl font-bold text-orange-400 mb-6">Our services include:</h3>
                         <ul className="space-y-4">
@@ -1407,8 +1407,8 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     </div>
                 </div>
 
-                 <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {firstRowProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
                             <VideoProjectCard project={project} />
@@ -1417,7 +1417,7 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
                 </div>
 
                 {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
                             <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
                                 <VideoProjectCard project={project} />
@@ -1440,12 +1440,12 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
     ];
     
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-12">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Graphic Design Services
                 </h1>
-                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
                     Stand out with professional graphic designs that captivate and convey your message. Whether it’s social media posts, event promotions, logos, thumbnails, or any other visual content, we provide creative designs that make your brand shine.
                 </p>
             </section>
@@ -1455,7 +1455,7 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
 
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base mb-20">
                     <div>
                         <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
                         <ul className="space-y-4">
@@ -1465,7 +1465,7 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                     {graphicsDesignProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
                             <GraphicProjectSlider images={project.images} />
@@ -1489,12 +1489,12 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
     ];
 
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-12">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Web Development Services
                 </h1>
-                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
                     Transform your online presence with custom web development solutions tailored to your needs. From sleek, modern websites to robust web applications, we handle it all, ensuring your site is not only visually appealing but also functional and user-friendly.
                 </p>
             </section>
@@ -1503,7 +1503,7 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
                 
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base mb-20">
                     <div>
                         <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
                         <ul className="space-y-4">
@@ -1513,8 +1513,8 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     </div>
                 </div>
 
-                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {firstRowProjects.map((project, index) => (
                          <AnimatedWrapper key={index} index={index}>
                             <ProjectCard project={project} />
@@ -1522,7 +1522,7 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     ))}
                 </div>
                 {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
                             <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
                                 <ProjectCard project={project} />
@@ -1545,12 +1545,12 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
     ];
     
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-12">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Digital Art Services
                 </h1>
-                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
                     Bring your ideas to life with expressive, character-driven artwork, expertly crafted in both digital and traditional mediums. Whether you're looking for emotes, cover art, animations, or concept art, we deliver unique, creative designs that capture the essence of your vision.
                 </p>
             </section>
@@ -1560,7 +1560,7 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
 
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base mb-20">
                     <div>
                         <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
                         <ul className="space-y-4">
@@ -1569,8 +1569,8 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     </div>
                 </div>
 
-                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                     {digitalArtProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
                             <GraphicProjectSlider images={project.images} />
@@ -1593,12 +1593,12 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
     ];
     
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-12">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Pixel Art & Game Design Services
                 </h1>
-                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-lg leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
                     Bring your game to life with custom pixel art and game design solutions. From character concepts to full sprite sheet animations, we craft every detail with precision. Our pixel art also extends to level designs, featuring layer-by-layer parallax backgrounds that add depth to your worlds.
                 </p>
             </section>
@@ -1608,7 +1608,7 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
 
-                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base md:text-lg mb-20">
+                <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base mb-20">
                     <div>
                         <h3 className="text-3xl font-bold text-orange-400 mb-6">Services include:</h3>
                         <ul className="space-y-4">
@@ -1618,9 +1618,9 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     </div>
                 </div>
 
-                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {firstRowProjects.map((project, index) => (
                          <AnimatedWrapper key={index} index={index}>
                             <PixelArtProjectCard project={project} />
@@ -1629,7 +1629,7 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
                 </div>
 
                 {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:w-2/3 lg:mx-auto">
                          {secondRowProjects.map((project, index) => (
                             <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
                                 <PixelArtProjectCard project={project} />
@@ -1655,12 +1655,12 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
     const secondRowProjects = placeholderProjects.slice(3);
 
     return (
-        <div className="pt-12 px-4">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8">
             <section className="text-center pb-16">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     {service.name}
                 </h1>
-                <p className="max-w-2xl mx-auto text-gray-400 mt-4">
+                <p className="max-w-2xl mx-auto text-gray-400 mt-4 text-base sm:text-lg">
                     {(service.description.split('.')[0] || '') + '.'} Explore our portfolio of projects for {service.name.toLowerCase()}.
                 </p>
             </section>
@@ -1668,8 +1668,8 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
                 <div className="mb-8">
                     <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
                 </div>
-                <h2 className="text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {firstRowProjects.map((project, index) => (
                         <AnimatedWrapper key={index} index={index}>
                             <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
@@ -1677,7 +1677,7 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
                     ))}
                 </div>
                 {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-2/3 lg:mx-auto">
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:w-2/3 lg:mx-auto">
                         {secondRowProjects.map((project, index) => (
                             <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
                                 <ProjectCard project={{ ...project, images: project.images.map(img => `${img}?service=${service.id}`) }} />
@@ -1691,9 +1691,9 @@ const ServicePlaceholderPage = ({ service, navigateTo }: { service: Service; nav
 };
 
 const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
-    <div className="pt-12 px-4 pb-16">
+    <div className="pt-12 px-4 sm:px-6 lg:px-8 pb-16">
         <section className="text-center pb-12">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight max-w-7xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight max-w-7xl mx-auto">
                 Clipping & Social Media Growth Service
             </h1>
         </section>
@@ -1703,7 +1703,7 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
                 <BackButton navigateTo={navigateTo} page="services-page" text="Back to Services" />
             </div>
 
-            <p className="text-left text-gray-300 text-base md:text-lg mb-16">
+            <p className="text-left text-gray-300 text-base mb-16">
                 Our Clipping and Social Media Growth Service is designed to help creators and businesses from all industries amplify their presence and reach across multiple platforms. Whether you’re a gaming creator, YouTuber, fitness coach, restaurant owner, or any other business, we transform your content into engaging, bite-sized video clips perfect for social media.
             </p>
 
@@ -1711,7 +1711,7 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
                  <div>
                      <VideoPlayer />
                  </div>
-                 <div className="text-left text-gray-300 space-y-8 text-base md:text-lg">
+                 <div className="text-left text-gray-300 space-y-8 text-base">
                     <div>
                         <h3 className="text-2xl font-bold text-orange-400 mb-4">What We Provide:</h3>
                         <ul className="space-y-3 pl-4">
@@ -1779,12 +1779,12 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
 
 
     return (
-        <div className="pt-12 px-4 min-h-screen">
+        <div className="pt-12 px-4 sm:px-6 lg:px-8 min-h-screen">
             <section className="text-center pb-16">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Get in Touch
                 </h1>
-                <p className="max-w-2xl mx-auto text-gray-400 mt-4">
+                <p className="max-w-2xl mx-auto text-gray-400 mt-4 text-base sm:text-lg">
                     We’d love to hear from you. Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.
                 </p>
             </section>
@@ -1792,7 +1792,7 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
             <section className="pb-24">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
                     {/* Contact Form */}
-                    <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-8">
+                    <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 sm:p-8">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
@@ -1868,15 +1868,15 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
 const AllServicesPage = ({ navigateTo, currentPage }: NavigationProps) => {
     return (
         <div className="pt-12 pb-16">
-            <section className="py-16 px-4">
+            <section className="py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight mb-4">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight mb-4">
                         Our Services
                     </h1>
-                    <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-lg">
+                    <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-base sm:text-lg">
                         We offer a comprehensive suite of creative services to bring your vision to life. Each service is tailored to meet your unique needs with precision and flair.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                         {services.map((service, index) => (
                             <AnimatedWrapper key={service.id} index={index}>
                                 <button 
@@ -1903,10 +1903,10 @@ const WhatsAppButton = () => (
       href="https://wa.me/923167741677"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-95 transition-transform duration-300 ease-in-out"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#25D366] w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-95 transition-transform duration-300 ease-in-out"
       aria-label="Chat on WhatsApp"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor">
         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z" />
       </svg>
     </a>
