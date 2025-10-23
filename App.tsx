@@ -1167,7 +1167,6 @@ const digitalArtProjects = [
         title: 'Anime Styled Animations',
         images: [
             '/assets/images/digital art/anime_styled_animations (1).mp4',
-            '/assets/images/digital art/anime_styled_animations (2).mp4',
         ]
     }
 ];
@@ -1340,9 +1339,14 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [showControls, setShowControls] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const prevMedia = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1372,8 +1376,56 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
         }
     };
 
+    const toggleMute = () => {
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+            setIsMuted(videoRef.current.muted);
+        }
+    };
+
+    const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (videoRef.current) {
+            const seekTime = parseFloat(e.target.value);
+            videoRef.current.currentTime = seekTime;
+            setCurrentTime(seekTime);
+        }
+    };
+
+    const seekForward = () => {
+        if (videoRef.current) {
+            videoRef.current.currentTime += 10;
+        }
+    };
+
+    const seekBackward = () => {
+        if (videoRef.current) {
+            videoRef.current.currentTime -= 10;
+        }
+    };
+
+    const toggleFullscreen = () => {
+        if (!containerRef.current) return;
+        
+        if (!isFullscreen) {
+            if (containerRef.current.requestFullscreen) {
+                containerRef.current.requestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    };
+
+    const handleFullscreenChange = () => {
+        setIsFullscreen(!!document.fullscreenElement);
+    };
+
     const handleVideoLoad = () => {
         handleLoad(currentIndex);
+        if (videoRef.current) {
+            setDuration(videoRef.current.duration);
+        }
     };
 
     const handleVideoPlay = () => {
@@ -1388,11 +1440,32 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
         handleLoad(currentIndex);
     };
 
+    const handleTimeUpdate = () => {
+        if (videoRef.current) {
+            setCurrentTime(videoRef.current.currentTime);
+        }
+    };
+
+    const formatTime = (time: number) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
+    // Add fullscreen change listener
+    React.useEffect(() => {
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        };
+    }, []);
+
     const currentSrc = images[currentIndex];
     const isCurrentVideo = isVideo(currentSrc);
 
     return (
         <div 
+            ref={containerRef}
             className="relative group aspect-video overflow-hidden rounded-lg bg-[#111] cursor-pointer"
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}
@@ -1404,7 +1477,7 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                         <video
                             ref={index === currentIndex ? videoRef : null}
                             className="w-full h-full object-cover"
-                            muted
+                            muted={isMuted}
                             loop
                             playsInline
                             preload="metadata"
@@ -1412,6 +1485,7 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                             onPlay={index === currentIndex ? handleVideoPlay : undefined}
                             onPause={index === currentIndex ? handleVideoPause : undefined}
                             onError={index === currentIndex ? handleVideoError : undefined}
+                            onTimeUpdate={index === currentIndex ? handleTimeUpdate : undefined}
                             onClick={index === currentIndex ? togglePlay : undefined}
                         >
                             <source src={src} type="video/mp4" />
@@ -1435,24 +1509,125 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                 </div>
             ))}
             
-            {/* Video Play/Pause Overlay */}
+            {/* Enhanced Video Controls */}
             {isCurrentVideo && (
-                <div 
-                    className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
-                    onClick={togglePlay}
-                >
-                    <div className={`w-20 h-20 bg-orange-500/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg ${isPlaying ? 'scale-75 opacity-50' : 'scale-100 opacity-100 group-hover:scale-110 group-hover:bg-orange-500'}`}>
-                        {isPlaying ? (
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-                            </svg>
-                        ) : (
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        )}
+                <>
+                    {/* Video Play/Pause Overlay */}
+                    <div 
+                        className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                        onClick={togglePlay}
+                    >
+                        <div className={`w-20 h-20 bg-orange-500/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg ${isPlaying ? 'scale-75 opacity-50' : 'scale-100 opacity-100 group-hover:scale-110 group-hover:bg-orange-500'}`}>
+                            {isPlaying ? (
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                                </svg>
+                            ) : (
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            )}
+                        </div>
                     </div>
-                </div>
+
+                    {/* Video Control Bar */}
+                    <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+                        {/* Progress Bar */}
+                        <div className="mb-3">
+                            <input
+                                type="range"
+                                min="0"
+                                max={duration || 0}
+                                value={currentTime}
+                                onChange={handleSeek}
+                                className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+                                style={{
+                                    background: `linear-gradient(to right, #f97316 0%, #f97316 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.2) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.2) 100%)`
+                                }}
+                            />
+                        </div>
+
+                        {/* Control Buttons */}
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                                {/* Play/Pause */}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); togglePlay(); }}
+                                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                >
+                                    {isPlaying ? (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    )}
+                                </button>
+
+                                {/* Seek Backward */}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); seekBackward(); }}
+                                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                                    </svg>
+                                </button>
+
+                                {/* Seek Forward */}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); seekForward(); }}
+                                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13 6v12l8.5-6L13 6zM4 18l8.5-6L4 6v12z"/>
+                                    </svg>
+                                </button>
+
+                                {/* Mute/Unmute */}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); toggleMute(); }}
+                                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                >
+                                    {isMuted ? (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                        </svg>
+                                    )}
+                                </button>
+
+                                {/* Time Display */}
+                                <span className="text-white text-sm font-medium">
+                                    {formatTime(currentTime)} / {formatTime(duration)}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                                {/* Fullscreen */}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
+                                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                >
+                                    {isFullscreen ? (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
             )}
             
             {/* Navigation Controls */}
