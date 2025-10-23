@@ -564,6 +564,7 @@ const TeamSection = () => (
 );
 
 const testimonialsCol1 = [
+
     '/public/assets/images/testimonials/1.png',
     '/public/assets/images/testimonials/2.png',
     '/public/assets/images/testimonials/3.png',
@@ -575,6 +576,7 @@ const testimonialsCol2 = [
     '/public/assets/images/testimonials/6.png',
     '/public/assets/images/testimonials/7.png',
     '/public/assets/images/testimonials/8.png',
+
 ];
 
 const TestimonialsSection = () => (
@@ -1336,36 +1338,81 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
 
 const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [showControls, setShowControls] = useState(false);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     const prevMedia = (e: React.MouseEvent) => {
         e.stopPropagation();
         setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+        setIsPlaying(false);
     };
 
     const nextMedia = (e: React.MouseEvent) => {
         e.stopPropagation();
         setCurrentIndex((prev) => (prev + 1) % images.length);
+        setIsPlaying(false);
     };
 
     const isVideo = (src: string) => {
         return src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm') || src.toLowerCase().endsWith('.mov');
     };
 
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (videoRef.current.paused) {
+                videoRef.current.play();
+                setIsPlaying(true);
+            } else {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            }
+        }
+    };
+
+    const handleVideoLoad = () => {
+        handleLoad(currentIndex);
+    };
+
+    const handleVideoPlay = () => {
+        setIsPlaying(true);
+    };
+
+    const handleVideoPause = () => {
+        setIsPlaying(false);
+    };
+
+    const handleVideoError = () => {
+        handleLoad(currentIndex);
+    };
+
+    const currentSrc = images[currentIndex];
+    const isCurrentVideo = isVideo(currentSrc);
+
     return (
-        <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
+        <div 
+            className="relative group aspect-video overflow-hidden rounded-lg bg-[#111] cursor-pointer"
+            onMouseEnter={() => setShowControls(true)}
+            onMouseLeave={() => setShowControls(false)}
+        >
             {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
             {images.map((src, index) => (
                 <div key={index} className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}>
                     {isVideo(src) ? (
                         <video
+                            ref={index === currentIndex ? videoRef : null}
                             className="w-full h-full object-cover"
-                            controls
                             muted
                             loop
                             playsInline
                             preload="metadata"
+                            onLoadedData={index === currentIndex ? handleVideoLoad : undefined}
+                            onPlay={index === currentIndex ? handleVideoPlay : undefined}
+                            onPause={index === currentIndex ? handleVideoPause : undefined}
+                            onError={index === currentIndex ? handleVideoError : undefined}
+                            onClick={index === currentIndex ? togglePlay : undefined}
                         >
                             <source src={src} type="video/mp4" />
                             Your browser does not support the video tag.
@@ -1388,29 +1435,59 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                 </div>
             ))}
             
-            <>
-                <div className="absolute top-2 right-2 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
-                    {currentIndex + 1} / {images.length}
+            {/* Video Play/Pause Overlay */}
+            {isCurrentVideo && (
+                <div 
+                    className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                    onClick={togglePlay}
+                >
+                    <div className={`w-20 h-20 bg-orange-500/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg ${isPlaying ? 'scale-75 opacity-50' : 'scale-100 opacity-100 group-hover:scale-110 group-hover:bg-orange-500'}`}>
+                        {isPlaying ? (
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                            </svg>
+                        ) : (
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        )}
+                    </div>
                 </div>
-                <button
-                    onClick={prevMedia}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
-                    aria-label="Previous media"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                </button>
-                <button
-                    onClick={nextMedia}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white opacity-100 md:opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80 z-10 active:scale-95"
-                    aria-label="Next media"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                    </svg>
-                </button>
-            </>
+            )}
+            
+            {/* Navigation Controls */}
+            {images.length > 1 && (
+                <>
+                    <div className="absolute top-2 right-2 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                        {currentIndex + 1} / {images.length}
+                    </div>
+                    <button
+                        onClick={prevMedia}
+                        className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:bg-black/80 z-10 active:scale-95 ${showControls ? 'opacity-100' : 'opacity-0 md:opacity-50 md:group-hover:opacity-100'}`}
+                        aria-label="Previous media"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    <button
+                        onClick={nextMedia}
+                        className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:bg-black/80 z-10 active:scale-95 ${showControls ? 'opacity-100' : 'opacity-0 md:opacity-50 md:group-hover:opacity-100'}`}
+                        aria-label="Next media"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                </>
+            )}
+
+            {/* Video Type Indicator */}
+            {isCurrentVideo && (
+                <div className="absolute top-2 left-2 bg-orange-500/80 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                    VIDEO
+                </div>
+            )}
         </div>
     );
 };
