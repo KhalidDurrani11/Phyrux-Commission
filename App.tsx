@@ -1,40 +1,62 @@
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
 import React, { useState, useEffect, useRef } from'react';
 
-const Preloader=()=> {
-    // FIX: 'a' is not defined. Replaced with 'useState'.
-    const [visibleWord, setVisibleWord] = useState('Phyrux');
+const Preloader = React.memo(() => {
+    const [showFirstWord, setShowFirstWord] = useState(true);
+    const [showSecondWord, setShowSecondWord] = useState(false);
 
-    // FIX: 'c' is not defined. Replaced with 'useEffect'.
     useEffect(() => {
-        // This timer waits for the first word's animation (0.8s) to complete
-        // before switching to the second word.
-        const wordSwitchTimer = setTimeout(() => {
-            setVisibleWord('Commissions');
-        }, 800);
+        // Use requestAnimationFrame for smoother timing
+        let fadeOutTimerId: number;
+        let fadeInTimerId: number;
+        
+        // Pop out first word
+        const fadeOutTimer = setTimeout(() => {
+            fadeOutTimerId = requestAnimationFrame(() => {
+                setShowFirstWord(false);
+            });
+        }, 900);
+        
+        // Pop in second word
+        const fadeInTimer = setTimeout(() => {
+            fadeInTimerId = requestAnimationFrame(() => {
+                setShowSecondWord(true);
+            });
+        }, 1100);
 
         return () => {
-            clearTimeout(wordSwitchTimer);
+            clearTimeout(fadeOutTimer);
+            clearTimeout(fadeInTimer);
+            if (fadeOutTimerId) cancelAnimationFrame(fadeOutTimerId);
+            if (fadeInTimerId) cancelAnimationFrame(fadeInTimerId);
         };
     }, []);
     
     return (
         <div className="text-5xl sm:text-7xl lg:text-9xl font-black tracking-tighter sm:tracking-widest uppercase relative h-32 w-full flex items-center justify-center text-center">
-            {/* Using a key prop on the span ensures that React treats each word as a new element,
-                forcing the animation to restart correctly when the word changes. */}
-            {visibleWord === 'Phyrux' && (
-                <span key="phyrux" className="absolute animate-preloader-pop-in-out text-orange-500">
-                    Phyrux
-                </span>
-            )}
-            {visibleWord === 'Commissions' && (
-                <span key="commissions" className="absolute animate-preloader-pop-in-out text-white">
+            {/* First word with pop animation - always rendered to avoid layout shift */}
+            <span 
+                className={`absolute text-orange-500 ${
+                    showFirstWord 
+                        ? 'animate-preloader-pop-in' 
+                        : 'animate-preloader-pop-out'
+                }`}
+                style={{ pointerEvents: 'none' }}
+            >
+                Phyrux
+            </span>
+            {/* Second word with pop animation - conditionally rendered */}
+            {showSecondWord && (
+                <span 
+                    className="absolute text-white animate-preloader-pop-in"
+                    style={{ pointerEvents: 'none' }}
+                >
                     Commissions
                 </span>
             )}
         </div>
     );
-};
+});
 
 
 const Logo = () => (
@@ -564,17 +586,19 @@ const TeamSection = () => (
 );
 
 const testimonialsCol1 = [
-    '/assets/images/testimonials/1.png',
-    '/assets/images/testimonials/2.png',
-    '/assets/images/testimonials/3.png',
-    '/assets/images/testimonials/4.png',
+
+    '/public/assets/images/testimonials/1.png',
+    '/public/assets/images/testimonials/2.png',
+    '/public/assets/images/testimonials/3.png',
+    '/public/assets/images/testimonials/4.png',
 ];
 
 const testimonialsCol2 = [
-    '/assets/images/testimonials/5.png',
-    '/assets/images/testimonials/6.png',
-    '/assets/images/testimonials/7.png',
-    '/assets/images/testimonials/8.png',
+    '/public/assets/images/testimonials/5.png',
+    '/public/assets/images/testimonials/6.png',
+    '/public/assets/images/testimonials/7.png',
+    '/public/assets/images/testimonials/8.png',
+
 ];
 
 const TestimonialsSection = () => (
@@ -625,16 +649,16 @@ const TestimonialsSection = () => (
 );
 
 
-const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#9999ff]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM8.834 18H5.5V9.01h3.334c2.308 0 3.667 1.25 3.667 3.495 0 2.246-1.359 3.495-3.667 3.495zm7.333-5.25h-3.5v3.668H10.5V9.01h5.667c2.25 0 3.333 1.083 3.333 3.083 0 1.375-.792 2.417-2.167 2.917l2.5 3.99H16.5l-2.333-3.75zm-7.333-2.25h-1.25v3.75h1.25c.833 0 1.25-.417 1.25-1.25v-1.25c0-.833-.417-1.25-1.25-1.25zm5.583-.5h-3.5v2.25h3.5c.834 0 1.084-.333 1.084-1.083 0-.834-.25-1.167-1.084-1.167z" fill="currentColor"/></svg>;
-const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#d291ff]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM9.548 18H6.5l3.25-9h2.333L15.5 18h-2.833l-.666-2.167H9.998L9.548 18zm.834-3.667h2.25L11.5 10.498h-.083L10.382 14.333zm8.333 3.667h-3l3.25-9h2.333L24 18h-2.833l-.667-2.167h-2.5l-.45 2.167zm.834-3.667h2.25L19.915 10.5h-.083L18.715 14.333z" fill="currentColor"/></svg>;
-const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#31c5f4]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM8.834 18H5.5V9.01h3.334c2.308 0 3.667 1.25 3.667 3.495 0 2.246-1.359 3.495-3.667 3.495zm7.5-6.5c0-1.958-1.208-3.083-3.292-3.083H10.5V18h2.167v-3.833h1.333l1.833 3.833h2.5L15.917 14c1.166-.458 2.417-1.5 2.417-2.5zm-7.334-2.25h-1.25v3.75h1.25c.833 0 1.25-.417 1.25-1.25v-1.25c0-.833-.417-1.25-1.25-1.25zm5.25 0H12.5v2.333h1.75c.917 0 1.333-.417 1.333-1.167 0-.75-.416-1.166-1.333-1.166z" fill="currentColor"/></svg>;
-const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff9a00]"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zM9.548 18H6.5l3.25-9h2.333L15.5 18h-2.833l-.666-2.167H9.998L9.548 18zm6.618 0H14V9h2.166v9z" fill="currentColor"/></svg>;
-const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z" fill="#2c2c2c" fillRule="evenodd"/><path d="M12 18a6 6 0 01-6-6h6v6z" fill="#0acf83"/><path d="M12 12a6 6 0 016-6v6h-6z" fill="#a259ff"/><path d="M12 6a6 6 0 01-6 6h6V6z" fill="#f24e1e"/><path d="M18 12a6 6 0 01-6 6v-6h6z" fill="#ff7262"/><path d="M6 12a6 6 0 016-6v6H6z" fill="#1abcfe"/></svg>;
-const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><g fill="currentColor"><circle cx="12" cy="12" r="2.05"/><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z"/><path d="M16.3 7.7a10.21 10.21 0 00-8.6 0 1 1 0 00-.5 1.6l.8.8a1 1 0 001.3-.1 6.2 6.2 0 015.4 0 1 1 0 001.3.1l.8-.8a1 1 0 00-.5-1.6zM7.7 16.3a10.21 10.21 0 008.6 0 1 1 0 00.5-1.6l-.8-.8a1 1 0 00-1.3.1 6.2 6.2 0 01-5.4 0 1 1 0 00-1.3-.1l-.8.8a1 1 0 00.5 1.6z"/><path transform="rotate(-30 12 12)" d="M12.4 3.1a1 1 0 00-1 .1 10.21 10.21 0 00-3.2 15.6 1 1 0 001.6-.5l.3-.9a1 1 0 00-.1-1.3 6.2 6.2 0 012-9.6 1 1 0 00.1-1.3l-.3-.9a1 1 0 00-.8-1.1z"/><path transform="rotate(30 12 12)" d="M12.6 3.1a1 1 0 00-1.1.8l-.3.9a1 1 0 00.1 1.3 6.2 6.2 0 012 9.6 1 1 0 00-.1 1.3l.3.9a1 1 0 001.6.5 10.21 10.21 0 00-3.2-15.6 1 1 0 00-.3-.1z"/></g></svg>;
-const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.721 16.5H15.5v-7.857L10.38 18.5h-1.4V5.5h1.4v7.857L15.5 5.5h1.221v13z" fill="currentColor"/></svg>;
-const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><g fill="currentColor"><circle cx="8.5" cy="15.5" r="5.5"/><circle cx="15.5" cy="15.5" r="5.5"/><circle cx="12" cy="8.5" r="5.5"/></g></svg>;
+const PremiereProLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><rect width="24" height="24" rx="4.8" fill="#9999FF"/><path d="M10.2 8.5c-.9 0-1.5.1-1.8.1v7.2h1.5v-2.4c.3 0 .6 0 .9 0 1.6 0 2.7-.8 2.7-2.5 0-1.5-.9-2.4-3.3-2.4zm-.3 3.5v-2.4c.1 0 .3 0 .5 0 .8 0 1.2.4 1.2 1.2 0 .8-.5 1.2-1.3 1.2h-.4zm5.8-.4v3.2H17v-3c0-.9.4-1.4 1-1.4.2 0 .3 0 .5.1v-1.3c-.1 0-.3 0-.5 0-.6 0-1.1.3-1.3 1h0v-.9h-1.2v5.5h1.2z" fill="white"/></svg>;
+const AfterEffectsLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><rect width="24" height="24" rx="4.8" fill="#D291FF"/><path d="M11.4 11.9l-.8-2.4h0l-.7 2.4h1.5zm2.3 1.8c-.4-.1-.6-.1-.9-.1-.6 0-.9.2-.9.6 0 .4.3.6.7.6.6 0 1.1-.3 1.1-1v-.1zm-6.2-5.4l-2.8 7.5h1.5l.7-2h2.8l.7 2h1.6l-2.9-7.5h-1.6zm8.4 4.5c0-1.4-.8-2.1-2.3-2.1-1 0-1.8.2-2.4.5l.3 1c.5-.2 1.2-.4 1.9-.4.7 0 1.1.3 1.1 1v.1c0 0-.3 0-.7 0-1.6 0-2.7.7-2.7 2 0 1.1.8 1.8 1.9 1.8.8 0 1.4-.3 1.7-.8h0v.7h1.3v-3.8z" fill="white"/></svg>;
+const PhotoshopLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><rect width="24" height="24" rx="4.8" fill="#31A8FF"/><path d="M8.7 8.5c-.3 0-.6 0-.9 0v2.8c.2 0 .5 0 .8 0 1.1 0 1.7-.5 1.7-1.5 0-.9-.5-1.3-1.6-1.3zm-.9 6.3v-2.4c.3 0 .6 0 .9 0 1.2 0 2 .6 2 1.3 0 .9-.7 1.4-2.1 1.4-.3 0-.6 0-.8-.1v-.2zm6.3-1.4c0-.5-.4-.8-1.1-.8-.4 0-.8.1-1.1.2l-.3-1c.4-.2 1-.3 1.7-.3 1.4 0 2.2.7 2.2 1.9v2.4h-1.1l-.1-.5h0c-.4.4-.9.6-1.5.6-.9 0-1.6-.6-1.6-1.5 0-1.1.9-1.7 2.1-1.7.3 0 .6 0 .8.1v-.4zm-6.4-5.1H6.2v7.5h1.5v-2.7h.9c1.8 0 2.9-.9 2.9-2.4 0-1.4-.9-2.4-2.8-2.4zm7.4 5.5c0 .4.3.7.8.7.5 0 .8-.3.8-.7v-.1c0-.4-.3-.7-.8-.7-.5 0-.8.3-.8.7v.1z" fill="white"/></svg>;
+const IllustratorLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><rect width="24" height="24" rx="4.8" fill="#FF9A00"/><path d="M10.5 11.4l-.8-2.3h0l-.7 2.3h1.5zm4.2 1.3c0-.5 0-.9 0-1.3h0c-.2.4-.5.9-.7 1.3l-1 1.8h-.9l-.9-1.8c-.2-.4-.4-.9-.6-1.3h0c0 .4 0 .8-.1 1.3l-.2 2.1H8.8l.6-5.3h1.3l1 1.9c.2.4.4.8.6 1.2h0c.2-.4.4-.8.6-1.2l1-1.9h1.3l.5 5.3h-1.4l-.2-2.1zm-7.2-4.4h-1.7v5.3h1.5v-2h.2c.4 0 .8-.1 1.1-.3.5-.3.8-.9.8-1.5 0-1.2-.8-1.5-1.9-1.5zm-.2 2.6h-.2v-1.7c.1 0 .2 0 .3 0 .6 0 .9.3.9.9 0 .5-.3.8-.9.8z" fill="white"/></svg>;
+const FigmaLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10"><path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4z" fill="#0ACF83"/><path d="M4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4z" fill="#A259FF"/><path d="M4 4c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4z" fill="#F24E1E"/><path d="M12 0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V0z" fill="#FF7262"/><path d="M20 12c0 2.208-1.792 4-4 4s-4-1.792-4-4 1.792-4 4-4 4 1.792 4 4z" fill="#1ABCFE"/></svg>;
+const ReactLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#61dafb]"><path d="M12 10.11c1.03 0 1.87.84 1.87 1.89 0 1-.84 1.85-1.87 1.85S10.13 13 10.13 12c0-1.05.84-1.89 1.87-1.89M7.37 20c.63.38 2.01-.2 3.6-1.7-.52-.59-1.03-1.23-1.51-1.9a22.7 22.7 0 0 1-2.4-.36c-.51 2.14-.32 3.61.31 3.96m.71-5.74l-.29-.51c-.11.29-.22.58-.29.86.27.06.57.11.88.16l-.3-.51zm6.54-.76l.81-1.5-.81-1.5c-.3-.53-.62-1-.91-1.47C13.17 9 12.6 9 12 9c-.6 0-1.17 0-1.71.03-.29.47-.61.94-.91 1.47L8.57 12l.81 1.5c.3.53.62 1 .91 1.47.54.03 1.11.03 1.71.03.6 0 1.17 0 1.71-.03.29-.47.61-.94.91-1.47M12 6.78c-.19.22-.39.45-.59.72h1.18c-.2-.27-.4-.5-.59-.72m0 10.44c.19-.22.39-.45.59-.72h-1.18c.2.27.4.5.59.72M16.62 4c-.62-.38-2 .2-3.59 1.7.52.59 1.03 1.23 1.51 1.9.82.08 1.63.2 2.4.36.51-2.14.32-3.61-.32-3.96m-.7 5.74l.29.51c.11-.29.22-.58.29-.86-.27-.06-.57-.11-.88-.16l.3.51zm1.45-7.05c1.47.84 1.63 3.05 1.01 5.63 2.54.75 4.37 1.99 4.37 3.68s-1.83 2.93-4.37 3.68c.62 2.58.46 4.79-1.01 5.63-1.46.84-3.45-.12-5.37-1.95-1.92 1.83-3.91 2.79-5.38 1.95-1.46-.84-1.62-3.05-1-5.63-2.54-.75-4.37-1.99-4.37-3.68s1.83-2.93 4.37-3.68c-.62-2.58-.46-4.79 1-5.63 1.47-.84 3.46.12 5.38 1.95 1.92-1.83 3.91-2.79 5.37-1.95zM17.08 12c.34.75.64 1.5.89 2.26 2.1-.63 3.28-1.53 3.28-2.26s-1.18-1.63-3.28-2.26c-.25.76-.55 1.51-.89 2.26M6.92 12c-.34-.75-.64-1.5-.89-2.26-2.1.63-3.28 1.53-3.28 2.26s1.18 1.63 3.28 2.26c.25-.76.55-1.51.89-2.26m9.35 1.5c.3-.76.47-1.5.47-2.26s-.17-1.5-.47-2.26c-.3-.76-.62-1.5-.99-2.2-.37-.7-.78-1.35-1.23-1.93C12.6 5.29 11.42 5 12 5s-.6.29-1.05.85c-.45.58-.86 1.23-1.23 1.93-.37.7-.69 1.44-.99 2.2-.3.76-.47 1.5-.47 2.26s.17 1.5.47 2.26c.3.76.62 1.5.99 2.2.37.7.78 1.35 1.23 1.93.45.56.63.85 1.05.85s.6-.29 1.05-.85c.45-.58.86-1.23 1.23-1.93.37-.7.69-1.44.99-2.2z" fill="currentColor"/></svg>;
+const NextJSLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z" fill="currentColor"/></svg>;
+const DaVinciResolveLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#ff7d4a]"><path d="M11.667 0C5.255 0 0 5.254 0 11.667s5.255 11.667 11.667 11.667c6.411 0 11.666-5.254 11.666-11.667S18.078 0 11.667 0zm7.155 14.276c-1.123 3.663-4.503 6.331-8.488 6.331-3.986 0-7.365-2.668-8.488-6.331C.724 10.61 3.057 6.943 6.72 5.822c3.664-1.122 7.33 1.211 8.452 4.874.195.635-.161 1.31-.797 1.505-.634.195-1.308-.161-1.504-.797-.747-2.44-3.19-3.988-5.63-3.241-2.44.746-3.989 3.19-3.242 5.63.746 2.44 3.19 3.988 5.63 3.242 1.5-.459 2.653-1.612 3.112-3.112.195-.635.87-.992 1.504-.797.636.195.992.87.797 1.505z" fill="currentColor"/></svg>;
 const TailwindLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#38b2ac]"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" fill="currentColor"/></svg>;
-const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f7df1e]"><path d="M17.368 14.516c0 1.736-1.079 2.78-2.603 2.78-1.468 0-2.548-1.017-2.548-2.493 0-1.626 1.134-2.52 2.718-2.52.863 0 1.467.247 1.98.7L18.1 11.75c-.382-.382-.89-.598-1.625-.598-1.134 0-1.84.727-1.84 1.84 0 1.133.64 1.812 1.727 1.812 1.052 0 1.625-.619 1.625-1.626h-1.57v-1.18h2.718v1.517zM9.421 17.296h1.597v-6.333H9.42v-1.157h3.992v1.157H11.8v6.333h1.625v1.157H9.421v-1.157z" fill="currentColor"/></svg>;
+const JavascriptLogo = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f7df1e]"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="currentColor"/></svg>;
 
 
 const techLogos = [
@@ -662,9 +686,9 @@ const TechMarquee = () => (
             </h2>
         </div>
         <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee space-x-16 pr-16 flex-shrink-0 items-center">
-                {[...techLogos, ...techLogos].map((tech, index) => (
-                    <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer">
+            <div className="flex animate-marquee space-x-16 flex-shrink-0 items-center">
+                {[...techLogos, ...techLogos, ...techLogos, ...techLogos].map((tech, index) => (
+                    <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer min-w-[120px]">
                         <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center group-hover/item:scale-110 transition-all duration-300 ease-in-out group-hover/item:bg-orange-500/10 group-hover/item:shadow-lg group-hover/item:shadow-orange-500/20 group-hover/item:border-orange-500/30">
                             {tech.component}
                         </div>
@@ -947,13 +971,19 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                         <h3 className="font-bold text-white mb-4">Connect</h3>
                         <div className="flex justify-center lg:justify-start space-x-4">
                            <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0 3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                                </svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0 a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                                </svg>
                             </SocialIcon>
                             <SocialIcon href="https://wa.me/923167741677">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z"/></svg>
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                               </svg>
                            </SocialIcon>
                         </div>
                         <div className="mt-6">
@@ -1088,7 +1118,7 @@ const pixelArtProjects = [
             '/assets/images/pixel-art/Overall art and design/Game-cover-arts.png',
             '/assets/images/pixel-art/Overall art and design/Splash-art.png',
         ],
-    },
+      },
 ];
   
 const graphicsDesignProjects = [
@@ -1141,9 +1171,9 @@ const digitalArtProjects = [
     { 
         title: 'Anime Art Collection',
         images: [
-            '/assets/images/digital art/anime_art.jpeg',
-            '/assets/images/digital art/anime_art.webp',
-            '/assets/images/digital art/anime_art.png',
+            'public/assets/images/digital art/anime_art.jpeg',
+            'public/assets/images/digital art/anime_art2.png',
+            'public/assets/images/digital art/anime_art3.webp',
         ]
     },
     { 
@@ -1235,7 +1265,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1291,7 +1321,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1474,7 +1504,7 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                     {isVideo(src) ? (
                         <video
                             ref={index === currentIndex ? videoRef : null}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             muted={isMuted}
                             loop
                             playsInline
@@ -1494,7 +1524,7 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                             loading="lazy"
                             src={src}
                             alt={`Media sample ${index + 1}`}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onLoad={() => handleLoad(index)}
                             onError={(e) => {
                                 handleLoad(index);
@@ -1690,7 +1720,7 @@ const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
                         key={index}
                         src={src}
                         alt={`Graphic design sample ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -2222,18 +2252,24 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmissionStatus('sending');
-        // Simulate API call
-        setTimeout(() => {
+        
             if (formState.name && formState.email && formState.message) {
+            // Create mailto link with form data
+            const subject = formState.subject || 'Contact Form Submission';
+            const body = `Name: ${formState.name}%0D%0AEmail: ${formState.email}%0D%0A%0D%0AMessage:%0D%0A${formState.message}`;
+            const mailtoLink = `mailto:tezurect82@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Open default email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
                 setSubmissionStatus('success');
                 setFormState({ name: '', email: '', subject: '', message: '' });
-                setTimeout(() => setSubmissionStatus('idle'), 5000); // Reset after 5s
+            setTimeout(() => setSubmissionStatus('idle'), 5000);
             } else {
                 setSubmissionStatus('error');
-                setTimeout(() => setSubmissionStatus('idle'), 5000); // Reset after 5s
+            setTimeout(() => setSubmissionStatus('idle'), 3000);
             }
-        }, 1500);
     };
 
 
@@ -2270,19 +2306,11 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                                 <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleInputChange} required className="w-full bg-[#0D0D0D] border border-white/20 rounded-lg px-4 py-2.5 text-white focus:ring-orange-500 focus:border-orange-500 transition"></textarea>
                             </div>
                             <div>
-                                <button type="submit" disabled={submissionStatus === 'sending'} className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-3 rounded-full text-base transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center active:scale-95">
-                                    {submissionStatus === 'sending' ? (
-                                        <>
-                                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            Sending...
-                                        </>
-                                    ) : 'Send Message'}
+                                <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-3 rounded-full text-base transition-all duration-300 hover:opacity-90 flex items-center justify-center active:scale-95">
+                                    Send Message
                                 </button>
-                                {submissionStatus === 'success' && <p className="text-green-400 mt-4 text-center">Thank you! Your message has been sent successfully.</p>}
-                                {submissionStatus === 'error' && <p className="text-red-400 mt-4 text-center">Something went wrong. Please fill all required fields and try again.</p>}
+                                {submissionStatus === 'success' && <p className="text-green-400 mt-4 text-center">Opening your email client...</p>}
+                                {submissionStatus === 'error' && <p className="text-red-400 mt-4 text-center">Please fill all required fields.</p>}
                             </div>
                         </form>
                     </div>
@@ -2308,13 +2336,19 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0 3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                                </svg>
                             </SocialIcon>
                             <SocialIcon href="#">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.782 19.782 0 00-4.982-1.524c-.214.362-.42.718-.612 1.068-1.815-.362-3.674-.362-5.466 0-.193-.349-.398-.706-.612-1.068a19.78 19.78 0 00-4.982 1.524C1.569 9.878.683 15.13.683 15.13s1.815 3.125 5.466 3.825c.193.072.385.145.576.217.48.193.96.385 1.45.555 1.887.644 3.773.972 5.66.972.193 0 .385 0 .576-.018.48-.054.942-.127 1.404-.217a12.186 12.186 0 005.466-3.825s-.904-5.252-4.52-10.761zm-10.64 6.733c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422zm6.368 0c-1.187 0-2.155-1.08-2.155-2.422s.968-2.422 2.155-2.422c1.187 0 2.173 1.08 2.155 2.422 0 1.343-.986 2.422-2.155 2.422z"/></svg>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0 a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                                </svg>
                             </SocialIcon>
                             <SocialIcon href="https://wa.me/923167741677">
-                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z"/></svg>
+                               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                               </svg>
                            </SocialIcon>
                         </div>
                     </div>
@@ -2366,7 +2400,7 @@ const WhatsAppButton = () => (
       aria-label="Chat on WhatsApp"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.502 1.908 6.384l-.357 1.291 1.347-.353z" />
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
       </svg>
     </a>
   );
@@ -2416,10 +2450,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Total duration for the two sequential word animations (0.8s each)
-    const totalWordAnimationTime = 1600;
-    // Duration for the final preloader exit animation
-    const exitAnimationTime = 500;
+    // Pop animation timing: pop in (700ms) + hold + pop out (500ms) + pop in (700ms)
+    const totalWordAnimationTime = 2300;
+    // Smooth exit animation
+    const exitAnimationTime = 600;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {

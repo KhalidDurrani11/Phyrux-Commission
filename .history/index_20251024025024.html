@@ -16,36 +16,6 @@
       body {
         font-family: 'Inter', sans-serif;
       }
-      
-      /* Performance optimizations */
-      * {
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      /* Hardware acceleration for smooth animations */
-      .preloader-exit,
-      .page-transition-enter,
-      .page-transition-exit,
-      .animate-preloader-pop-in,
-      .animate-preloader-pop-out {
-        will-change: transform, opacity;
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        perspective: 1000px;
-        /* Prevent subpixel rendering issues */
-        transform-style: preserve-3d;
-      }
-      
-      /* Force GPU rendering for text during animation */
-      .animate-preloader-pop-in,
-      .animate-preloader-pop-out {
-        /* Optimize text rendering during animation */
-        text-rendering: optimizeSpeed;
-        /* Prevent layout thrashing */
-        contain: layout style paint;
-      }
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -96,27 +66,19 @@
       @keyframes page-enter {
         from { 
             opacity: 0; 
-            transform: translateY(30px) scale(0.95);
-            filter: blur(10px);
+            transform: translateY(20px) scale(0.98);
         }
         to { 
             opacity: 1; 
             transform: translateY(0) scale(1);
-            filter: blur(0px);
         }
       }
       @keyframes page-exit {
-        from { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-        to { 
-            opacity: 0; 
-            transform: translateY(-10px); 
-        }
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-10px); }
       }
       .page-transition-enter {
-        animation: page-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: page-enter 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
       }
       .page-transition-exit {
         animation: page-exit 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
@@ -139,77 +101,54 @@
       }
       
       @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
       }
       .animate-marquee {
-        animation: marquee 30s linear infinite;
+        animation: marquee 8s linear infinite;
       }
       .group:hover .animate-marquee, .animate-marquee:hover {
         animation-play-state: paused;
       }
       
-      @keyframes preloader-pop-in {
-        0% {
+      @keyframes preloader-pop-in-out {
+        0% { /* Pop In Start */
           opacity: 0;
-          transform: scale3d(0, 0, 1) translate3d(0, 30px, 0);
+          transform: translateY(20px) scale(0.9);
         }
-        50% {
+        25% { /* Overshoot */
           opacity: 1;
-          transform: scale3d(1.15, 1.15, 1) translate3d(0, -5px, 0);
+          transform: translateY(0) scale(1.1);
         }
-        70% {
-          transform: scale3d(0.95, 0.95, 1) translate3d(0, 0, 0);
-        }
-        85% {
-          transform: scale3d(1.05, 1.05, 1) translate3d(0, 0, 0);
-        }
-        100% {
+        50% { /* Hold */
           opacity: 1;
-          transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+          transform: translateY(0) scale(1);
         }
-      }
-      
-      @keyframes preloader-pop-out {
-        0% {
+        75% { /* Pop Out Start (Overshoot) */
           opacity: 1;
-          transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+          transform: translateY(0) scale(1.1);
         }
-        30% {
-          opacity: 1;
-          transform: scale3d(1.1, 1.1, 1) translate3d(0, -10px, 0);
-        }
-        100% {
+        100% { /* Pop Out End */
           opacity: 0;
-          transform: scale3d(0, 0, 1) translate3d(0, -50px, 0);
+          transform: translateY(20px) scale(0.9);
         }
       }
-      
-      .animate-preloader-pop-in {
-        animation: preloader-pop-in 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      .animate-preloader-pop-in-out {
+        animation: preloader-pop-in-out 0.8s cubic-bezier(0.45, 0, 0.55, 1) forwards;
       }
-      
-      .animate-preloader-pop-out {
-        animation: preloader-pop-out 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
-        animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
-      }
-      
+
       @keyframes preloader-exit {
-        0% {
+        from {
           opacity: 1;
-          transform: scale3d(1, 1, 1) translateZ(0);
-          filter: blur(0px);
+          transform: scale(1);
         }
-        100% {
+        to {
           opacity: 0;
-          transform: scale3d(1.1, 1.1, 1) translateZ(0);
-          filter: blur(20px);
+          transform: scale(0.95);
         }
       }
       .preloader-exit {
-        animation: preloader-exit 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        will-change: transform, opacity, filter;
+        animation: preloader-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
       
       @keyframes pulse-bg {
@@ -246,6 +185,33 @@
         border: 2px solid white;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       }
+
+      .social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: #333;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #0088cc;
+}
+
+.fa-instagram:hover {
+    color: #E4405F;
+}
+
+.fa-discord:hover {
+    color: #7289DA;
+}
+
+.fa-whatsapp:hover {
+    color: #25D366;
+}
     </style>
   <script type="importmap">
 {
@@ -257,9 +223,21 @@
 }
 </script>
 <link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
   <body class="bg-[#0D0D0D]">
     <div id="root"></div>
+    <div class="social-icons">
+    <a href="https://instagram.com/your-handle" target="_blank">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://discord.gg/your-server" target="_blank">
+        <i class="fab fa-discord"></i>
+    </a>
+    <a href="https://wa.me/your-number" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
