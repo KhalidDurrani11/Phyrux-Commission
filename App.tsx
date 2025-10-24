@@ -1,6 +1,21 @@
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
 import React, { useState, useEffect, useRef } from'react';
 
+// Preload critical images
+const ImagePreloader: React.FC<{ images: string[] }> = ({ images }) => {
+    useEffect(() => {
+        images.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            document.head.appendChild(link);
+        });
+    }, [images]);
+    
+    return null;
+};
+
 const Preloader = React.memo(() => {
     const [showFirstWord, setShowFirstWord] = useState(true);
     const [showSecondWord, setShowSecondWord] = useState(false);
@@ -1290,10 +1305,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 };
 
 const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[] } }> = ({ project }) => {
-    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
+    const [isVisible, setIsVisible] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    // Intersection observer for lazy loading
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '50px' }
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Preload next and previous images
+    useEffect(() => {
+        if (isVisible) {
+            const nextIndex = (currentIndex + 1) % project.images.length;
+            const prevIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+            
+            [nextIndex, prevIndex].forEach(idx => {
+                const img = new Image();
+                img.src = project.images[idx];
+            });
+        }
+    }, [currentIndex, isVisible, project.images]);
 
     const prevImage = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1306,16 +1354,18 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
+        <div ref={cardRef} className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
-                {project.images.map((src, index) => (
+                {isVisible && project.images.map((src, index) => (
                     <img
-                        loading="lazy"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                        fetchPriority={index === 0 ? "high" : "low"}
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1365,10 +1415,47 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const mediaRef = useRef<HTMLDivElement>(null);
+
+    // Intersection observer for lazy loading
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '100px' }
+        );
+
+        if (mediaRef.current) {
+            observer.observe(mediaRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Preload next and previous media
+    useEffect(() => {
+        if (isVisible) {
+            const nextIndex = (currentIndex + 1) % images.length;
+            const prevIndex = (currentIndex - 1 + images.length) % images.length;
+            
+            [nextIndex, prevIndex].forEach(idx => {
+                const src = images[idx];
+                if (!isVideo(src)) {
+                    const img = new Image();
+                    img.src = src;
+                }
+            });
+        }
+    }, [currentIndex, isVisible, images]);
 
     const prevMedia = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1487,49 +1574,55 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
 
     return (
         <div 
-            ref={containerRef}
+            ref={mediaRef}
             className="relative group aspect-video overflow-hidden rounded-lg bg-[#111] cursor-pointer"
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => setShowControls(false)}
         >
-            {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
-            {images.map((src, index) => (
-                <div key={index} className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}>
-                    {isVideo(src) ? (
-                        <video
-                            ref={index === currentIndex ? videoRef : null}
-                            className="w-full h-full object-contain"
-                            muted={isMuted}
-                            loop
-                            playsInline
-                            preload="metadata"
-                            onLoadedData={index === currentIndex ? handleVideoLoad : undefined}
-                            onPlay={index === currentIndex ? handleVideoPlay : undefined}
-                            onPause={index === currentIndex ? handleVideoPause : undefined}
-                            onError={index === currentIndex ? handleVideoError : undefined}
-                            onTimeUpdate={index === currentIndex ? handleTimeUpdate : undefined}
-                            onClick={index === currentIndex ? togglePlay : undefined}
-                        >
-                            <source src={src} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    ) : (
-                        <img
-                            loading="lazy"
-                            src={src}
-                            alt={`Media sample ${index + 1}`}
-                            className="w-full h-full object-contain"
-                            onLoad={() => handleLoad(index)}
-                            onError={(e) => {
-                                handleLoad(index);
-                                const target = e.target as HTMLImageElement;
-                                target.onerror = null; 
-                                target.src = 'https://i.imgur.com/8rqwdLX.png';
-                            }}
-                        />
-                    )}
-                </div>
-            ))}
+            <div 
+                ref={containerRef}
+                className="relative w-full h-full"
+                onMouseEnter={() => setShowControls(true)}
+                onMouseLeave={() => setShowControls(false)}
+            >
+                {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
+                {isVisible && images.map((src, index) => (
+                    <div key={index} className={`absolute inset-0 w-full h-full transition-opacity duration-300 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}>
+                        {isVideo(src) ? (
+                            <video
+                                ref={index === currentIndex ? videoRef : null}
+                                className="w-full h-full object-contain"
+                                muted={isMuted}
+                                loop
+                                playsInline
+                                preload="metadata"
+                                onLoadedData={index === currentIndex ? handleVideoLoad : undefined}
+                                onPlay={index === currentIndex ? handleVideoPlay : undefined}
+                                onPause={index === currentIndex ? handleVideoPause : undefined}
+                                onError={index === currentIndex ? handleVideoError : undefined}
+                                onTimeUpdate={index === currentIndex ? handleTimeUpdate : undefined}
+                                onClick={index === currentIndex ? togglePlay : undefined}
+                            >
+                                <source src={src} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : (
+                            <img
+                                loading={index === 0 ? "eager" : "lazy"}
+                                decoding="async"
+                                fetchPriority={index === 0 ? "high" : "low"}
+                                src={src}
+                                alt={`Media sample ${index + 1}`}
+                                className="w-full h-full object-contain"
+                                onLoad={() => handleLoad(index)}
+                                onError={(e) => {
+                                    handleLoad(index);
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null; 
+                                    target.src = 'https://i.imgur.com/8rqwdLX.png';
+                                }}
+                            />
+                        )}
+                    </div>
+                ))}
             
             {/* Enhanced Video Controls */}
             {isCurrentVideo && (
@@ -1685,6 +1778,7 @@ const MixedMediaSlider: React.FC<{ images: string[] }> = ({ images }) => {
                     VIDEO
                 </div>
             )}
+            </div>
         </div>
     );
 };
@@ -1693,6 +1787,40 @@ const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
+    const [isVisible, setIsVisible] = useState(false);
+    const sliderRef = useRef<HTMLDivElement>(null);
+
+    // Intersection observer for lazy loading
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '50px' }
+        );
+
+        if (sliderRef.current) {
+            observer.observe(sliderRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Preload next and previous images
+    useEffect(() => {
+        if (isVisible) {
+            const nextIndex = (currentIndex + 1) % images.length;
+            const prevIndex = (currentIndex - 1 + images.length) % images.length;
+            
+            [nextIndex, prevIndex].forEach(idx => {
+                const img = new Image();
+                img.src = images[idx];
+            });
+        }
+    }, [currentIndex, isVisible, images]);
 
     const prevImage = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -1705,16 +1833,18 @@ const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
     };
 
     return (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
+        <div ref={sliderRef} className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
-                {images.map((src, index) => (
+                {isVisible && images.map((src, index) => (
                     <img
-                        loading="lazy"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                        fetchPriority={index === 0 ? "high" : "low"}
                         key={index}
                         src={src}
                         alt={`Graphic design sample ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1914,13 +2044,17 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
     const features = [
         { title: 'Social Media Graphics', description: 'Custom designs for Instagram posts, stories, and ads.' },
         { title: 'Event Promotions', description: 'Stunning event flyers, banners, and social media visuals.' },
-        { title: 'Logo Design', description: 'Tailored logos to reflect your brand’s unique identity.' },
+        { title: 'Logo Design', description: "Tailored logos to reflect your brand's unique identity." },
         { title: 'Thumbnails', description: 'Attention-grabbing thumbnails for YouTube, TikTok, and more.' },
         { title: 'Other Visual Designs', description: 'Posters, digital ads, and any other design you need.' },
     ];
     
+    // Preload first images
+    const firstImages = graphicsDesignProjects.map(p => p.images[0]).filter(Boolean);
+    
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
+            <ImagePreloader images={firstImages.slice(0, 2)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Graphic Design Services
@@ -2024,8 +2158,14 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
         { title: 'Creative & Expressive Styles', description: 'Personalized, characterized drawings with a strong focus on detail and style.' },
     ];
     
+    // Preload first images (filter out videos)
+    const firstImages = digitalArtProjects
+        .map(p => p.images[0])
+        .filter(src => src && !src.toLowerCase().endsWith('.mp4'));
+    
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
+            <ImagePreloader images={firstImages.slice(0, 2)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Digital Art Services
@@ -2075,8 +2215,12 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
         { title: 'Game Covers & Logos (Raster Art)', description: 'Eye-catching cover arts and logos created in Photoshop to make your game stand out.' },
     ];
     
+    // Preload first images
+    const firstImages = pixelArtProjects.map(p => p.images[0]).filter(Boolean);
+    
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
+            <ImagePreloader images={firstImages.slice(0, 3)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Pixel Art & Game Design Services
