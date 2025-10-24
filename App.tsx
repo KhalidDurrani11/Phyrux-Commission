@@ -980,7 +980,7 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                     <div className="lg:col-span-3 text-center lg:text-left">
                         <h3 className="font-bold text-white mb-4">Connect</h3>
                         <div className="flex justify-center lg:justify-start space-x-4">
-                           <SocialIcon href="#">
+                           <SocialIcon href="https://www.instagram.com/phyruxvisuals/">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
                                 </svg>
@@ -1042,11 +1042,39 @@ const HomePage = ({ navigateTo, currentPage }: NavigationProps) => (
 );
 
 const videoEditingProjects = [
-    { title: 'Corporate Branding Video', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep1/600/400' },
-    { title: 'Social Media Ad Campaign', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep2/600/400' },
-    { title: 'Gaming Montage', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4', thumbnailUrl: 'https://picsum.photos/seed/vep3/600/400' },
-    { videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', thumbnailUrl: 'https://picsum.photos/seed/wedding/400/600', isShortForm: true },
-    { videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', thumbnailUrl: 'https://picsum.photos/seed/music/400/600', isShortForm: true },
+    { 
+        title: 'Game Edits', 
+        videos: [
+            { youtubeUrl: 'https://www.youtube.com/embed/Q5lbZSVtWgg', thumbnailUrl: 'https://img.youtube.com/vi/Q5lbZSVtWgg/maxresdefault.jpg' },
+            { youtubeUrl: 'https://www.youtube.com/embed/ZYXAwpFwYZg', thumbnailUrl: 'https://img.youtube.com/vi/ZYXAwpFwYZg/maxresdefault.jpg' }
+        ]
+    },
+    { 
+        title: 'Intro & Trailer Videos', 
+        videos: [
+            { youtubeUrl: 'https://www.youtube.com/embed/xGQdrj2H71I', thumbnailUrl: 'https://img.youtube.com/vi/xGQdrj2H71I/maxresdefault.jpg' },
+            { youtubeUrl: 'https://www.youtube.com/embed/-4pA9gfESr4', thumbnailUrl: 'https://img.youtube.com/vi/-4pA9gfESr4/maxresdefault.jpg' }
+        ]
+    },
+    { 
+        title: 'Long Form & Documentary', 
+        videos: [
+            { youtubeUrl: 'https://www.youtube.com/embed/qnCM7eN7_K0', thumbnailUrl: 'https://img.youtube.com/vi/qnCM7eN7_K0/maxresdefault.jpg' },
+            { youtubeUrl: 'https://www.youtube.com/embed/lJ9VBCLGO5k', thumbnailUrl: 'https://img.youtube.com/vi/lJ9VBCLGO5k/maxresdefault.jpg' }
+        ]
+    },
+    { 
+        title: 'Short Form Content', 
+        videos: [
+            { youtubeUrl: 'https://www.youtube.com/embed/Ov8NAkvqvDs', thumbnailUrl: 'https://img.youtube.com/vi/Ov8NAkvqvDs/maxresdefault.jpg', isShortForm: true }
+        ]
+    },
+    { 
+        title: 'Short Form Content', 
+        videos: [
+            { youtubeUrl: 'https://www.youtube.com/embed/wsmtgCcbR98', thumbnailUrl: 'https://img.youtube.com/vi/wsmtgCcbR98/maxresdefault.jpg', isShortForm: true }
+        ]
+    },
 ];
 
 const webDevProjects = [
@@ -1934,15 +1962,17 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({ children, index }) =>
     );
 };
 
-type VideoProject = { title?: string; videoUrl: string; thumbnailUrl: string; isShortForm?: boolean };
+type SingleVideo = { videoUrl?: string; youtubeUrl?: string; thumbnailUrl: string; isShortForm?: boolean };
+type VideoProject = { title?: string; videos: SingleVideo[] };
 
 const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
-    // FIX: 'u' is not defined. Replaced with 'useRef'.
     const videoRef = useRef<HTMLVideoElement>(null);
-    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [isInteracted, setIsInteracted] = useState(false);
     const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
+    const currentVideo = project.videos[currentVideoIndex];
+    const hasMultipleVideos = project.videos.length > 1;
 
     const handlePlay = () => {
         if(isInteracted) return;
@@ -1952,13 +1982,31 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
         }, 0);
     };
 
+    const handlePrevious = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentVideoIndex((prev) => (prev - 1 + project.videos.length) % project.videos.length);
+    };
+
+    const handleNext = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentVideoIndex((prev) => (prev + 1) % project.videos.length);
+    };
+
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
-            <div className={`relative group ${project.isShortForm ? 'aspect-[9/16]' : 'aspect-video'} overflow-hidden rounded-lg cursor-pointer bg-black`} onClick={handlePlay}>
-                {!isInteracted ? (
+            <div className={`relative group ${currentVideo.isShortForm ? 'aspect-[9/16]' : 'aspect-video'} overflow-hidden rounded-lg ${!currentVideo.youtubeUrl ? 'cursor-pointer' : ''} bg-black`} onClick={!currentVideo.youtubeUrl ? handlePlay : undefined}>
+                {currentVideo.youtubeUrl ? (
+                    <iframe
+                        src={currentVideo.youtubeUrl}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={project.title || 'Video project'}
+                    />
+                ) : !isInteracted ? (
                     <>
                         {!thumbnailLoaded && <div className="absolute inset-0 animate-pulse-bg"></div>}
-                        <img loading="lazy" src={project.thumbnailUrl} alt={project.title || 'Video project thumbnail'} className={`w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setThumbnailLoaded(true)} />
+                        <img loading="lazy" src={currentVideo.thumbnailUrl} alt={project.title || 'Video project thumbnail'} className={`w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setThumbnailLoaded(true)} />
                         <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`}>
                             <div className="w-16 h-16 bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
@@ -1966,10 +2014,50 @@ const VideoProjectCard: React.FC<{ project: VideoProject }> = ({ project }) => {
                         </div>
                     </>
                 ) : (
-                    <video ref={videoRef} src={project.videoUrl} className="w-full h-full object-cover" controls playsInline autoPlay />
+                    <video ref={videoRef} src={currentVideo.videoUrl} className="w-full h-full object-cover" controls playsInline autoPlay />
+                )}
+                
+                {hasMultipleVideos && (
+                    <>
+                        <button
+                            onClick={handlePrevious}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 z-10 active:scale-95"
+                            aria-label="Previous video"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-orange-500/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 z-10 active:scale-95"
+                            aria-label="Next video"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                            {project.videos.map((_, index) => (
+                                <div
+                                    key={index}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                        index === currentVideoIndex ? 'bg-orange-500 w-6' : 'bg-white/50'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    </>
                 )}
             </div>
-            {project.title && <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>}
+            {project.title && (
+                <div className="mt-4 flex items-center justify-between">
+                    <h3 className="font-bold text-xl text-white">{project.title}</h3>
+                    {hasMultipleVideos && (
+                        <span className="text-sm text-gray-400">{currentVideoIndex + 1} / {project.videos.length}</span>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
@@ -1999,7 +2087,7 @@ const VideoEditingPage = ({ navigateTo, currentPage }: NavigationProps) => {
                     Video Editing Services
                 </h1>
                 <p className="max-w-3xl mx-auto text-gray-400 mt-6 text-base sm:text-lg leading-relaxed">
-                    Take your content to the next level with our expert video editing services. Whether you need short-form clips for TikTok and Instagram Reels or long-form YouTube videos, we deliver top-notch edits that fit your style. We can mimic any editing style, ensuring your videos align with your brand’s vision.
+                    Take your content to the next level with our expert video editing services. Whether you need short-form clips for TikTok and Instagram Reels or long-form YouTube videos, we deliver top-notch edits that fit your style. We can mimic any editing style, ensuring your videos align with your brand's vision.
                 </p>
             </section>
             
