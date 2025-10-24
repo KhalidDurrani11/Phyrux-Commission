@@ -2392,10 +2392,22 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
         e.preventDefault();
         
             if (formState.name && formState.email && formState.message) {
-            // Create mailto link with form data
+            // Create clean mailto link
             const subject = formState.subject || 'Contact Form Submission';
-            const body = `Name: ${formState.name}%0D%0AEmail: ${formState.email}%0D%0A%0D%0AMessage:%0D%0A${formState.message}`;
-            const mailtoLink = `mailto:tezurect82@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Build clean body with proper line breaks
+            const bodyLines = [
+                `Name: ${formState.name}`,
+                `Email: ${formState.email}`,
+                '',
+                'Message:',
+                formState.message
+            ];
+            
+            // Use encodeURIComponent for clean encoding
+            const body = encodeURIComponent(bodyLines.join('\n'));
+            const encodedSubject = encodeURIComponent(subject);
+            const mailtoLink = `mailto:tezurect82@gmail.com?subject=${encodedSubject}&body=${body}`;
             
             // Open default email client
             window.location.href = mailtoLink;
