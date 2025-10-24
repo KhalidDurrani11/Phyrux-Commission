@@ -2692,10 +2692,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Pop animation timing: pop in (700ms) + hold + pop out (500ms) + pop in (700ms)
-    const totalWordAnimationTime = 2300;
+    // Faster preloader for better UX on slow connections
+    const totalWordAnimationTime = 1500;
     // Smooth exit animation
-    const exitAnimationTime = 600;
+    const exitAnimationTime = 400;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {
@@ -2708,9 +2708,8 @@ export default function App() {
         document.body.style.overflow = '';
         setAnimationClass('page-transition-enter');
         
-        // Set initial URL based on hash
-        const hash = window.location.hash.slice(1) || 'home';
-        setCurrentPage(hash);
+        // Set initial page to home (no hash in URL)
+        setCurrentPage('home');
     }, totalWordAnimationTime + exitAnimationTime);
 
     return () => {
@@ -2722,9 +2721,9 @@ export default function App() {
 
   // Handle browser back/forward buttons
   useEffect(() => {
-    const handlePopState = () => {
-      const hash = window.location.hash.slice(1) || 'home';
-      setCurrentPage(hash);
+    const handlePopState = (event: PopStateEvent) => {
+      const page = event.state?.page || 'home';
+      setCurrentPage(page);
       window.scrollTo(0, 0);
     };
 
@@ -2741,8 +2740,9 @@ export default function App() {
         return;
     };
 
-    // Update browser history
-    window.history.pushState({ page }, '', `#${page}`);
+    // Update browser history without showing hash in URL
+    const title = page.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    window.history.pushState({ page }, '', window.location.pathname);
 
     setAnimationClass('page-transition-exit');
     setTimeout(() => {
