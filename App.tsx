@@ -2428,7 +2428,7 @@ const ClippingServicePage = ({ navigateTo, currentPage }: NavigationProps) => (
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                  <div>
-                     <VideoPlayer src="/assets/images/Clipping Service Video.mp4" poster="/assets/images/testimonials/testi.mp4" />
+                     <VideoPlayer src="/assets/images/Clipping Service Video.mp4" poster="/assets/images/clipping_thumbnail.png" />
                  </div>
                  <div className="text-left text-gray-300 space-y-8 text-base">
                     <div>
