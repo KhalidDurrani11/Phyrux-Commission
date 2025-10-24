@@ -4,22 +4,34 @@
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
-  
-  # Cache Control for Assets
-  Cache-Control: public, max-age=31536000, immutable
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Cache Control for Images - 1 year cache
 /assets/images/*
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/logos/*
+# Cache Control for all asset types
+/assets/**/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Cache CSS and JS files - 1 year
 /*.css
   Cache-Control: public, max-age=31536000, immutable
 
 /*.js
   Cache-Control: public, max-age=31536000, immutable
 
+# Cache fonts
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+# Don't cache HTML - always get fresh
 /index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
   Cache-Control: public, max-age=0, must-revalidate
 
