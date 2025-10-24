@@ -161,21 +161,22 @@ const iconPaths: { [key: string]: React.ReactNode } = {
       </>
     ),
     'pixel-art': (
-        <g fill="currentColor" strokeWidth="0">
-            <path d="M12 2 L10.5 5.5 L13.5 5.5 Z" opacity="1"/>
-            <path d="M10.5 5.5 L8 7.5 L10.5 9.5 Z" opacity="0.8"/>
-            <path d="M13.5 5.5 L16 7.5 L13.5 9.5 Z" opacity="0.8"/>
-            <path d="M10.5 9.5 L13.5 9.5 L12 6.5 Z" opacity="0.9"/>
-            <path d="M8 7.5 L7 12 L10.5 9.5 Z" opacity="0.7"/>
-            <path d="M16 7.5 L17 12 L13.5 9.5 Z" opacity="0.7"/>
-            <path d="M10.5 9.5 L7 12 L10.5 15 Z" opacity="0.6"/>
-            <path d="M13.5 9.5 L17 12 L13.5 15 Z" opacity="0.6"/>
-            <path d="M10.5 15 L13.5 15 L12 9.5 Z" opacity="0.8"/>
-            <path d="M7 12 L8 18 L10.5 15 Z" opacity="0.5"/>
-            <path d="M17 12 L16 18 L13.5 15 Z" opacity="0.5"/>
-            <path d="M10.5 15 L8 18 L12 22 Z" opacity="0.7"/>
-            <path d="M13.5 15 L16 18 L12 22 Z" opacity="0.7"/>
-        </g>
+        <>
+            {/* Simple pixel heart/8-bit style icon */}
+            <rect x="5" y="6" width="3" height="3"/>
+            <rect x="11" y="6" width="3" height="3"/>
+            <rect x="8" y="9" width="3" height="3"/>
+            <rect x="5" y="9" width="3" height="3"/>
+            <rect x="11" y="9" width="3" height="3"/>
+            <rect x="14" y="9" width="3" height="3"/>
+            <rect x="5" y="12" width="3" height="3"/>
+            <rect x="8" y="12" width="3" height="3"/>
+            <rect x="11" y="12" width="3" height="3"/>
+            <rect x="14" y="12" width="3" height="3"/>
+            <rect x="8" y="15" width="3" height="3"/>
+            <rect x="11" y="15" width="3" height="3"/>
+            <rect x="11" y="18" width="3" height="3"/>
+        </>
     ),
     'clipping-service': (
       <>
@@ -2615,6 +2616,10 @@ export default function App() {
         setPreloaderVisible(false);
         document.body.style.overflow = '';
         setAnimationClass('page-transition-enter');
+        
+        // Set initial URL based on hash
+        const hash = window.location.hash.slice(1) || 'home';
+        setCurrentPage(hash);
     }, totalWordAnimationTime + exitAnimationTime);
 
     return () => {
@@ -2624,11 +2629,29 @@ export default function App() {
     };
   }, []);
 
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.slice(1) || 'home';
+      setCurrentPage(hash);
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   const navigateTo = (page: string) => {
     if (page === currentPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     };
+
+    // Update browser history
+    window.history.pushState({ page }, '', `#${page}`);
 
     setAnimationClass('page-transition-exit');
     setTimeout(() => {
@@ -2693,10 +2716,13 @@ export default function App() {
   }
 
   return (
-    <div className="bg-[#0D0D0D] min-h-screen text-white">
+    <div className="bg-[#0D0D0D] min-h-screen text-white" role="document">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-orange-500 focus:text-white focus:rounded-lg">
+        Skip to main content
+      </a>
       <ScrollProgressBar />
       <Header navigateTo={navigateTo} currentPage={currentPage} />
-      <main className={animationClass}>
+      <main id="main-content" className={animationClass} role="main" aria-label="Main content">
         {renderPage()}
       </main>
       <Footer navigateTo={navigateTo} currentPage={currentPage} />

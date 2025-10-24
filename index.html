@@ -4,17 +4,101 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creative Agency Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Primary Meta Tags -->
+    <title>Phyrux Commissions - Professional Creative Services | Digital Art, Graphic Design & Pixel Art</title>
+    <meta name="title" content="Phyrux Commissions - Professional Creative Services | Digital Art, Graphic Design & Pixel Art" />
+    <meta name="description" content="Transform your vision into reality with Phyrux Commissions. Expert digital art, anime-style illustrations, graphic design, pixel art, game design, and video editing services. Professional quality, fast turnaround." />
+    <meta name="keywords" content="digital art commissions, anime art, graphic design, pixel art, game design, video editing, thumbnail design, logo design, character design, illustration services, creative agency" />
+    <meta name="author" content="Phyrux Commissions" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://phyrux-commissions.netlify.app/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://phyrux-commissions.netlify.app/" />
+    <meta property="og:title" content="Phyrux Commissions - Professional Creative Services" />
+    <meta property="og:description" content="Expert digital art, graphic design, pixel art, and video editing services. Transform your vision into stunning reality." />
+    <meta property="og:image" content="https://phyrux-commissions.netlify.app/assets/images/digital%20art/anime_art.webp" />
+    <meta property="og:site_name" content="Phyrux Commissions" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://phyrux-commissions.netlify.app/" />
+    <meta property="twitter:title" content="Phyrux Commissions - Professional Creative Services" />
+    <meta property="twitter:description" content="Expert digital art, graphic design, pixel art, and video editing services. Transform your vision into stunning reality." />
+    <meta property="twitter:image" content="https://phyrux-commissions.netlify.app/assets/images/digital%20art/anime_art.webp" />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Phyrux Commissions",
+      "description": "Professional creative services specializing in digital art, graphic design, pixel art, video editing, and game design",
+      "url": "https://phyrux-commissions.netlify.app/",
+      "logo": "https://phyrux-commissions.netlify.app/vite.svg",
+      "image": "https://phyrux-commissions.netlify.app/assets/images/digital%20art/anime_art.webp",
+      "email": "tezurect82@gmail.com",
+      "priceRange": "$$",
+      "serviceType": ["Digital Art", "Graphic Design", "Pixel Art", "Video Editing", "Animation", "Game Design"],
+      "areaServed": "Worldwide",
+      "sameAs": [
+        "https://www.instagram.com/phyrux.commission",
+        "https://discord.gg/uWDEX3nW9G"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "tezurect82@gmail.com",
+        "contactType": "Customer Service",
+        "availableLanguage": "English"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "50"
+      }
+    }
+    </script>
+    
+    <!-- Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
         scroll-behavior: smooth;
       }
       body {
         font-family: 'Inter', sans-serif;
+      }
+      
+      /* Accessibility - Skip to content link */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      
+      .focus\:not-sr-only:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
       }
       
       /* Performance optimizations */

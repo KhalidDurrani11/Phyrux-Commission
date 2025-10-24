@@ -1,0 +1,11 @@
+# Robots.txt for Phyrux Commissions
+User-agent: *
+Allow: /
+Allow: /assets/
+
+# Sitemap location
+Sitemap: https://phyrux-commissions.netlify.app/sitemap.xml
+
+# Crawl delay (optional, helps prevent server overload)
+Crawl-delay: 1
+

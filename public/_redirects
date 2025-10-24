@@ -1,0 +1,9 @@
+# Redirect default Netlify subdomain to custom domain (if you set one up later)
+# https://phyrux-commissions.netlify.app/* https://www.phyrux-commissions.com/:splat 301!
+
+# SPA fallback - serve index.html for all routes
+/*    /index.html   200
+
+# 404 fallback
+/404  /index.html   404
+
