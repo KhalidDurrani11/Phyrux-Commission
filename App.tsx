@@ -586,19 +586,17 @@ const TeamSection = () => (
 );
 
 const testimonialsCol1 = [
-
-    '/public/assets/images/testimonials/1.png',
-    '/public/assets/images/testimonials/2.png',
-    '/public/assets/images/testimonials/3.png',
-    '/public/assets/images/testimonials/4.png',
+    '/assets/images/testimonials/1.png',
+    '/assets/images/testimonials/2.png',
+    '/assets/images/testimonials/3.png',
+    '/assets/images/testimonials/4.png',
 ];
 
 const testimonialsCol2 = [
-    '/public/assets/images/testimonials/5.png',
-    '/public/assets/images/testimonials/6.png',
-    '/public/assets/images/testimonials/7.png',
-    '/public/assets/images/testimonials/8.png',
-
+    '/assets/images/testimonials/5.png',
+    '/assets/images/testimonials/6.png',
+    '/assets/images/testimonials/7.png',
+    '/assets/images/testimonials/8.png',
 ];
 
 const TestimonialsSection = () => (
