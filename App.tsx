@@ -1351,7 +1351,7 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
                     observer.disconnect();
                 }
             },
-            { rootMargin: '50px' }
+            { rootMargin: '300px' }
         );
 
         if (cardRef.current) {
@@ -1830,7 +1830,7 @@ const GraphicProjectSlider: React.FC<{ images: string[] }> = ({ images }) => {
                     observer.disconnect();
                 }
             },
-            { rootMargin: '50px' }
+            { rootMargin: '300px' }
         );
 
         if (sliderRef.current) {
@@ -2145,7 +2145,7 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
     
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
-            <ImagePreloader images={firstImages.slice(0, 2)} />
+            <ImagePreloader images={firstImages.slice(0, 4)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Graphic Design Services
@@ -2245,7 +2245,7 @@ const DigitalArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
     
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
-            <ImagePreloader images={firstImages.slice(0, 2)} />
+            <ImagePreloader images={firstImages.slice(0, 4)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Digital Art Services
@@ -2300,7 +2300,7 @@ const PixelArtPage = ({ navigateTo, currentPage }: NavigationProps) => {
     
     return (
         <div className="pt-12 px-4 sm:px-6 lg:px-8">
-            <ImagePreloader images={firstImages.slice(0, 3)} />
+            <ImagePreloader images={firstImages.slice(0, 6)} />
             <section className="text-center pb-12">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight">
                     Pixel Art & Game Design Services
