@@ -1079,34 +1079,28 @@ const videoEditingProjects = [
 
 const webDevProjects = [
     { 
-        title: 'Gym Website', 
-        description: 'A dynamic website for a fitness center with class schedules and membership info.', 
-        images: ['https://image.thum.io/get/width/1200/crop/800/https://goldsgymqta.netlify.app'],
-        url: 'https://goldsgymqta.netlify.app'
+        title: 'Business Landing Page', 
+        description: 'A modern landing page designed for businesses to showcase their services and solutions.', 
+        images: ['/assets/images/web-dev/flexdrop.png'],
+        url: 'https://flexdrop.netlify.app/'
     },
     { 
-        title: 'High-Conversion Landing Page', 
-        description: 'A focused landing page designed to maximize lead generation for a tech product.', 
-        images: ['https://image.thum.io/get/width/1200/crop/800/https://stripe.com/'],
-        url: 'https://stripe.com/'
+        title: 'POS System for Restaurant', 
+        description: 'A comprehensive point-of-sale system built for restaurant management and operations.', 
+        images: ['/assets/images/web-dev/pos-system.png'],
+        url: 'https://system-pos.netlify.app/'
     },
     { 
-        title: 'Personal Portfolio Website', 
-        description: 'A creative portfolio to showcase skills and projects with interactive 3D elements.', 
-        images: ['https://image.thum.io/get/width/1200/crop/800/https://bruno-simon.com/'],
-        url: 'https://bruno-simon.com/'
+        title: 'Professional Landing Page', 
+        description: 'A sleek single-page website with professional design and smooth user experience.', 
+        images: ['/assets/images/web-dev/cobaalt.png'],
+        url: 'https://cobaalt.netlify.app/'
     },
     { 
-        title: 'E-commerce Store', 
-        description: 'A feature-rich online store for selling premium electronic products.', 
-        images: ['https://image.thum.io/get/width/1200/crop/800/https://www.apple.com/store'],
-        url: 'https://www.apple.com/store'
-    },
-    { 
-        title: 'Corporate Business Website', 
-        description: 'A professional site to represent a company\'s brand and cloud services.', 
-        images: ['https://image.thum.io/get/width/1200/crop/800/https://vercel.com'],
-        url: 'https://vercel.com'
+        title: 'Creative Agency Portfolio', 
+        description: 'A stunning portfolio website showcasing creative agency services and projects.', 
+        images: ['/assets/images/web-dev/phyrux.png'],
+        url: 'https://phyrux.netlify.app/'
     },
 ];
 
@@ -1258,14 +1252,11 @@ type ProjectCardProps = {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-    // FIX: 'a' is not defined. Replaced with 'useState'.
     const [currentIndex, setCurrentIndex] = useState(0);
     const { loadedIndices, handleLoad } = useImageLoader();
     const isCurrentLoading = !loadedIndices.includes(currentIndex);
 
     useEffect(() => {
-        // Reset loaded state if project changes
-        // This is unlikely in this app structure, but good practice
         const newLoaded: number[] = [];
         project.images.forEach((_, index) => {
             const img = new Image();
@@ -1284,16 +1275,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         }
     };
 
-    const CardComponent = project.url ? 'a' : 'div';
-    const props = project.url ? { href: project.url, target: '_blank', rel: 'noopener noreferrer' } : {};
-
     return (
-        <CardComponent
-            {...props}
-            className="block bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95"
-        >
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95 group">
             <div 
-                className="relative group aspect-video overflow-hidden rounded-lg cursor-pointer bg-[#111]"
+                className="relative aspect-video overflow-hidden rounded-lg bg-[#111]"
                 onClick={nextImage}
             >
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
@@ -1303,7 +1288,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1313,23 +1298,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                           }}
                     />
                 ))}
-                 {project.url && (
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                        <span className="flex items-center gap-2 text-white font-semibold border-2 border-white/50 rounded-full px-5 py-2.5 transform group-hover:scale-105 transition-transform bg-black/30">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                               <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                               <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                            </svg>
-                            <span>View Site</span>
-                        </span>
-                    </div>
-                )}
             </div>
             <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
             {project.description && (
-                <p className="text-sm text-gray-400 mt-1">{project.description}</p>
+                <p className="text-sm text-gray-400 mt-2">{project.description}</p>
             )}
-        </CardComponent>
+            {project.url && (
+                <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg transition-all duration-300 active:scale-95"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                    </svg>
+                    Visit Website
+                </a>
+            )}
+        </div>
     );
 };
 
@@ -2181,8 +2169,6 @@ const GraphicsDesigningPage = ({ navigateTo, currentPage }: NavigationProps) => 
 };
 
 const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
-    const firstRowProjects = webDevProjects.slice(0, 3);
-    const secondRowProjects = webDevProjects.slice(3);
     const features = [
         { title: 'Custom Website Design', description: 'Unique, responsive websites that adapt seamlessly to all devices.' },
         { title: 'Web Applications', description: 'Fully functional, interactive web apps built to streamline your business processes.' },
@@ -2217,22 +2203,13 @@ const WebDevelopmentPage = ({ navigateTo, currentPage }: NavigationProps) => {
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">Our Projects</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {firstRowProjects.map((project, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                    {webDevProjects.map((project, index) => (
                          <AnimatedWrapper key={index} index={index}>
                             <ProjectCard project={project} />
                          </AnimatedWrapper>
                     ))}
                 </div>
-                {secondRowProjects.length > 0 && (
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:w-2/3 lg:mx-auto">
-                         {secondRowProjects.map((project, index) => (
-                            <AnimatedWrapper key={index + firstRowProjects.length} index={index}>
-                                <ProjectCard project={project} />
-                            </AnimatedWrapper>
-                        ))}
-                    </div>
-                )}
             </section>
         </div>
     );
