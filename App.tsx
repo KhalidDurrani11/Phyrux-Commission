@@ -1277,8 +1277,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
     return (
         <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95 group">
-            <div 
-                className="relative aspect-video overflow-hidden rounded-lg bg-[#111]"
+            <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative aspect-[4/3] overflow-hidden rounded-lg bg-[#111] group-hover:cursor-pointer"
                 onClick={nextImage}
             >
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
@@ -1288,7 +1291,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                         key={index}
                         src={src}
                         alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
                         onLoad={() => handleLoad(index)}
                         onError={(e) => {
                             handleLoad(index);
@@ -1298,7 +1301,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                           }}
                     />
                 ))}
-            </div>
+                {project.url && (
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                        <span className="flex items-center gap-2 text-white font-semibold border-2 border-white/50 rounded-full px-5 py-2.5 transform group-hover:scale-105 transition-transform bg-black/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                               <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                               <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                            </svg>
+                            <span>Visit Site</span>
+                        </span>
+                    </div>
+                )}
+            </a>
             <h3 className="font-bold text-xl text-white mt-4">{project.title}</h3>
             {project.description && (
                 <p className="text-sm text-gray-400 mt-2">{project.description}</p>
@@ -1308,7 +1322,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg transition-all duration-300 active:scale-95"
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-white/20 hover:border-orange-500 text-gray-300 hover:text-orange-500 font-semibold rounded-lg transition-all duration-300 hover:bg-orange-500/10 active:scale-95"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
