@@ -1057,7 +1057,7 @@ const videoEditingProjects = [
         ]
     },
     { 
-        title: 'Long Form & Documentary', 
+        title: 'Long Form Videos', 
         videos: [
             { youtubeUrl: 'https://www.youtube.com/embed/qnCM7eN7_K0', thumbnailUrl: 'https://img.youtube.com/vi/qnCM7eN7_K0/maxresdefault.jpg' },
             { youtubeUrl: 'https://www.youtube.com/embed/lJ9VBCLGO5k', thumbnailUrl: 'https://img.youtube.com/vi/lJ9VBCLGO5k/maxresdefault.jpg' }
