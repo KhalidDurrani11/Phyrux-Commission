@@ -1,5 +1,36 @@
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
-import React, { useState, useEffect, useRef } from'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+
+// Responsive Image Component for better LCP
+interface ResponsiveImageProps {
+    src: string;
+    alt: string;
+    className?: string;
+    loading?: 'lazy' | 'eager';
+    fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
+    src,
+    alt,
+    className = '',
+    loading = 'lazy',
+    fetchpriority = 'auto'
+}) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+        <img
+            src={src}
+            alt={alt}
+            className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+            loading={loading}
+            fetchpriority={fetchpriority}
+            onLoad={() => setIsLoaded(true)}
+            decoding="async"
+        />
+    );
+};
 
 // Preload critical images
 const ImagePreloader: React.FC<{ images: string[] }> = ({ images }) => {
@@ -420,9 +451,27 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
         </div>
         <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
-                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="/assets/images/clients/clients_1.jpeg" alt="client 1" loading="eager" />
-                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="/assets/images/clients/clients_2.jpeg" alt="client 2" loading="eager" />
-                <img className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover" src="/assets/images/clients/clients_3.jpeg" alt="client 3" loading="eager" />
+                <ResponsiveImage 
+                    src="/assets/images/clients/clients_1.jpeg" 
+                    alt="client 1" 
+                    className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                />
+                <ResponsiveImage 
+                    src="/assets/images/clients/clients_2.jpeg" 
+                    alt="client 2" 
+                    className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                />
+                <ResponsiveImage 
+                    src="/assets/images/clients/clients_3.jpeg" 
+                    alt="client 3" 
+                    className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                />
             </div>
             <p className="ml-4 text-gray-400 text-sm">500+ Happy customers</p>
         </div>
@@ -2759,32 +2808,38 @@ export default function App() {
 
   const renderPage = () => {
     const servicePage = services.find(s => s.id === currentPage);
-
     const navigationProps = { navigateTo, currentPage };
+
+    // Loading fallback for lazy-loaded components
+    const LoadingFallback = () => (
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    );
 
     switch(currentPage) {
         case 'home':
             return <HomePage {...navigationProps} />;
         case 'services-page':
-            return <AllServicesPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><AllServicesPage {...navigationProps} /></Suspense>;
         case 'video-editing':
-            return <VideoEditingPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><VideoEditingPage {...navigationProps} /></Suspense>;
         case 'graphics-designing':
-            return <GraphicsDesigningPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><GraphicsDesigningPage {...navigationProps} /></Suspense>;
         case 'web-development':
-            return <WebDevelopmentPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><WebDevelopmentPage {...navigationProps} /></Suspense>;
         case 'digital-art':
-            return <DigitalArtPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><DigitalArtPage {...navigationProps} /></Suspense>;
         case 'pixel-art':
-            return <PixelArtPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><PixelArtPage {...navigationProps} /></Suspense>;
         case 'clipping-service':
-            return <ClippingServicePage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><ClippingServicePage {...navigationProps} /></Suspense>;
         case 'about-us':
-            return <AboutUsPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><AboutUsPage {...navigationProps} /></Suspense>;
         case 'faqs':
-            return <FAQPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><FAQPage {...navigationProps} /></Suspense>;
         case 'contact':
-            return <ContactPage {...navigationProps} />;
+            return <Suspense fallback={<LoadingFallback />}><ContactPage {...navigationProps} /></Suspense>;
         default:
             if (servicePage) {
                 return <ServicePlaceholderPage service={servicePage} navigateTo={navigateTo} />;
