@@ -1155,26 +1155,6 @@ const pixelArtProjects = [
   
 const graphicsDesignProjects = [
     { 
-        title: 'Cosplay Edits',
-        images: [
-            '/assets/images/graphic designing/cosplay_edit (1).jpeg',
-            '/assets/images/graphic designing/cosplay_edit (2).jpeg',
-            '/assets/images/graphic designing/cosplay_edit (3).jpeg',
-        ]
-    },
-    { 
-        title: 'Social Media Posts',
-        images: [
-            '/assets/images/graphic designing/post_1 (2).jpeg',
-            '/assets/images/graphic designing/post_1 (6).jpeg',
-            '/assets/images/graphic designing/post_1 (3).jpeg',
-            '/assets/images/graphic designing/post_1 (4).jpeg',
-            '/assets/images/graphic designing/post_1 (1).jpeg',
-            '/assets/images/graphic designing/post_1 (5).jpeg',
-            '/assets/images/graphic designing/post_1 (7).jpeg',
-        ]
-    },
-    { 
         title: 'Social Media Banners',
         images: [
             '/assets/images/graphic designing/socialmedia_banner (1).jpeg',
@@ -1195,6 +1175,26 @@ const graphicsDesignProjects = [
             '/assets/images/graphic designing/yt_thumb (5).jpeg',
             '/assets/images/graphic designing/yt_thumb (6).jpeg',
             '/assets/images/graphic designing/yt_thumb (7).jpeg',
+        ]
+    },
+    { 
+        title: 'Cosplay Edits',
+        images: [
+            '/assets/images/graphic designing/cosplay_edit (1).jpeg',
+            '/assets/images/graphic designing/cosplay_edit (2).jpeg',
+            '/assets/images/graphic designing/cosplay_edit (3).jpeg',
+        ]
+    },
+    { 
+        title: 'Social Media Posts',
+        images: [
+            '/assets/images/graphic designing/post_1 (2).jpeg',
+            '/assets/images/graphic designing/post_1 (6).jpeg',
+            '/assets/images/graphic designing/post_1 (3).jpeg',
+            '/assets/images/graphic designing/post_1 (4).jpeg',
+            '/assets/images/graphic designing/post_1 (1).jpeg',
+            '/assets/images/graphic designing/post_1 (5).jpeg',
+            '/assets/images/graphic designing/post_1 (7).jpeg',
         ]
     }
 ];
