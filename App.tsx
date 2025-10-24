@@ -1169,9 +1169,9 @@ const digitalArtProjects = [
     { 
         title: 'Anime Art Collection',
         images: [
-            'public/assets/images/digital art/anime_art.jpeg',
-            'public/assets/images/digital art/anime_art2.png',
-            'public/assets/images/digital art/anime_art3.webp',
+            'assets/images/digital art/anime_art.jpeg',
+            'assets/images/digital art/anime_art2.png',
+            'assets/images/digital art/anime_art3.webp',
         ]
     },
     { 
