@@ -22,6 +22,11 @@
         -webkit-tap-highlight-color: transparent;
       }
       
+      /* SVG logo optimization */
+      img[src*="logos/"][src$=".svg"] {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+      }
+      
       /* Hardware acceleration for smooth animations */
       .preloader-exit,
       .page-transition-enter,
@@ -146,7 +151,7 @@
         animation: marquee 30s linear infinite;
       }
       .animate-marquee-fast {
-        animation: marquee 20s linear infinite;
+        animation: marquee 15s linear infinite;
       }
       .group:hover .animate-marquee, 
       .animate-marquee:hover,
