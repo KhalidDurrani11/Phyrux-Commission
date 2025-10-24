@@ -43,8 +43,8 @@ const Preloader = React.memo(() => {
                 }`}
                 style={{ pointerEvents: 'none' }}
             >
-                Phyrux
-            </span>
+                    Phyrux
+                </span>
             {/* Second word with pop animation - conditionally rendered */}
             {showSecondWord && (
                 <span 
@@ -683,14 +683,18 @@ const TechMarquee = () => (
                 Powered by Industry-Leading Tools
             </h2>
         </div>
-        <div className="group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee space-x-16 flex-shrink-0 items-center">
+        <div className="relative w-full overflow-hidden py-4">
+            {/* Gradient masks on the sides */}
+            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/20 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black/20 to-transparent z-10 pointer-events-none"></div>
+            
+            <div className="group flex animate-marquee-fast space-x-8 flex-shrink-0 items-center">
                 {[...techLogos, ...techLogos, ...techLogos, ...techLogos].map((tech, index) => (
-                    <div key={index} className="group/item flex flex-col items-center justify-center gap-4 text-center cursor-pointer min-w-[120px]">
-                        <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center group-hover/item:scale-110 transition-all duration-300 ease-in-out group-hover/item:bg-orange-500/10 group-hover/item:shadow-lg group-hover/item:shadow-orange-500/20 group-hover/item:border-orange-500/30">
+                    <div key={index} className="group/item flex flex-col items-center justify-center gap-3 text-center cursor-pointer min-w-[100px] flex-shrink-0">
+                        <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-110 hover:bg-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-500/30">
                             {tech.component}
                         </div>
-                        <span className="text-sm font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover/item:text-white">
+                        <span className="text-xs font-semibold text-gray-500 whitespace-nowrap transition-colors duration-300 group-hover/item:text-white">
                             {tech.name}
                         </span>
                     </div>
@@ -1169,9 +1173,9 @@ const digitalArtProjects = [
     { 
         title: 'Anime Art Collection',
         images: [
-            'public/assets/images/digital art/anime_art.jpeg',
-            'public/assets/images/digital art/anime_art2.png',
-            'public/assets/images/digital art/anime_art3.webp',
+            'assets/images/digital art/anime_art.jpeg',
+            'assets/images/digital art/anime_art2.png',
+            'assets/images/digital art/anime_art3.webp',
         ]
     },
     { 
