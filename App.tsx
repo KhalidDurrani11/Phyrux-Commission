@@ -2839,10 +2839,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Preloader timing - balanced speed and visibility
-    const totalWordAnimationTime = 2000; // Commissions visible for ~1 second
+    // Preloader timing - quick and snappy
+    const totalWordAnimationTime = 1700; // Commissions visible for ~0.7 seconds
     // Smooth exit animation
-    const exitAnimationTime = 350;
+    const exitAnimationTime = 300;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {
