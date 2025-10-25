@@ -2768,6 +2768,14 @@ export default function App() {
     };
   }, []);
 
+  // Remove hash from URL on initial load
+  useEffect(() => {
+    if (window.location.hash) {
+      // Clean URL by removing hash
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, []);
+
   // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
@@ -2789,9 +2797,9 @@ export default function App() {
         return;
     };
 
-    // Update browser history without showing hash in URL
-    const title = page.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    window.history.pushState({ page }, '', window.location.pathname);
+    // Update browser history without showing hash in URL - keep URL completely clean
+    const cleanUrl = window.location.origin + window.location.pathname;
+    window.history.pushState({ page }, '', cleanUrl);
 
     setAnimationClass('page-transition-exit');
     setTimeout(() => {
