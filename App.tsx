@@ -690,7 +690,9 @@ const TestimonialsSection = () => (
                             key={`col1-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + 1}`} 
-                            className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover -rotate-2" 
+                            className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover -rotate-2"
+                            width="400"
+                            height="300"
                         />
                     ))}
                 </div>
@@ -702,7 +704,9 @@ const TestimonialsSection = () => (
                             key={`col2-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + testimonialsCol1.length + 1}`} 
-                            className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover rotate-2" 
+                            className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover rotate-2"
+                            width="400"
+                            height="300"
                         />
                     ))}
                 </div>
@@ -2747,10 +2751,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Faster preloader for better UX on slow connections
-    const totalWordAnimationTime = 1500;
+    // Ultra-fast preloader for optimal mobile performance
+    const totalWordAnimationTime = 1000;
     // Smooth exit animation
-    const exitAnimationTime = 400;
+    const exitAnimationTime = 300;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {

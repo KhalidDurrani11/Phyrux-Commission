@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
     <!-- Primary Meta Tags -->
     <title>Phyrux Commissions - Professional Creative Services | Digital Art, Graphic Design & Pixel Art</title>
@@ -65,10 +69,7 @@
     <!-- Critical Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://img.youtube.com">
-    <link rel="preconnect" href="https://www.youtube.com">
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://aistudiocdn.com">
     
     <!-- Preload critical LCP images for hero section -->
     <link rel="preload" href="/assets/images/clients/clients_1.jpeg" as="image" type="image/jpeg" fetchpriority="high">
@@ -122,11 +123,25 @@
       /* Optimize image rendering */
       img {
         content-visibility: auto;
+        image-rendering: -webkit-optimize-contrast;
       }
       
       /* Reduce layout shifts */
       iframe {
         aspect-ratio: 16 / 9;
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        
+        img, video, iframe {
+          max-width: 100%;
+          height: auto;
+        }
       }
       
       /* SVG logo optimization */

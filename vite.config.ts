@@ -40,9 +40,19 @@ export default defineConfig(({ mode }) => {
           compress: {
             drop_console: true,
             drop_debugger: true,
+            passes: 2,
+            pure_funcs: ['console.log', 'console.info'],
+          },
+          mangle: {
+            safari10: true,
+          },
+          format: {
+            comments: false,
           },
         },
         chunkSizeWarningLimit: 1000,
+        reportCompressedSize: false,
+        sourcemap: false,
       },
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
