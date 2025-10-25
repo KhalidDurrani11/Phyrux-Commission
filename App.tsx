@@ -1,33 +1,86 @@
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 
-// Responsive Image Component for better LCP
-interface ResponsiveImageProps {
-    src: string;
+// Optimized Image Component with WebP support and fallback
+interface OptimizedImageProps {
+    src: string; // Path without extension, e.g., "/assets/images/hero"
     alt: string;
     className?: string;
     loading?: 'lazy' | 'eager';
     fetchpriority?: 'high' | 'low' | 'auto';
+    width?: number;
+    height?: number;
 }
 
-const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
+const OptimizedImage: React.FC<OptimizedImageProps> = ({
     src,
     alt,
     className = '',
     loading = 'lazy',
-    fetchpriority = 'auto'
+    fetchpriority = 'auto',
+    width,
+    height
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    
+    // Get file extension from original src
+    const getExtension = (path: string) => {
+        const ext = path.match(/\.(jpeg|jpg|png|webp)$/i);
+        return ext ? ext[1].toLowerCase() : 'jpeg';
+    };
+    
+    const originalExt = getExtension(src);
+    const basePath = src.replace(/\.(jpeg|jpg|png|webp)$/i, '');
+    
+    // Generate WebP and fallback paths
+    const webpSrc = `${basePath}.webp`;
+    const fallbackSrc = originalExt === 'webp' ? `${basePath}.jpeg` : src;
 
+    return (
+        <picture>
+            <source srcSet={webpSrc} type="image/webp" />
+            <img
+                src={fallbackSrc}
+                alt={alt}
+                className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+                loading={loading}
+                fetchpriority={fetchpriority}
+                onLoad={() => setIsLoaded(true)}
+                decoding="async"
+                width={width}
+                height={height}
+            />
+        </picture>
+    );
+};
+
+// Simple image component for backwards compatibility (no WebP optimization)
+interface SimpleImageProps {
+    src: string;
+    alt: string;
+    className?: string;
+    loading?: 'lazy' | 'eager';
+    width?: number;
+    height?: number;
+}
+
+const SimpleImage: React.FC<SimpleImageProps> = ({
+    src,
+    alt,
+    className = '',
+    loading = 'lazy',
+    width,
+    height
+}) => {
     return (
         <img
             src={src}
             alt={alt}
-            className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+            className={className}
             loading={loading}
-            fetchpriority={fetchpriority}
-            onLoad={() => setIsLoaded(true)}
             decoding="async"
+            width={width}
+            height={height}
         />
     );
 };
@@ -451,32 +504,32 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
         </div>
         <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
-                <img 
+                <OptimizedImage 
                     src="/assets/images/clients/clients_1.jpeg" 
                     alt="client 1" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     loading="eager"
-                    decoding="async"
+                    fetchpriority="high"
                 />
-                <img 
+                <OptimizedImage 
                     src="/assets/images/clients/clients_2.jpeg" 
                     alt="client 2" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     loading="eager"
-                    decoding="async"
+                    fetchpriority="high"
                 />
-                <img 
+                <OptimizedImage 
                     src="/assets/images/clients/clients_3.jpeg" 
                     alt="client 3" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     loading="eager"
-                    decoding="async"
+                    fetchpriority="high"
                 />
             </div>
             <p className="ml-4 text-gray-300 text-sm">500+ Happy customers</p>
@@ -691,28 +744,28 @@ const TestimonialsSection = () => (
                 {/* Column 1 */}
                 <div className="flex flex-col gap-8 w-[300px] md:w-[400px] animate-scroll-up">
                     {[...testimonialsCol1, ...testimonialsCol1].map((src, index) => (
-                        <img 
+                        <OptimizedImage
                             loading="lazy"
                             key={`col1-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + 1}`} 
                             className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover -rotate-2"
-                            width="400"
-                            height="300"
+                            width={400}
+                            height={300}
                         />
                     ))}
                 </div>
                 {/* Column 2 */}
                 <div className="hidden md:flex flex-col gap-8 w-[300px] md:w-[400px] animate-scroll-down">
                     {[...testimonialsCol2, ...testimonialsCol2].map((src, index) => (
-                        <img 
+                        <OptimizedImage
                             loading="lazy"
                             key={`col2-${index}`}
                             src={src} 
                             alt={`Testimonial screenshot ${index + testimonialsCol1.length + 1}`} 
                             className="w-full rounded-2xl shadow-xl shadow-black/40 object-cover rotate-2"
-                            width="400"
-                            height="300"
+                            width={400}
+                            height={300}
                         />
                     ))}
                 </div>
@@ -1279,9 +1332,9 @@ const digitalArtProjects = [
     { 
         title: 'Anime Art Collection',
         images: [
-            'assets/images/digital art/anime_art.jpeg',
-            'assets/images/digital art/anime_art2.png',
-            'assets/images/digital art/anime_art3.webp',
+            '/assets/images/digital art/anime_art.jpeg',
+            '/assets/images/digital art/anime_art2.png',
+            '/assets/images/digital art/anime_art3.webp',
         ]
     },
     { 
@@ -1361,22 +1414,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 onClick={nextImage}
             >
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
-                {project.images.map((src, index) => (
-                     <img
-                        loading="lazy"
-                        key={index}
-                        src={src}
-                        alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
-                        onLoad={() => handleLoad(index)}
-                        onError={(e) => {
-                            handleLoad(index);
-                            const target = e.target as HTMLImageElement;
-                            target.onerror = null; 
-                            target.src = 'https://i.imgur.com/8rqwdLX.png';
-                          }}
-                    />
-                ))}
+                {project.images.map((src, index) => {
+                    const getExtension = (path: string) => {
+                        const ext = path.match(/\.(jpeg|jpg|png|webp)$/i);
+                        return ext ? ext[1].toLowerCase() : 'jpeg';
+                    };
+                    
+                    const originalExt = getExtension(src);
+                    const basePath = src.replace(/\.(jpeg|jpg|png|webp)$/i, '');
+                    const webpSrc = `${basePath}.webp`;
+                    const fallbackSrc = originalExt === 'webp' ? `${basePath}.jpeg` : src;
+                    
+                    return (
+                        <picture key={index}>
+                            <source srcSet={webpSrc} type="image/webp" />
+                            <img
+                                loading="lazy"
+                                src={fallbackSrc}
+                                alt={`${project.title} preview ${index + 1}`}
+                                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                                onLoad={() => handleLoad(index)}
+                                onError={(e) => {
+                                    handleLoad(index);
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null; 
+                                    target.src = 'https://i.imgur.com/8rqwdLX.png';
+                                }}
+                                decoding="async"
+                            />
+                        </picture>
+                    );
+                })}
                 {project.url && (
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                         <span className="flex items-center gap-2 text-white font-semibold border-2 border-white/50 rounded-full px-5 py-2.5 transform group-hover:scale-105 transition-transform bg-black/30">
@@ -1464,24 +1532,38 @@ const PixelArtProjectCard: React.FC<{ project: { title: string; images: string[]
         <div ref={cardRef} className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 active:scale-95">
             <div className="relative group aspect-video overflow-hidden rounded-lg bg-[#111]">
                 {isCurrentLoading && <div className="absolute inset-0 animate-pulse-bg"></div>}
-                {isVisible && project.images.map((src, index) => (
-                    <img
-                        loading={index === 0 ? "eager" : "lazy"}
-                        decoding="async"
-                        fetchPriority={index === 0 ? "high" : "low"}
-                        key={index}
-                        src={src}
-                        alt={`${project.title} preview ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
-                        onLoad={() => handleLoad(index)}
-                        onError={(e) => {
-                            handleLoad(index);
-                            const target = e.target as HTMLImageElement;
-                            target.onerror = null; 
-                            target.src = 'https://i.imgur.com/8rqwdLX.png';
-                        }}
-                    />
-                ))}
+                {isVisible && project.images.map((src, index) => {
+                    const getExtension = (path: string) => {
+                        const ext = path.match(/\.(jpeg|jpg|png|webp)$/i);
+                        return ext ? ext[1].toLowerCase() : 'jpeg';
+                    };
+                    
+                    const originalExt = getExtension(src);
+                    const basePath = src.replace(/\.(jpeg|jpg|png|webp)$/i, '');
+                    const webpSrc = `${basePath}.webp`;
+                    const fallbackSrc = originalExt === 'webp' ? `${basePath}.jpeg` : src;
+                    
+                    return (
+                        <picture key={index}>
+                            <source srcSet={webpSrc} type="image/webp" />
+                            <img
+                                loading={index === 0 ? "eager" : "lazy"}
+                                decoding="async"
+                                fetchpriority={index === 0 ? "high" : "low"}
+                                src={fallbackSrc}
+                                alt={`${project.title} preview ${index + 1}`}
+                                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'} ${index === currentIndex && isCurrentLoading ? '!opacity-0' : ''}`}
+                                onLoad={() => handleLoad(index)}
+                                onError={(e) => {
+                                    handleLoad(index);
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null; 
+                                    target.src = 'https://i.imgur.com/8rqwdLX.png';
+                                }}
+                            />
+                        </picture>
+                    );
+                })}
                 
                 {project.images.length > 1 && (
                     <>
