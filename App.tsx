@@ -451,26 +451,32 @@ const Hero = ({ navigateTo, currentPage }: NavigationProps) => (
         </div>
         <div className="mt-8 flex items-center justify-center opacity-0 animate-fade-in-up animation-delay-600">
             <div className="flex -space-x-4">
-                <ResponsiveImage 
+                <img 
                     src="/assets/images/clients/clients_1.jpeg" 
                     alt="client 1" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    width="40"
+                    height="40"
                     loading="eager"
-                    fetchpriority="high"
+                    decoding="async"
                 />
-                <ResponsiveImage 
+                <img 
                     src="/assets/images/clients/clients_2.jpeg" 
                     alt="client 2" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    width="40"
+                    height="40"
                     loading="eager"
-                    fetchpriority="high"
+                    decoding="async"
                 />
-                <ResponsiveImage 
+                <img 
                     src="/assets/images/clients/clients_3.jpeg" 
                     alt="client 3" 
                     className="w-10 h-10 rounded-full border-2 border-[#0D0D0D] object-cover"
+                    width="40"
+                    height="40"
                     loading="eager"
-                    fetchpriority="high"
+                    decoding="async"
                 />
             </div>
             <p className="ml-4 text-gray-300 text-sm">500+ Happy customers</p>
