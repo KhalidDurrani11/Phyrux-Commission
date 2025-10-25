@@ -1073,7 +1073,7 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-500">
+                <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-300">
                     <p>&copy; {new Date().getFullYear()} Phyrux Commissions. All Rights Reserved.</p>
                 </div>
             </div>
