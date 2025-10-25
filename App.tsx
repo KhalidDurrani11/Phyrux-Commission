@@ -109,19 +109,19 @@ const Preloader = React.memo(() => {
         let fadeOutTimerId: number;
         let fadeInTimerId: number;
         
-        // Pop out first word - reduced delay so second word gets more time
+        // Pop out first word - let it be seen properly
         const fadeOutTimer = setTimeout(() => {
             fadeOutTimerId = requestAnimationFrame(() => {
                 setShowFirstWord(false);
             });
-        }, 800);
+        }, 850);
         
-        // Pop in second word - appears slightly earlier
+        // Pop in second word - then HOLD it so people can read it
         const fadeInTimer = setTimeout(() => {
             fadeInTimerId = requestAnimationFrame(() => {
                 setShowSecondWord(true);
             });
-        }, 1000);
+        }, 1050);
 
         return () => {
             clearTimeout(fadeOutTimer);
@@ -2839,10 +2839,10 @@ export default function App() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    // Preloader timing - show both words clearly
-    const totalWordAnimationTime = 2500; // Increased so "Commissions" is visible longer
+    // Preloader timing - give Commissions proper display time
+    const totalWordAnimationTime = 2200; // Commissions stays visible longer
     // Smooth exit animation
-    const exitAnimationTime = 400;
+    const exitAnimationTime = 350;
 
     // Start the final exit animation after the words are done
     const startTimer = setTimeout(() => {
