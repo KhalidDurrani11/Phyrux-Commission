@@ -1,5 +1,5 @@
 // FIX: Invalid import statement. Replaced with a standard import for React hooks.
-import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+//import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 
 // Optimized Image Component with WebP support and fallback
 interface OptimizedImageProps {
