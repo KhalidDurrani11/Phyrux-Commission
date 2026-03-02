@@ -142,7 +142,7 @@ const Preloader = React.memo(() => {
                 }`}
                 style={{ pointerEvents: 'none' }}
             >
-                    Phyrux
+                    Codex
                 </span>
             {/* Second word with pop animation - conditionally rendered */}
             {showSecondWord && (
@@ -150,7 +150,7 @@ const Preloader = React.memo(() => {
                     className="absolute text-white animate-preloader-pop-in"
                     style={{ pointerEvents: 'none' }}
                 >
-                    Commissions
+                    Solutions
                 </span>
             )}
         </div>
@@ -404,8 +404,8 @@ const Header = ({ navigateTo, currentPage }: NavigationProps) => {
                 <button onClick={() => navigateTo('home')} className="group flex items-center focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100">
                   
                   <span className="font-bold text-lg sm:text-xl text-white tracking-wider ml-3 transition-colors duration-300 ease-in-out group-hover:text-orange-400">
-                      <span className="group-hover:hidden">Phyrux Commissions</span>
-                      <span className="hidden group-hover:inline">Phyrux Comms</span>
+                      <span className="group-hover:hidden">Codex Solutions</span>
+                      <span className="hidden group-hover:inline">Codex Comms</span>
                   </span>
                 </button>
                 <nav className="hidden md:flex items-center space-x-1">
@@ -692,7 +692,7 @@ const TeamSection = () => (
                 Our Team
             </h2>
             <p className="max-w-3xl mx-auto text-gray-400 mb-12 text-base sm:text-lg">
-                We are a group of passionate creatives, each bringing unique expertise and vision to every project. Meet the talented individuals behind Phyrux Commissions who help turn your ideas into reality:
+                We are a group of passionate creatives, each bringing unique expertise and vision to every project. Meet the talented individuals behind Codex Solutions who help turn your ideas into reality:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {teamMembers.map((member, index) => (
@@ -826,7 +826,7 @@ const TechMarquee = () => (
 
 
 const storyEvents = [
-  { year: '2020', title: 'Genesis Spark', description: 'Phyrux Commissions was founded with a passion for digital art and gaming aesthetics, starting with small commissions.' },
+  { year: '2020', title: 'Genesis Spark', description: 'Codex Solutions was founded with a passion for digital art and gaming aesthetics, starting with small Solutions.' },
   { year: '2021', title: 'Service Expansion', description: 'Expanded our services to include video editing and graphic design, attracting a wider range of clients.' },
   { year: '2022', title: 'Studio Establishment', description: 'Officially established a small, dedicated team and moved into our first creative studio space.' },
   { year: '2023', title: 'Future Forged', description: 'Launched our new brand identity and futuristic website, marking a new era of high-end creative solutions.' },
@@ -850,12 +850,12 @@ const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
                         About Us
                     </h1>
                     <p className="mx-auto text-gray-400 mb-12 text-base sm:text-lg leading-relaxed">
-                        Welcome to Phyrux Commissions, where creativity meets professionalism. We are a dynamic creative services group, driven by a passion for producing high-quality content that helps brands, creators, and businesses stand out in the digital world.
+                        Welcome to Codex Solutions, where creativity meets professionalism. We are a dynamic creative services group, driven by a passion for producing high-quality content that helps brands, creators, and businesses stand out in the digital world.
                     </p>
                 </div>
                 <div className="max-w-4xl mx-auto text-left text-gray-300 space-y-8 text-base">
                     <div>
-                        <p>At Phyrux Commissions, we offer a diverse range of services to cater to your unique needs, including:</p>
+                        <p>At Codex Solutions, we offer a diverse range of services to cater to your unique needs, including:</p>
                         <ul className="mt-6 space-y-4">
                             {aboutServices.map(service => (
                                 <ServiceFeature key={service.title} title={service.title} description={service.description} />
@@ -866,7 +866,7 @@ const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
                         <p>Our team is passionate about collaboration, and we pride ourselves on being more than just service providers — we are partners in your creative journey. We listen to your ideas, understand your goals, and deliver the perfect blend of artistry and technical expertise to make your vision a reality.</p>
                     </div>
                     <div>
-                        <p>Whether you’re a growing brand, a seasoned creator, or a business looking to enhance your digital footprint, Phyrux Commissions is here to bring your ideas to life. Let’s create something amazing together.</p>
+                        <p>Whether you’re a growing brand, a seasoned creator, or a business looking to enhance your digital footprint, Codex Solutions is here to bring your ideas to life. Let’s create something amazing together.</p>
                     </div>
                 </div>
             </section>
@@ -883,7 +883,7 @@ const AboutUsPage = ({ navigateTo, currentPage }: NavigationProps) => {
                         Our Story
                     </h2>
                     <p className="max-w-3xl mx-auto text-gray-400 mb-20 text-base sm:text-lg">
-                        Born from a shared passion for gaming culture and cutting-edge design, Phyrux Commissions is more than just a studio — it’s an arsenal of creativity. We empower brands with the visual power to dominate their digital landscapes.
+                        Born from a shared passion for gaming culture and cutting-edge design, Codex Solutions is more than just a studio — it’s an arsenal of creativity. We empower brands with the visual power to dominate their digital landscapes.
                     </p>
                     <div className="relative">
                         <div className="hidden md:block">
@@ -983,7 +983,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, defaultOpen = false
 
 const FAQPage = ({ navigateTo, currentPage }: NavigationProps) => {
     const faqs = [
-        { q: "What services do you offer?", a: "At Phyrux Commissions, we provide a wide range of services including video editing, clipping, graphic design, digital art, website development, and pixel art. We tailor each service to your specific needs to help bring your vision to life." },
+        { q: "What services do you offer?", a: "At Codex Solutions, we provide a wide range of services including video editing, clipping, graphic design, digital art, website development, and pixel art. We tailor each service to your specific needs to help bring your vision to life." },
         { q: "Do you offer custom graphic designs for branding?", a: "Yes! Whether you need a logo, a complete brand identity, or marketing collateral, our graphic design team works closely with you to create visuals that perfectly represent your brand." },
         { q: "Can you help with website development?", a: "Absolutely! Our website development services are focused on creating responsive, user-friendly websites that are optimized for performance. We’ll work with you from start to finish to ensure your site meets your needs." },
         { q: "Do you create digital art for video games or apps?", a: "Yes, we specialize in digital art tailored to the gaming and tech industries. Whether it's character designs, environment art, or assets for apps and games, we can bring your project to life with stunning visuals." },
@@ -1063,11 +1063,11 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                     <div className="lg:col-span-5 text-center lg:text-left">
                         <div className="flex items-center justify-center lg:justify-start mb-4">
                             <span className="font-bold text-xl text-orange-400 tracking-wider">
-                                Phyrux Commissions
+                                Codex Solutions
                             </span>
                         </div>
                         <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto lg:mx-0">
-                           Phyrux Commissions is a creative services group dedicated to bringing your ideas to life across multiple platforms. We specialize in a wide range of digital services, including video editing, clipping, graphic design, digital art, website development, and pixel art. Our goal is to help brands, creators, and businesses create compelling and professional content that resonates with their audience. With a focus on quality, creativity, and innovation, we’re here to turn your visions into polished, impactful digital experiences.
+                           Codex Solutions is a creative services group dedicated to bringing your ideas to life across multiple platforms. We specialize in a wide range of digital services, including video editing, clipping, graphic design, digital art, website development, and pixel art. Our goal is to help brands, creators, and businesses create compelling and professional content that resonates with their audience. With a focus on quality, creativity, and innovation, we’re here to turn your visions into polished, impactful digital experiences.
                         </p>
                     </div>
 
@@ -1098,17 +1098,17 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                     <div className="lg:col-span-3 text-center lg:text-left">
                         <h3 className="font-bold text-white mb-4">Connect</h3>
                         <div className="flex justify-center lg:justify-start space-x-4">
-                           <SocialIcon href="https://www.instagram.com/phyruxvisuals/">
+                           <SocialIcon href="https://www.instagram.com/khalid_durrani1">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
                                 </svg>
                             </SocialIcon>
-                            <SocialIcon href="https://discord.gg/sVZeyGQm">
+                            <SocialIcon href="https://www.linkedin.com/in/khalid-durrani-320879288/">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0 a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                                 </svg>
                             </SocialIcon>
-                            <SocialIcon href="https://wa.me/923167741677">
+                            <SocialIcon href="https://wa.me/923343199005">
                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                                </svg>
@@ -1116,18 +1116,18 @@ const Footer = ({ navigateTo, currentPage }: NavigationProps) => {
                         </div>
                         <div className="mt-6">
                             <p className="text-gray-400 text-sm mb-1">Email Us</p>
-                            <a href="mailto:tezurect82@gmail.com" className="font-semibold text-white hover:text-orange-400 text-sm transition-all duration-300 ease-in-out inline-flex items-center gap-2 active:scale-95" aria-label="Email us at tezurect82@gmail.com">
+                            <a href="mailto:kkjan9198@gmail.com" className="font-semibold text-white hover:text-orange-400 text-sm transition-all duration-300 ease-in-out inline-flex items-center gap-2 active:scale-95" aria-label="Email us at kkjan9198@gmail.com">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
-                                <span>tezurect82@gmail.com</span>
+                                <span>kkjan9198@gmail.com</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-gray-300">
-                    <p>&copy; {new Date().getFullYear()} Phyrux Commissions. All Rights Reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Codex Solutions. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
@@ -1228,8 +1228,8 @@ const webDevProjects = [
     { 
         title: 'Creative Agency Portfolio', 
         description: 'A stunning portfolio website showcasing creative agency services and projects.', 
-        images: ['/assets/images/web-dev/phyrux.png'],
-        url: 'https://phyrux.netlify.app/'
+        images: ['/assets/images/web-dev/Codex.png'],
+        url: 'https://Codex.netlify.app/'
     },
 ];
 
@@ -2646,7 +2646,7 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
             // Use encodeURIComponent for clean encoding
             const body = encodeURIComponent(bodyLines.join('\n'));
             const encodedSubject = encodeURIComponent(subject);
-            const mailtoLink = `mailto:tezurect82@gmail.com?subject=${encodedSubject}&body=${body}`;
+            const mailtoLink = `mailto:kkjan9198@gmail.com?subject=${encodedSubject}&body=${body}`;
             
             // Open default email client
             window.location.href = mailtoLink;
@@ -2717,24 +2717,24 @@ const ContactPage = ({ navigateTo, currentPage }: NavigationProps) => {
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Email Us</p>
-                                    <a href="mailto:tezurect82@gmail.com" className="hover:text-orange-400 transition-colors ease-in-out duration-300" aria-label="Email us at tezurect82@gmail.com">tezurect82@gmail.com</a>
+                                    <a href="mailto:kkjan9198@gmail.com" className="hover:text-orange-400 transition-colors ease-in-out duration-300" aria-label="Email us at kkjan9198@gmail.com">kkjan9198@gmail.com</a>
                                 </div>
                             </div>
                         </div>
 
                          <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
                          <div className="flex justify-start space-x-4">
-                            <SocialIcon href="https://www.instagram.com/phyruxvisuals/" ariaLabel="Visit our Instagram page">
+                            <SocialIcon href="https://www.instagram.com/khalid_durrani1" ariaLabel="Visit our Instagram page">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
                                 </svg>
                             </SocialIcon>
-                            <SocialIcon href="https://discord.gg/sVZeyGQm" ariaLabel="Join our Discord community">
+                            <SocialIcon href="https://www.linkedin.com/in/khalid-durrani-320879288/" ariaLabel="We can connect on Linkedin">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0 a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                                 </svg>
                             </SocialIcon>
-                            <SocialIcon href="https://wa.me/923167741677" ariaLabel="Contact us on WhatsApp">
+                            <SocialIcon href="https://wa.me/923343199005" ariaLabel="Contact us on WhatsApp">
                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                                </svg>
@@ -2782,7 +2782,7 @@ const AllServicesPage = ({ navigateTo, currentPage }: NavigationProps) => {
 
 const WhatsAppButton = () => (
     <a
-      href="https://wa.me/923167741677"
+      href="https://wa.me/923343199005"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#25D366] w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 active:scale-95 transition-transform duration-300 ease-in-out"
@@ -2840,7 +2840,7 @@ export default function App() {
     document.body.style.overflow = 'hidden';
     
     // Preloader timing - quick and snappy
-    const totalWordAnimationTime = 1700; // Commissions visible for ~0.7 seconds
+    const totalWordAnimationTime = 1700; // Solutions visible for ~0.7 seconds
     // Smooth exit animation
     const exitAnimationTime = 300;
 

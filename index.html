@@ -50,7 +50,7 @@
       "areaServed": "Worldwide",
       "sameAs": [
         "https://www.instagram.com/phyruxvisuals/",
-        "https://discord.gg/sVZeyGQm"
+        "https://www.linkedin.com/in/your-profile"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -78,8 +78,27 @@
     <style>
       #root { min-height: 100vh; background-color: #0D0D0D; }
       .preloader { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: #0D0D0D; }
+      /* social icons styling */
+      .social-icons { display: flex; gap: 20px; justify-content: center; margin-top: 1rem; }
+      .social-icons a { color: #333; font-size: 24px; transition: color 0.3s ease; }
+      .social-icons a:hover { color: #0088cc; }
+      .fa-instagram:hover { color: #E4405F; }
+      .fa-linkedin:hover { color: #0A66C2; }
+      .fa-whatsapp:hover { color: #25D366; }
     </style>
     <div id="root"></div>
+    <!-- social icons: instagram, linkedin, whatsapp -->
+    <div class="social-icons">
+        <a href="https://instagram.com/your-handle" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
     <script type="module" src="/index.tsx" defer></script>
   </body>
 </html>
